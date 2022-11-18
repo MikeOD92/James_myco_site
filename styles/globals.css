@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Baskervville&display=swap");
+
 html,
 body {
   padding: 0;
@@ -14,13 +19,28 @@ a {
 * {
   box-sizing: border-box;
 }
-
+.homeSplash h1 {
+  font-family: "Baskervville", serif;
+  font-size: 72px;
+  text-shadow: 3px 3px 5px black;
+}
+.homeSplash h2 {
+  font-family: "Baskervville", serif;
+  font-size: 60px;
+  text-shadow: 3px 3px 5px black;
+}
+.navLink p {
+  display: none;
+}
+.navLink:hover p {
+  display: block;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
     color: white;
-    background: black;
+    /* background: black; */
   }
 }
