@@ -5,6 +5,7 @@ const About = () => {
     <div>
       <h1> About </h1>
       <Link href="/"> Home</Link>
+      <Link href="/home"> Home2</Link>
     </div>
   );
 };

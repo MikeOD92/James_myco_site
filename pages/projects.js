@@ -5,6 +5,7 @@ const Projects = () => {
     <div>
       <h1> Projects </h1>
       <Link href="/"> Home</Link>
+      <Link href="/home"> Home2</Link>
     </div>
   );
 };

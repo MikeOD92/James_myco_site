@@ -1,8 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Baskervville&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baskervville&family=Montserrat+Alternates:ital,wght@0,300;1,200&family=Noto+Sans&display=swap");
+/* 
+    font-family: 'Baskervville', serif;
 
+    font-family: 'Montserrat Alternates', sans-serif;
+
+    font-family: 'Noto Sans', sans-serif;
+*/
 html,
 body {
   padding: 0;
@@ -19,7 +25,7 @@ a {
 * {
   box-sizing: border-box;
 }
-.homeSplash h1 {
+h1 {
   font-family: "Baskervville", serif;
   font-size: 72px;
   text-shadow: 3px 3px 5px black;
@@ -29,11 +35,27 @@ a {
   font-size: 60px;
   text-shadow: 3px 3px 5px black;
 }
+.home {
+  font-family: "Montserrat Alternates", sans-serif;
+  text-shadow: none;
+  text-align: center;
+}
+.link p {
+  font-family: "Noto Sans", sans-serif;
+}
 .navLink p {
   display: none;
 }
 .navLink:hover p {
   display: block;
+}
+#extra {
+  padding: 3%;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.8rem;
+}
+h2 {
+  font-family: "Montserrat Alternates", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   html {
