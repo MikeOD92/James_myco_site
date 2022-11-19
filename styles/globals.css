@@ -37,8 +37,11 @@ h1 {
 }
 .home {
   font-family: "Montserrat Alternates", sans-serif;
-  text-shadow: none;
+  /* text-shadow: ; */
   text-align: center;
+}
+.home h1 {
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 .link p {
   font-family: "Noto Sans", sans-serif;
