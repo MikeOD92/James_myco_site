@@ -35,13 +35,17 @@ h1 {
   font-size: 60px;
   text-shadow: 3px 3px 5px black;
 }
-.home {
-  font-family: "Montserrat Alternates", sans-serif;
-  /* text-shadow: ; */
+/* .home {
+  
   text-align: center;
-}
+} */
 .home h1 {
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  font-family: "Montserrat Alternates", sans-serif;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+}
+.home h2 {
+  font-family: "Baskervville", serif;
+  text-align: center;
 }
 .link p {
   font-family: "Noto Sans", sans-serif;
