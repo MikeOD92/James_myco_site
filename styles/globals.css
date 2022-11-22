@@ -26,9 +26,9 @@ a {
   box-sizing: border-box;
 }
 h1 {
-  font-family: "Baskervville", serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-size: 72px;
-  text-shadow: 3px 3px 5px black;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
 }
 .homeSplash h2 {
   font-family: "Baskervville", serif;
@@ -40,7 +40,6 @@ h1 {
   text-align: center;
 } */
 .home h1 {
-  font-family: "Montserrat Alternates", sans-serif;
   text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
 }
 .home h2 {

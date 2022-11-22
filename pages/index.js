@@ -6,8 +6,8 @@ import Header from "../components/Header";
 export default function Home() {
   return (
     <div>
+      <Header />
       <div className="bg-[url('/img/asphalt_myco.jpg')] bg-black home bg-cover max-w-screen h-screen">
-        <Header />
         {/* <div> */}
 
         {/* <Image src="/img/asphalt_myco.jpg" width="1000" height="1000" /> */}
@@ -15,7 +15,7 @@ export default function Home() {
           {/* <h1 className="text-8xl font-serif home text-yellow-400 relative top-1/3 right-6"> */}
           James Oliver
         </h1>
-        <h2 className="home text-6xl text-white bg-mushroom absolute bottom-0 right-0 left-0 w-full p-3">
+        <h2 className="home text-6xl text-white bg-bruise absolute bottom-0 right-0 left-0 w-full p-3">
           Mycology
           <span className=""> & </span>
           <span className="">Soil Science</span>

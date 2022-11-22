@@ -9,7 +9,7 @@ module.exports = {
         "lens-white": "#fcfdeb",
         "lens-green": "#e5dcb7",
         mushroom: "#7b7864",
-        lightmushroom: "#f8f1ed",
+        lightmushroom: "#cacabc",
         bruise: "#8C7090",
       },
     },
