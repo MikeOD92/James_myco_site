@@ -32,7 +32,7 @@ export async function getStaticProps() {
   );
   const db = client.db();
   const jamesPages = db.collection("jamesPages");
-  console.log(jamesPages);
+  // console.log(jamesPages);
   const about = await jamesPages.findOne({ title: "About" });
   // console.log(about);
 

@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-black home bg-cover max-w-screen h-screen">
+      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-fixed bg-black home bg-cover max-w-screen h-screen">
         {/* <div> */}
 
         {/* <Image src="/img/asphalt_myco.jpg" width="1000" height="1000" /> */}
