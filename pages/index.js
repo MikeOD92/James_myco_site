@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 
 export default function Home() {
@@ -8,11 +5,7 @@ export default function Home() {
     <div>
       <Header />
       <div className="bg-[url('/img/asphalt_myco.jpg')] bg-fixed bg-black home bg-cover max-w-screen h-screen">
-        {/* <div> */}
-
-        {/* <Image src="/img/asphalt_myco.jpg" width="1000" height="1000" /> */}
         <h1 className="text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
-          {/* <h1 className="text-8xl font-serif home text-yellow-400 relative top-1/3 right-6"> */}
           James Oliver
         </h1>
         <h2 className="home text-6xl text-white bg-bruise absolute bottom-0 right-0 left-0 w-full p-3">
