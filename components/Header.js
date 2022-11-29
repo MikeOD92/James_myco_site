@@ -7,8 +7,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signOut, signIn, signUp } from "next-auth/react";
+
 function Header() {
   const [show, setShow] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <div className="w-screen h-20 bg-mushroom shadow-md fixed top-0 z-50">
@@ -27,11 +30,27 @@ function Header() {
       >
         {show ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
-      {show ? (
+      {show && session?.user ? (
+        <div className="absolute right-0 top-14 h-64 w-1/4 bg-lightmushroom z-40 text-xl">
+          <Link className="p-2" href="/admin/about">
+            <p>About</p>
+          </Link>
+          <Link className="p-2" href="/admin/projects">
+            <p>Projects</p>
+          </Link>
+          <Link className="p-2" href="/admin/cv">
+            <p>CV</p>
+          </Link>
+          <Link className="p-2" href="/admin/events">
+            <p>Events</p>
+          </Link>
+          <button onClick={signOut}>Log out</button>
+        </div>
+      ) : show ? (
         //desktop
-        // <div className="absolute right-0 top-14 h-64 w-1/4 bg-lightmushroom z-40 text-xl">
-        //mobile
-        <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center">
+        <div className="absolute right-0 top-14 h-64 w-1/4 bg-lightmushroom z-40 text-xl">
+          {/* //mobile */}
+          {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
           <Link className="p-2" href="/about">
             <p>About</p>
           </Link>

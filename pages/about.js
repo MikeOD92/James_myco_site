@@ -28,7 +28,7 @@ export default About;
 
 export async function getStaticProps() {
   const client = await MongoClient.connect(
-    `mongodb+srv://modell:${process.env.NEXT_PUBLIC_DB_PASSWORD}@cluster0.ax3qeqy.mongodb.net/?retryWrites=true&w=majority`
+    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
   );
   const db = client.db();
   const jamesPages = db.collection("jamesPages");
