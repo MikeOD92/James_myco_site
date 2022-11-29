@@ -1,12 +1,20 @@
-import react, { useState, useRef } from "react";
-import { signIn, useSession } from "next-auth/react";
+import react, { useEffect, useRef } from "react";
+import { signIn, useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Login = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const emailRef = useRef();
   const passRef = useRef();
   const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session) {
+        router.replace("/");
+      }
+    });
+  }, [router]);
 
   const handleSubmission = async (e) => {
     e.preventDefault();
