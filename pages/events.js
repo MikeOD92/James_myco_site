@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { MongoClient } from "mongodb";
 import Header from "../components/Header";
-import CalanderTile from "../components/CalanderTile";
-import Calendar from "react-calendar";
-import { useState } from "react";
-import "../styles/Calendar.module.css";
+import { Calendar } from "../components/Calendar";
+import { useState, useEffect } from "react";
 
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
+  useEffect(() => {}, [props.eventList]);
+
   return (
     <div>
       <Header />
@@ -15,43 +15,9 @@ const Events = (props) => {
         <div>
           <h1 className="text-8xl text-yellow-400">Events</h1>
         </div>
-        <div className="bg-bruise p-10 w-1/2 h-2/3 rounded-md overflow-y-scroll align-left">
+        <div className="bg-bruise p-24 w-1/2 h-full rounded-md overflow-y-scroll align-left">
           {/* change overflow to overflow-auto or y-auto */}
-          <Calendar
-            onChange={setDate}
-            value={date}
-            tileClassName={({ date }) =>
-              date.getDate() === new Date().getDate() ? "today" : null
-            }
-            tileContent={({ date }) => {
-              // console.log(date.toLocaleDateString());
-              // let calEvent = null;
-              let calEvent = props.eventList.filter((item) => {
-                const eventDate = new Date(item.date);
-                if (
-                  eventDate.toLocaleDateString() === date.toLocaleDateString()
-                ) {
-                  console.log(
-                    "/////////////////////\n" +
-                      eventDate.toLocaleDateString() +
-                      " - - - " +
-                      date.toLocaleDateString() +
-                      "\n////////////////////"
-                  );
-                }
-              });
-
-              if (calEvent.length > 0) {
-                console.log(calEvent);
-                return <CalanderTile calEvent={calEvent} key={date} />;
-              }
-              return <CalanderTile key={date} />;
-            }}
-            // <CalanderTile />: null}
-            showNeighboringMonth={false}
-            view="month"
-            showNavigation={false}
-          />
+          <Calendar events={props.eventList} />
           {props.eventList.map((item) => {
             return (
               <div
@@ -85,7 +51,7 @@ export async function getStaticProps() {
     id: item._id.toString(),
     title: item.title,
     desc: item.desc,
-    date: new Date(item.date),
+    date: item.date,
     location: item.location,
     img: item.img,
   }));

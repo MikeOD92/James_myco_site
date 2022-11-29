@@ -1,4 +1,8 @@
 import Header from "../components/Header";
+// import FullCalendar from "@fullcalendar/react";
+// The import order DOES MATTER here. If you change it, you'll get an error!
+// import interactionPlugin from "@fullcalendar/interaction";
+// import timeGridPlugin from "@fullcalendar/timegrid";
 
 export default function Home() {
   return (
@@ -14,7 +18,7 @@ export default function Home() {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div id="extra" className="h-screen w-100 bg-lightmushroom text-black">
+      <div id="extra" className="h-screen w-100 bg-zinc-200 text-black">
         <p>
           {" "}
           In this section we could have an event/news feed like blog posts
