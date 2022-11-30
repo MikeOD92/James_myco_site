@@ -31,7 +31,7 @@ function Header() {
         {show ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
       {show && session?.user ? (
-        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl">
+        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-black">
           <Link className="p-2" href="/admin/about">
             <p>About</p>
           </Link>
@@ -48,7 +48,7 @@ function Header() {
         </div>
       ) : show ? (
         //desktop
-        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl">
+        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-black">
           {/* //mobile */}
           {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
           <Link className="p-2" href="/about">
