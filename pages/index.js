@@ -14,7 +14,7 @@ export default function Home() {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div id="extra" className="h-screen w-100 bg-zinc-200 text-black">
+      <div id="extra" className="h-screen w-100 bg-zinc-800 text-white">
         <p>
           {" "}
           In this section we could have an event/news feed like blog posts

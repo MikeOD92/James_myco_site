@@ -11,13 +11,16 @@ const Events = (props) => {
   return (
     <div>
       <Header />
-      <div className="w-full bg-[url('/img/sporeprint.jpg')] bg-cover max-w-screen h-screen flex justify-evenly items-center">
+      <div className="w-full bg-[url('/img/sporeprint.jpg')] bg-fixed bg-cover max-w-screen h-screen flex justify-evenly items-center">
         <div>
           <h1 className="text-8xl text-yellow-400">Events</h1>
         </div>
-        <div className="bg-bruise p-24 w-1/2 h-full rounded-md overflow-y-scroll align-left">
-          {/* change overflow to overflow-auto or y-auto */}
+      </div>
+      <div className="flex flex-row">
+        <div className="bg-bruise p-20 w-1/2">
           <Calendar events={props.eventList} />
+        </div>
+        <div className="bg-zinc-800 w-1/2 p-10">
           {props.eventList.map((item) => {
             return (
               <div

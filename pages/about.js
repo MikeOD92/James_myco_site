@@ -1,24 +1,59 @@
 import Link from "next/link";
 import Header from "../components/Header";
 import { MongoClient } from "mongodb";
-
+import Image from "next/image";
 const About = (props) => {
   // console.log(props);
   return (
     // <div className="bg-lightmushroom">
     <div>
       <Header />
-      <div className="absolute top-14 bg-[url('/img/sporeprint.jpg')] bg-cover h-1/3 w-full">
-        <h2 className="text-red-400 text-16">
-          {" "}
-          I dont think this background works
-        </h2>
-        <h1 className="text-yellow-300"> About </h1>
-        {props.about ? <p>{props.about.p1}</p> : ""}
-        {props.about ? <p>{props.about.p2}</p> : ""}
-        {props.about ? <p>{props.about.p3}</p> : ""}
-        <Link href="/"> Home</Link>
-        <Link href="/home"> Home2</Link>
+      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
+        <div className="text-left">
+          <h1 className="text-bruise"> About </h1>
+
+          <div className="flex flex-wrap row-reverse">
+            <div className="p-5 w-full flex flex-row justify-end rounded-md">
+              <Image
+                src="/img/portrait.JPG"
+                width="300"
+                height="300"
+                alt="portait"
+                className="p-5 bg-zinc-200 rounded-md"
+              />
+            </div>
+            <div className="p-5">
+              <Image
+                src="/../public/img/mycelium2.jpg"
+                width="300"
+                height="300"
+                alt="mycelium"
+                className="p-5 bg-zinc-200 rounded-md"
+              />
+            </div>
+            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3 flex flex-row justify-end">
+              {props.about ? <p>{props.about.p1}</p> : ""}
+            </div>
+            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3">
+              {props.about ? <p>{props.about.p2}</p> : ""}
+            </div>
+            <div className="p-5">
+              <Image
+                src="/img/mycelium.jpg"
+                width="300"
+                height="300"
+                alt="mycelium"
+                className="p-5 bg-zinc-200 rounded-md"
+              />
+            </div>
+
+            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md">
+              {props.about ? <p>{props.about.p3}</p> : ""}
+              <br />
+              {props.about ? <p>{props.about.p4}</p> : ""}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -46,6 +81,7 @@ export async function getStaticProps() {
         p1: about.p1,
         p2: about.p2,
         p3: about.p3,
+        p4: about.p4,
       },
     },
   };
