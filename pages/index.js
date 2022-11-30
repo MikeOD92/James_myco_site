@@ -8,7 +8,7 @@ export default function Home() {
         <h1 className="text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
           James Oliver
         </h1>
-        <h2 className="home text-6xl text-white bg-bruise absolute bottom-0 right-0 left-0 w-full p-3">
+        <h2 className="home text-6xl text-zinc-800 bg-lightmushroom opacity-70 absolute bottom-0 right-0 left-0 w-full p-3">
           Mycology
           <span className=""> & </span>
           <span className="">Soil Science</span>

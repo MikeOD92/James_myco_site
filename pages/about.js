@@ -8,7 +8,7 @@ const About = (props) => {
     // <div className="bg-lightmushroom">
     <div>
       <Header />
-      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
+      <div className="absolute top-14 bg-[url('/img/about_bg.PNG')] bg-cover w-full p-10">
         <div className="text-left">
           <h1 className="text-bruise"> About </h1>
 

@@ -13,6 +13,7 @@ export const Calendar = (props) => {
         editable
         selectable
         events={props.events}
+        className="text-black"
       />
     </NoSSR>
   );
