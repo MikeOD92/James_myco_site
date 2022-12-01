@@ -22,8 +22,10 @@ const About = (props) => {
       p2: p2.current.value,
       p3: p3.current.value,
       p4: p4.current.value,
+      posts: [],
     };
-    const response = await fetch("/api/editAbout", {
+
+    const response = await fetch("/api/pages", {
       method: method,
       body: JSON.stringify(aboutData),
       headers: {
@@ -31,11 +33,12 @@ const About = (props) => {
       },
     });
 
+    // title: "About"
     const data = await response.json();
-
     console.log(data);
+    // console.log(data);
 
-    router.replace("/about");
+    // router.replace("/about");
   };
   // console.log(props);
   return (
@@ -100,11 +103,24 @@ const About = (props) => {
 export default About;
 
 export async function getStaticProps() {
+  /// this will probab;y chnage to be mongoose
+
+  // const response = await fetch("/api/pages/", {
+  //   method: "GET",
+  //   body: { page: "About" },
+  //   headers: {
+  //     "content-Type": "application/json",
+  //   },
+  // });
+
+  // const about = await response.json();
+  // console.log(about);
+
   const client = await MongoClient.connect(
     `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
   );
   const db = client.db();
-  const jamesPages = db.collection("jamesPages");
+  const jamesPages = db.collection("pages");
   // console.log(jamesPages);
   const about = await jamesPages.findOne({ title: "About" });
   // console.log(about);
@@ -114,12 +130,13 @@ export async function getStaticProps() {
   return {
     props: {
       about: {
-        id: about._id.toString(),
+        _id: about._id.toString(),
         title: about.title,
         p1: about.p1,
         p2: about.p2,
         p3: about.p3,
         p4: about.p4,
+        posts: about.posts || [],
       },
     },
   };

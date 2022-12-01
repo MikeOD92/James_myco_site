@@ -66,7 +66,7 @@ export async function getStaticProps() {
     `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
   );
   const db = client.db();
-  const jamesPages = db.collection("jamesPages");
+  const jamesPages = db.collection("pages");
   // console.log(jamesPages);
   const about = await jamesPages.findOne({ title: "About" });
   // console.log(about);

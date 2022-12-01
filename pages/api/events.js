@@ -1,10 +1,10 @@
 import { MongoClient } from "mongodb";
 
+const MONGODB_URI = process.env.NEXT_PUBLIC_MONGO_DB_URI;
+
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    const client = await MongoClient.connect(
-      `mongodb+srv://modell:${process.env.NEXT_PUBLIC_DB_PASSWORD}@cluster0.ax3qeqy.mongodb.net/?retryWrites=true&w=majority`
-    );
+    const client = await MongoClient.connect(`${MONGODB_URI}`);
     const db = client.db();
     const james_events = db.collection("james_events");
     await james_events.insertOne(req.body);
