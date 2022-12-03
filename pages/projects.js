@@ -31,6 +31,7 @@ export async function getStaticProps() {
   const projects = await jamesPages.findOne({ title: "Projects" });
   // console.log(about);
 
+  console.log(projects.posts);
   client.close();
 
   return {
@@ -42,7 +43,9 @@ export async function getStaticProps() {
         p2: projects.p2 || "",
         p3: projects.p3 || "",
         p4: projects.p4 || "",
-        posts: projects.posts || [],
+        posts:
+          projects.posts.forEach((post) => JSON.parse(JSON.stringify(post))) ||
+          [],
       },
     },
   };

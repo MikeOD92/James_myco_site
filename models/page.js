@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import post from "./post";
 
 const pageSchema = new mongoose.Schema({
   title: {
@@ -27,9 +28,7 @@ const pageSchema = new mongoose.Schema({
     type: String,
     required: [false, ""],
   },
-  // posts: {
-  //     type:ObjectId
-  // }
+  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
 });
 
 export default mongoose.models.Page || mongoose.model("Page", pageSchema);

@@ -9,7 +9,7 @@ const Projects = (props) => {
   const p2 = useRef();
   const p3 = useRef();
   const p4 = useRef();
-  const postType = useRef();
+  // const postType = useRef();
   const router = useRouter();
 
   const handleTask = async (method, e) => {
@@ -21,7 +21,7 @@ const Projects = (props) => {
       p2: p2.current.value,
       p3: p3.current.value,
       p4: p4.current.value,
-      posts: [],
+      // posts: [],
     };
 
     const response = await fetch("/api/pages", {
@@ -37,11 +37,16 @@ const Projects = (props) => {
 
     // router.replace("/about");
   };
-  const addProject = async () => {
+  const addProject = async (e) => {
+    e.preventDefault();
+
     const post = {
-      page_id: props.projects._id,
-      type: postType.current.value,
+      pageId: props.projects._id,
+      postType: "Project",
+      value: ["hello", "World"],
     };
+
+    // console.log(post);
 
     const response = await fetch("/api/posts", {
       method: "POST",
@@ -51,8 +56,9 @@ const Projects = (props) => {
       },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
   };
+
   return (
     // <div className="bg-lightmushroom">
     <div>
@@ -107,11 +113,11 @@ const Projects = (props) => {
             )}
           </form>
         </div>
-        <div>
-          <from onsubmit={addProject}>
-            <input type="String" label="type" ref={postType} />
-            <button type="submit">POST</button>
-          </from>
+        <div className="p-20 bg-lightmushroom">
+          {/* <form>
+            <input type="String" label="type" ref={postType} /> */}
+          <button onClick={(e) => addProject(e)}> Add Project </button>
+          {/* </form> */}
         </div>
       </div>
     </div>
@@ -121,19 +127,6 @@ const Projects = (props) => {
 export default Projects;
 
 export async function getStaticProps() {
-  /// this will probab;y chnage to be mongoose
-
-  // const response = await fetch("/api/pages/", {
-  //   method: "GET",
-  //   body: { page: "About" },
-  //   headers: {
-  //     "content-Type": "application/json",
-  //   },
-  // });
-
-  // const about = await response.json();
-  // console.log(about);
-
   const client = await MongoClient.connect(
     `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
   );
@@ -142,7 +135,9 @@ export async function getStaticProps() {
   // console.log(jamesPages);
   const projects = await jamesPages.findOne({ title: "Projects" });
   // console.log(about);
-
+  for (let i in projects.posts) {
+    console.log(projects.posts[i]);
+  }
   client.close();
 
   return {
@@ -154,7 +149,18 @@ export async function getStaticProps() {
         p2: projects.p2,
         p3: projects.p3,
         p4: projects.p4,
-        posts: projects.posts || [],
+        // posts: projects.post || [],
+        // posts: lean(projects.posts),
+        posts:
+          projects.posts.forEach((post) =>
+            JSON.parse(
+              JSON.stringify({
+                _id: post._id.toString(),
+                type: post.type,
+                value: post.value,
+              })
+            )
+          ) || [],
       },
     },
   };

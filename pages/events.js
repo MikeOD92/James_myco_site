@@ -11,7 +11,7 @@ const Events = (props) => {
   return (
     <div>
       <Header />
-      <div className="w-full bg-[url('/img/lichen.jpg')] bg-fixed bg-top bg-cover max-w-screen h-screen flex justify-evenly items-center">
+      <div className="w-full bg-[url('/img/lichen.jpg')] bg-fixed bg-top bg-cover max-w-screen min-h-screen flex justify-evenly items-center">
         <div>
           <h1 className="text-8xl text-yellow-400">Events</h1>
         </div>

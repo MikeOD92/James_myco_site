@@ -12,9 +12,10 @@ handler.put(editPage);
 async function getPage(req, res) {
   const page = req.body.page;
   dbConnect();
-  const doc = await Page.findOne({ title: page });
+  const doc = await Page.findOne({ title: page }).populate("posts");
   await res.status(200).json(doc);
 }
+
 async function createPage(req, res) {
   const data = req.body;
 

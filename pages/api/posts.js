@@ -2,30 +2,44 @@ import Post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
 import handler from "../../utils/handler";
 // import handler from "../../../utils/handler";
+import Page from "../../models/page";
 
 handler.get(getPosts);
 handler.post(createPosts);
 handler.put(editPosts);
 
 async function getPosts(req, res) {
-  const post = req.body.post;
   // needs to be find many and will not need the above line?
   dbConnect();
-  const doc = await Post.findOne({ title: Post });
+  const doc = await Post.find();
   await res.status(200).json(doc);
 }
 /////////////
 async function createPosts(req, res) {
-  const data = req.body;
+  try {
+    const { postType, value, pageId } = req.body;
 
-  // const { email, password } = data;
+    dbConnect();
+    const post = await Post.create({
+      postType,
+      value,
+    });
 
-  dbConnect();
+    await post.save();
+    console.log(post);
+    const foundPage = await Page.findById(pageId);
+    const pagePosts = foundPage.posts;
+    const updatePage = await Page.findByIdAndUpdate(pageId, {
+      posts: [...pagePosts, post._id.toString()],
+    });
 
-  const post = await Post.create(data);
-  await post.save();
+    updatePage.save();
 
-  res.status(201).json({ message: "Post created!" });
+    res.status(201).json(post);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 }
 
 async function editPosts(req, res) {
