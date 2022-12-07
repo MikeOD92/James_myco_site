@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { MongoClient } from "mongodb";
 import Header from "../components/Header";
 import { Calendar } from "../components/Calendar";
 import { useState, useEffect } from "react";
@@ -21,14 +19,15 @@ const Events = (props) => {
           <Calendar events={props.eventList} />
         </div>
         <div className="bg-zinc-800bg-[url('/img/sporeprint.jpg')]  bg-cover bg-blend-overlay w-1/2 p-10">
-          {props.eventList.map((item) => {
+          {props.eventList?.posts.map((item) => {
             return (
+              // this will be a component
               <div
                 key={item._id}
                 className="text-black p-5 m-3 rounded-md bg-lightmushroom"
               >
                 <h3>{item.title}</h3>
-                <p>{item.date}</p>
+                <p>{item.dateTime}</p>
                 <p>{item.desc}</p>
               </div>
             );
@@ -39,29 +38,23 @@ const Events = (props) => {
   );
 };
 
-export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/pages/events").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const eventsCollection = db.collection("james_events");
-
-  const data = await eventsCollection.find().toArray();
-
-  client.close();
-
-  const eventList = data.map((item) => ({
-    id: item._id.toString(),
-    title: item.title,
-    desc: item.desc,
-    date: item.date,
-    location: item.location,
-    img: item.img,
-  }));
-
+  console.log(data);
+  if (!data) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
-      eventList: JSON.parse(JSON.stringify(eventList)),
+      eventList: {
+        _id: data._id || "",
+        title: data.title || "",
+        posts: data.posts || [],
+      },
     },
   };
 }

@@ -29,6 +29,13 @@ const pageSchema = new mongoose.Schema({
     required: [false, ""],
   },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  // $lookup: {
+  //   from: "./post.js",
+  //   localField: "projects.posts",
+  //   foreignField: "page_id",
+  //   as: "posts",
+  // },
+  // posts: [{ type: post, ref: "Post" }],
 });
 
 export default mongoose.models.Page || mongoose.model("Page", pageSchema);

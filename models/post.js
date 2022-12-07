@@ -2,17 +2,44 @@ import { ObjectId } from "mongodb";
 import mongoose, { Schema } from "mongoose";
 
 const postSchema = new mongoose.Schema({
-  // page_id: {
-  //   type: { type: String, ref: "Page" },
-  // },
+  pageid: {
+    type: String,
+    required: true,
+  },
   postType: {
     type: String,
     required: true,
   },
+  ///// Project post fields
   value: {
     type: [String],
-    required: true,
+    required: false,
   },
+  // images: {
+  //   type: [File],
+  //   required: false,
+  // },
+  ///// Event post fields
+  title: {
+    type: String,
+    required: false,
+  },
+  desc: {
+    type: String,
+    required: false,
+  },
+  dateTime: {
+    type: String,
+    required: false,
+  },
+  location: {
+    type: String,
+    required: false,
+  },
+  // img: {
+  //   type: File,
+  //   required: false,
+  // },
 });
 
 export default mongoose.models.Post || mongoose.model("Post", postSchema);

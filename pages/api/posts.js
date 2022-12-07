@@ -17,20 +17,38 @@ async function getPosts(req, res) {
 /////////////
 async function createPosts(req, res) {
   try {
-    const { postType, value, pageId } = req.body;
-
-    dbConnect();
-    const post = await Post.create({
+    const {
       postType,
       value,
+      images,
+      title,
+      desc,
+      dateTime,
+      location,
+      img,
+      pageid,
+    } = req.body;
+    // console.log("logging in Api route", pageid);
+    dbConnect();
+    const post = await Post.create({
+      pageid,
+      postType,
+      value: value || null,
+      images: images || [],
+      title: title || null,
+      desc: desc || null,
+      dateTime: dateTime || null,
+      location: location || null,
+      img: img || null,
     });
 
     await post.save();
     console.log(post);
-    const foundPage = await Page.findById(pageId);
+    console.log("logging in Api route after save", post);
+    const foundPage = await Page.findById(pageid);
     const pagePosts = foundPage.posts;
-    const updatePage = await Page.findByIdAndUpdate(pageId, {
-      posts: [...pagePosts, post._id.toString()],
+    const updatePage = await Page.findByIdAndUpdate(pageid, {
+      posts: [...pagePosts, post._id],
     });
 
     updatePage.save();
@@ -42,6 +60,7 @@ async function createPosts(req, res) {
   }
 }
 
+//////////
 async function editPosts(req, res) {
   const data = req.body;
   console.log("this is the data", data);

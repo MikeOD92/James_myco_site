@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { MongoClient } from "mongodb";
 import Header from "../../components/Header";
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
+
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
 
@@ -13,20 +12,38 @@ const Events = (props) => {
   const img = useRef();
 
   const router = useRouter();
-
-  const handleSubmit = async (e) => {
+  //////
+  const handlePageCreation = async (e) => {
     e.preventDefault();
-    const eventData = {
-      title: title.current.value,
-      desc: desc.current.value,
-      date: formDate.current.value,
-      location: location.current.value,
-      img: img.current.value,
+    const eventPageData = {
+      title: "Events",
     };
 
-    const response = await fetch("/api/events", {
+    const response = await fetch("/api/pages", {
       method: "POST",
-      body: JSON.stringify(eventData),
+      body: JSON.stringify(eventPageData),
+      headers: {
+        "content-Type": "application/json",
+      },
+    });
+  };
+  //////
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const eventPost = {
+      pageid: props.eventList._id,
+      postType: "Event",
+      title: title.current.value,
+      desc: desc.current.value,
+      dateTime: formDate.current.value,
+      location: location.current.value,
+      // img: img.current.value,
+    };
+    console.log("post data:", eventPost);
+    const response = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify(eventPost),
       headers: {
         "content-Type": "application/json",
       },
@@ -34,9 +51,9 @@ const Events = (props) => {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
-    router.replace("/events");
+    // router.replace("/events");
   };
 
   return (
@@ -44,43 +61,45 @@ const Events = (props) => {
       <Header />
       <div className="p-20">
         <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl">
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="title" ref={title} />
-            <input type="text" ref={desc} />
-            <input type="datetime-local" ref={formDate} />
-            <input type="text" ref={location} />
-            <input type="text" ref={img} />
-            <input type="submit" />
-          </form>
+          {props.eventList ? (
+            <form onSubmit={handleSubmit}>
+              <input type="text" placeholder="title" ref={title} />
+              <input type="text" ref={desc} />
+              <input type="datetime-local" ref={formDate} />
+              <input type="text" ref={location} />
+              <input type="text" ref={img} />
+              <input type="submit" />
+            </form>
+          ) : (
+            <button onClick={handlePageCreation}>create Event page</button>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/pages/events").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const eventsCollection = db.collection("james_events");
-
-  const data = await eventsCollection.find().toArray();
-
-  client.close();
-
-  const eventList = data.map((item) => ({
-    id: item._id.toString(),
-    title: item.title,
-    desc: item.desc,
-    date: item.date,
-    location: item.location,
-    img: item.img,
-  }));
-
+  console.log(data);
+  if (!data) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
-      eventList: JSON.parse(JSON.stringify(eventList)),
+      eventList: {
+        _id: data._id || "",
+        title: data.title || "",
+        p1: data.p1 || "",
+        p2: data.p2 || "",
+        p3: data.p3 || "",
+        p4: data.p4 || "",
+        posts: data.posts || [],
+      },
     },
   };
 }

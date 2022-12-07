@@ -41,12 +41,12 @@ const Projects = (props) => {
     e.preventDefault();
 
     const post = {
-      pageId: props.projects._id,
+      pageid: props.projects._id,
       postType: "Project",
       value: ["hello", "World"],
     };
 
-    // console.log(post);
+    // console.log("logging in admin/projects before POST", post);
 
     const response = await fetch("/api/posts", {
       method: "POST",
@@ -55,8 +55,10 @@ const Projects = (props) => {
         "content-Type": "application/json",
       },
     });
+    // console.log("request body", JSON.stringify(post));
+
     const data = await response.json();
-    // console.log(data);
+    // console.log("logging response data in admin/projects", data);
   };
 
   return (
@@ -126,7 +128,7 @@ const Projects = (props) => {
 
 export default Projects;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = await MongoClient.connect(
     `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
   );
@@ -135,32 +137,36 @@ export async function getStaticProps() {
   // console.log(jamesPages);
   const projects = await jamesPages.findOne({ title: "Projects" });
   // console.log(about);
-  for (let i in projects.posts) {
-    console.log(projects.posts[i]);
-  }
+  // for (let i in projects.posts) {
+  //   console.log(projects.posts[i]);
+  // }
   client.close();
-
+  if (!projects) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
       projects: {
-        _id: projects._id.toString(),
-        title: projects.title,
-        p1: projects.p1,
-        p2: projects.p2,
-        p3: projects.p3,
-        p4: projects.p4,
-        // posts: projects.post || [],
+        _id: projects._id.toString() || "",
+        title: projects.title || "",
+        p1: projects.p1 || "",
+        p2: projects.p2 || "",
+        p3: projects.p3 || "",
+        p4: projects.p4 || "",
+        posts: projects?.post || [],
         // posts: lean(projects.posts),
-        posts:
-          projects.posts.forEach((post) =>
-            JSON.parse(
-              JSON.stringify({
-                _id: post._id.toString(),
-                type: post.type,
-                value: post.value,
-              })
-            )
-          ) || [],
+        // posts:
+        //   projects.posts.forEach((post) =>
+        //     JSON.parse(
+        //       JSON.stringify({
+        //         _id: post._id.toString(),
+        //         type: post.type,
+        //         value: post.value,
+        //       })
+        //     )
+        //   ) || [],
       },
     },
   };

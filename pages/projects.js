@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "../components/Header";
-import { MongoClient } from "mongodb";
+// import { MongoClient } from "mongodb";
+// import mongoose from "mongoose";
 
 const Projects = (props) => {
   return (
@@ -8,12 +9,19 @@ const Projects = (props) => {
       <Header />
       <div className="p-20">
         <h1> Projects </h1>
-        <h1>{props.projects.p1}</h1>
-        {props.projects.posts.map((post) => {
-          <h1> Im a Post</h1>;
-        })}
-        <Link href="/"> Home</Link>
-        <Link href="/home"> Home2</Link>
+        {/* <h1>{props.projects.p1}</h1> */}
+
+        {props.projects?.posts
+          ? props.projects.posts.map((post) => {
+              return (
+                <h1 key={post._id}>
+                  {post.value[0]} {post.value[1]}
+                </h1>
+              );
+            })
+          : ""}
+        {/* <Link href="/"> Home</Link>
+        <Link href="/home"> Home2</Link> */}
       </div>
     </div>
   );
@@ -21,31 +29,25 @@ const Projects = (props) => {
 
 export default Projects;
 
-export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/pages/projects").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const jamesPages = db.collection("pages");
-  // console.log(jamesPages);
-  const projects = await jamesPages.findOne({ title: "Projects" });
-  // console.log(about);
-
-  console.log(projects.posts);
-  client.close();
-
+  if (!data) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
       projects: {
-        _id: projects._id.toString() || "",
-        title: projects.title || "",
-        p1: projects.p1 || "",
-        p2: projects.p2 || "",
-        p3: projects.p3 || "",
-        p4: projects.p4 || "",
-        posts:
-          projects.posts.forEach((post) => JSON.parse(JSON.stringify(post))) ||
-          [],
+        _id: data._id || "",
+        title: data.title || "",
+        p1: data.p1 || "",
+        p2: data.p2 || "",
+        p3: data.p3 || "",
+        p4: data.p4 || "",
+        posts: data.posts || [],
       },
     },
   };
