@@ -70,6 +70,7 @@ const Projects = (props) => {
 
     const post = {
       pageid: props.projects._id,
+      created: new Date(),
       postType: "project",
       value: ["hello", "World"],
     };

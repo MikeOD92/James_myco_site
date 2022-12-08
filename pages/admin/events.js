@@ -40,10 +40,11 @@ const Events = (props) => {
 
     const eventPost = {
       pageid: props.eventList._id,
+      created: new Date().toISOString(),
       postType: "Event",
       title: title.current.value,
       desc: desc.current.value,
-      dateTime: formDate.current.value,
+      dateTime: new Date(formDate.current.value).toISOString(),
       location: location.current.value,
       // img: img.current.value,
     };

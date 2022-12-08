@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 
-export default function Home() {
+function Home(props) {
   return (
     <div>
       <Header />
@@ -42,3 +42,21 @@ export default function Home() {
     </div>
   );
 }
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/posts").then((res) =>
+    res.json()
+  );
+  if (!data) {
+    console.log("no posts found");
+
+    return {
+      props: {},
+    };
+  }
+  return {
+    props: {
+      posts: [...data],
+    },
+  };
+}
+export default Home;

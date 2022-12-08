@@ -12,7 +12,7 @@ handler.use(hasTokenMiddleware).put(editPosts);
 async function getPosts(req, res) {
   // edit this to also be able to find a post by id for single event pages and project pages
   dbConnect();
-  const doc = await Post.find();
+  const doc = await Post.find().sort({ created: "desc" });
   await res.status(200).json(doc);
 }
 /////////////
@@ -20,6 +20,7 @@ async function createPosts(req, res) {
   try {
     const {
       postType,
+      created,
       value,
       images,
       title,
@@ -33,6 +34,7 @@ async function createPosts(req, res) {
     dbConnect();
     const post = await Post.create({
       pageid,
+      created,
       postType,
       value: value || null,
       images: images || [],
