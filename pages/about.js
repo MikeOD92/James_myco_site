@@ -1,6 +1,4 @@
-import Link from "next/link";
 import Header from "../components/Header";
-import { MongoClient } from "mongodb";
 import Image from "next/image";
 const About = (props) => {
   // console.log(props);
@@ -61,27 +59,25 @@ const About = (props) => {
 
 export default About;
 
-export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/pages/about").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const jamesPages = db.collection("pages");
-  // console.log(jamesPages);
-  const about = await jamesPages.findOne({ title: "About" });
-  // console.log(about);
-
-  client.close();
-
+  console.log(data);
+  if (!data) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
       about: {
-        id: about._id.toString(),
-        title: about.title,
-        p1: about.p1,
-        p2: about.p2,
-        p3: about.p3,
-        p4: about.p4,
+        id: data._id.toString() || "",
+        title: data.title || "",
+        p1: data.p1 || "",
+        p2: data.p2 || "",
+        p3: data.p3 || "",
+        p4: data.p4 || "",
       },
     },
   };

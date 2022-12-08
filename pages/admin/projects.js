@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import hasToken from "../../utils/checkUser";
 
 const Projects = (props) => {
   const p1 = useRef();
@@ -156,7 +157,18 @@ const Projects = (props) => {
 
 export default Projects;
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  const token = await hasToken(context.req);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   const data = await fetch("http://localhost:3000/api/pages/projects").then(
     (res) => res.json()
   );

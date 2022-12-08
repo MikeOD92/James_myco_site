@@ -1,8 +1,9 @@
 import Page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 import handler from "../../utils/handler";
+import { hasTokenMiddleware } from "../../utils/checkUser";
 
-handler.post(createPage);
+handler.use(hasTokenMiddleware).post(createPage);
 
 async function createPage(req, res) {
   const data = req.body;

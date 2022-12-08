@@ -3,9 +3,10 @@
 import Page from "../../../models/page";
 import dbConnect from "../../../utils/dbConnect";
 import handler from "../../../utils/handler";
+import { hasTokenMiddleware } from "../../../utils/checkUser";
 
 handler.get(getPage);
-handler.put(editPage);
+handler.use(hasTokenMiddleware).put(editPage);
 
 /// Read
 async function getPage(req, res) {

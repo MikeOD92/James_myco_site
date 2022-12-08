@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import react, { useRef } from "react";
 import { useRouter } from "next/router";
+import hasToken from "../../utils/checkUser";
 
 const CV = (props) => {
   const cvTxt = useRef();
@@ -75,7 +76,17 @@ const CV = (props) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const token = await hasToken(context.req);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const data = await fetch("http://localhost:3000/api/pages/cv").then((res) =>
     res.json()
   );

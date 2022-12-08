@@ -3,10 +3,11 @@ import dbConnect from "../../utils/dbConnect";
 import handler from "../../utils/handler";
 // import handler from "../../../utils/handler";
 import Page from "../../models/page";
+import { hasTokenMiddleware } from "../../utils/checkUser";
 
 handler.get(getPosts);
-handler.post(createPosts);
-handler.put(editPosts);
+handler.use(hasTokenMiddleware).post(createPosts);
+handler.use(hasTokenMiddleware).put(editPosts);
 
 async function getPosts(req, res) {
   // edit this to also be able to find a post by id for single event pages and project pages

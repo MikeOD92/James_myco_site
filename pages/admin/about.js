@@ -1,9 +1,7 @@
-import Link from "next/link";
 import Header from "../../components/Header";
-import { MongoClient } from "mongodb";
-import Image from "next/image";
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import hasToken from "../../utils/checkUser";
 
 const About = (props) => {
   const p1 = useRef();
@@ -13,11 +11,11 @@ const About = (props) => {
 
   const router = useRouter();
 
-  const handleTask = async (method, e) => {
+  const handlePageCreation = async (e) => {
     e.preventDefault();
 
     const aboutData = {
-      title: "About",
+      title: "about",
       p1: p1.current.value,
       p2: p2.current.value,
       p3: p3.current.value,
@@ -25,24 +23,50 @@ const About = (props) => {
       posts: [],
     };
 
-    const response = await fetch("/api/pages", {
-      method: method,
-      body: JSON.stringify(aboutData),
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
-
-    // title: "About"
-    const data = await response.json();
-    console.log(data);
-    // console.log(data);
-
-    // router.replace("/about");
+    try {
+      const response = await fetch("/api/pages", {
+        method: "POST",
+        body: JSON.stringify(aboutData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      router.replace("/about");
+    } catch (err) {
+      console.error(err);
+    }
   };
-  // console.log(props);
+
+  const handlePut = async (e) => {
+    e.preventDefault();
+
+    const aboutData = {
+      title: "about",
+      p1: p1.current.value,
+      p2: p2.current.value,
+      p3: p3.current.value,
+      p4: p4.current.value,
+    };
+    try {
+      const response = await fetch("/api/pages/about", {
+        method: "PUT",
+        body: JSON.stringify(aboutData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      router.replace("/about");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
-    // <div className="bg-lightmushroom">
     <div>
       <Header />
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
@@ -50,8 +74,6 @@ const About = (props) => {
           <form className="flex flex-col align-top">
             <label> Paragraph 1</label>
             <textarea
-              // type="text"
-              // placeholder="paragraph 1"
               defaultValue={props.about.p1}
               ref={p1}
               rows="4"
@@ -60,7 +82,6 @@ const About = (props) => {
             />
             <label> Paragraph 2</label>
             <textarea
-              // placeholder="paragraph 2"
               ref={p2}
               defaultValue={props.about.p2}
               rows="4"
@@ -86,12 +107,12 @@ const About = (props) => {
             {props.about ? (
               <button
                 className="bg-green-600 p-2"
-                onClick={(e) => handleTask("PUT", e)}
+                onClick={(e) => handlePut(e)}
               >
                 PUT
               </button>
             ) : (
-              <button onClick={(e) => handleTask("POST", e)}> POST </button>
+              <button onClick={(e) => handlePageCreation(e)}> POST </button>
             )}
           </form>
         </div>
@@ -100,44 +121,39 @@ const About = (props) => {
   );
 };
 
-export default About;
+export async function getServerSideProps(context) {
+  const token = await hasToken(context.req);
 
-export async function getStaticProps() {
-  /// this will probab;y chnage to be mongoose
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
-  // const response = await fetch("/api/pages/", {
-  //   method: "GET",
-  //   body: { page: "About" },
-  //   headers: {
-  //     "content-Type": "application/json",
-  //   },
-  // });
-
-  // const about = await response.json();
-  // console.log(about);
-
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+  const data = await fetch("http://localhost:3000/api/pages/about").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const jamesPages = db.collection("pages");
-  // console.log(jamesPages);
-  const about = await jamesPages.findOne({ title: "About" });
-  // console.log(about);
-
-  client.close();
-
+  // console.log(data);
+  if (!data) {
+    return {
+      props: {},
+    };
+  }
   return {
     props: {
       about: {
-        _id: about._id.toString(),
-        title: about.title,
-        p1: about.p1,
-        p2: about.p2,
-        p3: about.p3,
-        p4: about.p4,
-        posts: about.posts || [],
+        id: data._id.toString() || "",
+        title: data.title || "",
+        p1: data.p1 || "",
+        p2: data.p2 || "",
+        p3: data.p3 || "",
+        p4: data.p4 || "",
       },
     },
   };
 }
+
+export default About;

@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
+import hasToken from "../../utils/checkUser";
 
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
@@ -85,7 +86,17 @@ const Events = (props) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const token = await hasToken(context.req);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const data = await fetch("http://localhost:3000/api/pages/events").then(
     (res) => res.json()
   );
