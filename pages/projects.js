@@ -20,8 +20,6 @@ const Projects = (props) => {
               );
             })
           : ""}
-        {/* <Link href="/"> Home</Link>
-        <Link href="/home"> Home2</Link> */}
       </div>
     </div>
   );

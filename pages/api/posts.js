@@ -9,7 +9,7 @@ handler.post(createPosts);
 handler.put(editPosts);
 
 async function getPosts(req, res) {
-  // needs to be find many and will not need the above line?
+  // edit this to also be able to find a post by id for single event pages and project pages
   dbConnect();
   const doc = await Post.find();
   await res.status(200).json(doc);
@@ -28,7 +28,7 @@ async function createPosts(req, res) {
       img,
       pageid,
     } = req.body;
-    // console.log("logging in Api route", pageid);
+
     dbConnect();
     const post = await Post.create({
       pageid,
@@ -43,8 +43,7 @@ async function createPosts(req, res) {
     });
 
     await post.save();
-    console.log(post);
-    console.log("logging in Api route after save", post);
+
     const foundPage = await Page.findById(pageid);
     const pagePosts = foundPage.posts;
     const updatePage = await Page.findByIdAndUpdate(pageid, {
@@ -81,4 +80,6 @@ async function editPosts(req, res) {
     console.error(err);
   }
 }
+// need to add delete post function
+
 export default handler;

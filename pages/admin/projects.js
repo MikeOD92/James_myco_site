@@ -1,6 +1,4 @@
-import Link from "next/link";
 import Header from "../../components/Header";
-import { MongoClient } from "mongodb";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 
@@ -9,40 +7,69 @@ const Projects = (props) => {
   const p2 = useRef();
   const p3 = useRef();
   const p4 = useRef();
-  // const postType = useRef();
   const router = useRouter();
 
-  const handleTask = async (method, e) => {
+  const handleCreation = async (e) => {
     e.preventDefault();
 
     const projectData = {
-      title: "Projects",
+      title: "projects",
       p1: p1.current.value,
       p2: p2.current.value,
       p3: p3.current.value,
       p4: p4.current.value,
-      // posts: [],
     };
+    try {
+      const response = await fetch("/api/pages", {
+        method: "POST",
+        body: JSON.stringify(projectData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
 
-    const response = await fetch("/api/pages", {
-      method: method,
-      body: JSON.stringify(projectData),
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    // router.replace("/about");
+      const data = await response.json();
+      console.log(data);
+      router.replace("/admin/projects");
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+  const handlePut = async (e) => {
+    e.preventDefault();
+
+    const projectData = {
+      title: "projects",
+      p1: p1.current.value,
+      p2: p2.current.value,
+      p3: p3.current.value,
+      p4: p4.current.value,
+    };
+    try {
+      const response = await fetch("/api/pages/projects", {
+        method: "PUT",
+        body: JSON.stringify(projectData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      router.replace("/projects");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const addProject = async (e) => {
     e.preventDefault();
 
     const post = {
       pageid: props.projects._id,
-      postType: "Project",
+      postType: "project",
       value: ["hello", "World"],
     };
 
@@ -72,7 +99,7 @@ const Projects = (props) => {
             <textarea
               // type="text"
               // placeholder="paragraph 1"
-              // defaultValue={props.projects.p1 }
+              defaultValue={props.projects.p1}
               ref={p1}
               rows="4"
               cols="50"
@@ -82,7 +109,7 @@ const Projects = (props) => {
             <textarea
               // placeholder="paragraph 2"
               ref={p2}
-              // defaultValue={props.projects.p2}
+              defaultValue={props.projects.p2}
               rows="4"
               cols="50"
               className="m-3"
@@ -90,7 +117,7 @@ const Projects = (props) => {
             <label> Paragraph 3</label>
             <textarea
               ref={p3}
-              // defaultValue={props.projects.p3}
+              defaultValue={props.projects.p3}
               rows="4"
               cols="50"
               className="m-3"
@@ -98,7 +125,7 @@ const Projects = (props) => {
             <label> Paragraph 4</label>
             <textarea
               ref={p4}
-              // defaultValue={props.projects.p4}
+              defaultValue={props.projects.p4}
               rows="4"
               cols="50"
               className="m-3"
@@ -106,18 +133,19 @@ const Projects = (props) => {
             {props.projects ? (
               <button
                 className="bg-green-600 p-2"
-                onClick={(e) => handleTask("PUT", e)}
+                onClick={(e) => handlePut(e)}
               >
                 PUT
               </button>
             ) : (
-              <button onClick={(e) => handleTask("POST", e)}> POST </button>
+              <button onClick={(e) => handleCreation(e)}> POST </button>
             )}
           </form>
         </div>
         <div className="p-20 bg-lightmushroom">
           {/* <form>
             <input type="String" label="type" ref={postType} /> */}
+          {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}
           <button onClick={(e) => addProject(e)}> Add Project </button>
           {/* </form> */}
         </div>
@@ -128,20 +156,12 @@ const Projects = (props) => {
 
 export default Projects;
 
-export async function getServerSideProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_MONGO_DB_URI}`
+export async function getStaticProps() {
+  const data = await fetch("http://localhost:3000/api/pages/projects").then(
+    (res) => res.json()
   );
-  const db = client.db();
-  const jamesPages = db.collection("pages");
-  // console.log(jamesPages);
-  const projects = await jamesPages.findOne({ title: "Projects" });
-  // console.log(about);
-  // for (let i in projects.posts) {
-  //   console.log(projects.posts[i]);
-  // }
-  client.close();
-  if (!projects) {
+  if (!data) {
+    console.log("did not find page");
     return {
       props: {},
     };
@@ -149,24 +169,13 @@ export async function getServerSideProps() {
   return {
     props: {
       projects: {
-        _id: projects._id.toString() || "",
-        title: projects.title || "",
-        p1: projects.p1 || "",
-        p2: projects.p2 || "",
-        p3: projects.p3 || "",
-        p4: projects.p4 || "",
-        posts: projects?.post || [],
-        // posts: lean(projects.posts),
-        // posts:
-        //   projects.posts.forEach((post) =>
-        //     JSON.parse(
-        //       JSON.stringify({
-        //         _id: post._id.toString(),
-        //         type: post.type,
-        //         value: post.value,
-        //       })
-        //     )
-        //   ) || [],
+        _id: data._id || "",
+        title: data.title || "",
+        p1: data.p1 || "",
+        p2: data.p2 || "",
+        p3: data.p3 || "",
+        p4: data.p4 || "",
+        posts: data.posts || [],
       },
     },
   };

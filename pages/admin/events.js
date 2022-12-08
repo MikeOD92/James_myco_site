@@ -16,16 +16,22 @@ const Events = (props) => {
   const handlePageCreation = async (e) => {
     e.preventDefault();
     const eventPageData = {
-      title: "Events",
+      title: "events",
     };
-
-    const response = await fetch("/api/pages", {
-      method: "POST",
-      body: JSON.stringify(eventPageData),
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch("/api/pages", {
+        method: "POST",
+        body: JSON.stringify(eventPageData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      router.replace("/admin/events");
+    } catch (err) {
+      console.error(err);
+    }
   };
   //////
   const handleSubmit = async (e) => {

@@ -1,5 +1,4 @@
-import { ObjectId } from "mongodb";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
   pageid: {
@@ -19,6 +18,7 @@ const postSchema = new mongoose.Schema({
   //   type: [File],
   //   required: false,
   // },
+
   ///// Event post fields
   title: {
     type: String,

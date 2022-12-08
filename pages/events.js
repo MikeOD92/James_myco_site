@@ -16,7 +16,7 @@ const Events = (props) => {
       </div>
       <div className="flex flex-row">
         <div className="bg-lightmushroom text-zinc-800 p-20 w-1/2">
-          <Calendar events={props.eventList} />
+          <Calendar events={props.eventList.posts} />
         </div>
         <div className="bg-zinc-800bg-[url('/img/sporeprint.jpg')]  bg-cover bg-blend-overlay w-1/2 p-10">
           {props.eventList?.posts.map((item) => {

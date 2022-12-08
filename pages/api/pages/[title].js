@@ -7,24 +7,32 @@ import handler from "../../../utils/handler";
 handler.get(getPage);
 handler.put(editPage);
 
+/// Read
 async function getPage(req, res) {
   const { title } = req.query;
   dbConnect();
   const doc = await Page.findOne({
-    title: title.charAt(0).toUpperCase() + title.slice(1),
+    title: title,
   }).populate("posts");
 
   await res.status(200).json(doc);
 }
 
+// Edit
 async function editPage(req, res) {
-  const data = req.body;
-  console.log("this is the data", data);
+  const { title } = req.query;
+
   dbConnect();
 
+  // const doc = title.charAt(0).toUpperCase() + title.slice(1);
+
+  const data = req.body;
+
+  // console.log("this is the data", data);
+
   try {
-    const doc = await Page.updateOne(
-      { title: data.title },
+    await Page.updateOne(
+      { title: title },
       {
         title: data.title,
         p1: data.p1 || "",
@@ -35,8 +43,8 @@ async function editPage(req, res) {
       }
     );
 
-    const updatedDoc = await Page.find({ title: data.title });
-    console.log("weee hooo ////////////", doc, updatedDoc);
+    const updatedDoc = await Page.find({ title: title });
+    // console.log("weee hooo ////////////", updatedDoc);
     await res.status(200).json(updatedDoc);
   } catch (err) {
     console.error(err);
@@ -44,31 +52,5 @@ async function editPage(req, res) {
 }
 export default handler;
 
-// const MONGODB_URI = process.env.NEXT_PUBLIC_MONGO_DB_URI;
-
-// const handler = async (req, res) => {
-//   if (req.method === "POST") {
-//     const client = await MongoClient.connect(`${MONGODB_URI}`);
-//     const db = client.db();
-//     const jamesAbout = db.collection("jamesPages");
-//     await jamesAbout.insertOne(req.body);
-
-//     client.close();
-
-//     res.status(201).send({ Message: `Set ${req.body.title}` });
-//   }
-
-//   if (req.method === "PUT") {
-//     const client = await MongoClient.connect(`${MONGODB_URI}`);
-//     const db = client.db();
-//     const jamesPages = db.collection("jamesPages");
-//     // const about = jamesPages.findOne({ title: "About" });
-//     await jamesPages.updateOne({ title: req.body.title }, { $set: req.body });
-
-//     client.close();
-
-//     res.status(200).send({ Message: `${req.body.title} Edited` });
-//   }
-// };
-
-// export default handler;
+// create, read, update, destroy
+// this holds read and update, create is in ../pages.js and destroy is probably not needed for pages
