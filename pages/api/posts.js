@@ -1,13 +1,13 @@
 import Post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
 import handler from "../../utils/handler";
-// import handler from "../../../utils/handler";
 import Page from "../../models/page";
 import { hasTokenMiddleware } from "../../utils/checkUser";
 
 handler.get(getPosts);
 handler.use(hasTokenMiddleware).post(createPosts);
 handler.use(hasTokenMiddleware).put(editPosts);
+handler.use(hasTokenMiddleware).delete(deleteAllPosts);
 
 async function getPosts(req, res) {
   // edit this to also be able to find a post by id for single event pages and project pages
@@ -25,7 +25,7 @@ async function createPosts(req, res) {
       images,
       title,
       desc,
-      dateTime,
+      date,
       location,
       img,
       pageid,
@@ -40,7 +40,7 @@ async function createPosts(req, res) {
       images: images || [],
       title: title || null,
       desc: desc || null,
-      dateTime: dateTime || null,
+      date: date || null,
       location: location || null,
       img: img || null,
     });
@@ -85,4 +85,10 @@ async function editPosts(req, res) {
 }
 // need to add delete post function
 
+async function deleteAllPosts(req, res) {
+  dbConnect();
+  const posts = await Post.find();
+  await posts.deleteMany();
+  await res.status(204).json({ message: "posts DB has been cleared" });
+}
 export default handler;

@@ -44,7 +44,7 @@ const Events = (props) => {
       postType: "Event",
       title: title.current.value,
       desc: desc.current.value,
-      dateTime: new Date(formDate.current.value).toISOString(),
+      date: new Date(formDate.current.value).toISOString(),
       location: location.current.value,
       // img: img.current.value,
     };
@@ -63,7 +63,14 @@ const Events = (props) => {
 
     // router.replace("/events");
   };
-
+  const clearPostDB = async (e) => {
+    e.preventDefault();
+    const response = await fetch("/api/posts", {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    console.log(data);
+  };
   return (
     <div>
       <Header />
@@ -83,6 +90,10 @@ const Events = (props) => {
           )}
         </div>
       </div>
+      <button className="p-3 bg-red-500" onClick={(e) => clearPostDB(e)}>
+        {" "}
+        DELETE ALL{" "}
+      </button>
     </div>
   );
 };

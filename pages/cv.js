@@ -7,7 +7,9 @@ const CV = (props) => {
       <div className="p-20">
         <h1> CV </h1>
         <div>
-          <p>{props.cv ? props.cv.p1 : ""}</p>
+          <p style={{ whiteSpace: "pre-wrap" }}>
+            {props.cv ? props.cv.p1 : ""}
+          </p>
         </div>
       </div>
     </div>

@@ -4,10 +4,6 @@ import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 
 const Projects = (props) => {
-  const p1 = useRef();
-  const p2 = useRef();
-  const p3 = useRef();
-  const p4 = useRef();
   const router = useRouter();
 
   const handleCreation = async (e) => {
@@ -15,10 +11,6 @@ const Projects = (props) => {
 
     const projectData = {
       title: "projects",
-      p1: p1.current.value,
-      p2: p2.current.value,
-      p3: p3.current.value,
-      p4: p4.current.value,
     };
     try {
       const response = await fetch("/api/pages", {
@@ -32,34 +24,6 @@ const Projects = (props) => {
       const data = await response.json();
       console.log(data);
       router.replace("/admin/projects");
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handlePut = async (e) => {
-    e.preventDefault();
-
-    const projectData = {
-      title: "projects",
-      p1: p1.current.value,
-      p2: p2.current.value,
-      p3: p3.current.value,
-      p4: p4.current.value,
-    };
-    try {
-      const response = await fetch("/api/pages/projects", {
-        method: "PUT",
-        body: JSON.stringify(projectData),
-        headers: {
-          "content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      router.replace("/projects");
     } catch (err) {
       console.error(err);
     }
@@ -96,60 +60,23 @@ const Projects = (props) => {
       <Header />
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
         <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl bg-zinc-800">
-          <form className="flex flex-col align-top">
-            <label> Paragraph 1</label>
-            <textarea
-              // type="text"
-              // placeholder="paragraph 1"
-              defaultValue={props.projects.p1}
-              ref={p1}
-              rows="4"
-              cols="50"
-              className="m-3"
-            />
-            <label> Paragraph 2</label>
-            <textarea
-              // placeholder="paragraph 2"
-              ref={p2}
-              defaultValue={props.projects.p2}
-              rows="4"
-              cols="50"
-              className="m-3"
-            />
-            <label> Paragraph 3</label>
-            <textarea
-              ref={p3}
-              defaultValue={props.projects.p3}
-              rows="4"
-              cols="50"
-              className="m-3"
-            />
-            <label> Paragraph 4</label>
-            <textarea
-              ref={p4}
-              defaultValue={props.projects.p4}
-              rows="4"
-              cols="50"
-              className="m-3"
-            />
-            {props.projects ? (
-              <button
-                className="bg-green-600 p-2"
-                onClick={(e) => handlePut(e)}
-              >
-                PUT
-              </button>
-            ) : (
-              <button onClick={(e) => handleCreation(e)}> POST </button>
-            )}
-          </form>
-        </div>
-        <div className="p-20 bg-lightmushroom">
-          {/* <form>
+          {props.projects ? (
+            ""
+          ) : (
+            <button
+              className="p-3 bg-green-600 border-double border-2 border-white m-3"
+              onClick={(e) => handleCreation(e)}
+            >
+              Create Projects Page
+            </button>
+          )}
+          <div className="p-20 bg-lightmushroom">
+            {/* <form>
             <input type="String" label="type" ref={postType} /> */}
-          {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}
-          <button onClick={(e) => addProject(e)}> Add Project </button>
-          {/* </form> */}
+            {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}
+            <button onClick={(e) => addProject(e)}> Add Project </button>
+            {/* </form> */}
+          </div>
         </div>
       </div>
     </div>
