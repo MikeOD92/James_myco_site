@@ -2,6 +2,7 @@ import Header from "../../components/Header";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
+import ProjectFrom from "../../components/ProjectFrom";
 
 const Projects = (props) => {
   const router = useRouter();
@@ -58,7 +59,7 @@ const Projects = (props) => {
     // <div className="bg-lightmushroom">
     <div>
       <Header />
-      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
+      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10 min-h-full">
         <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl bg-zinc-800">
           {props.projects ? (
             ""
@@ -71,10 +72,11 @@ const Projects = (props) => {
             </button>
           )}
           <div className="p-20 bg-lightmushroom">
+            <ProjectFrom />
             {/* <form>
             <input type="String" label="type" ref={postType} /> */}
             {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}
-            <button onClick={(e) => addProject(e)}> Add Project </button>
+            {/* <button onClick={(e) => addProject(e)}> Add Project </button> */}
             {/* </form> */}
           </div>
         </div>

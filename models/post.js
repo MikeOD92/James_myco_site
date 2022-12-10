@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   ///// Project post fields
   value: {
     type: [String],
@@ -24,10 +28,7 @@ const postSchema = new mongoose.Schema({
   // },
 
   ///// Event post fields
-  title: {
-    type: String,
-    required: false,
-  },
+
   desc: {
     type: String,
     required: false,
