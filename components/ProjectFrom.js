@@ -4,22 +4,23 @@ export default function ProjectFrom() {
   const title = useRef();
   const body = useRef();
   const files = useRef();
-  const [uploadStatus, setUploadStatus] = useState(false);
-  const [uploadFileList, setUploadFileList] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [file, setfile] = useState([]);
   const [progress, setProgress] = useState();
 
   const handleChange = (e) => {
-    setUploadFileList(e.target.files[0]);
-    console.log(uploadFileList);
+    setfile(e.target.files[0]);
+    console.log(file);
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!uploadFileList) return;
+    if (!file) return;
+    setUploading(true);
 
     const formData = new FormData();
-    formData.append("file", uploadFileList);
-    formData.append("fileName", uploadFileList.name);
+    formData.append("file", file);
+    formData.append("fileName", file.name);
     console.log(formData);
     const config = {
       headers: {
@@ -37,6 +38,9 @@ export default function ProjectFrom() {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setUploading(false);
+      setProgress(0);
     }
     // setUploadStatus(true);
     // e.preventDefault();
@@ -89,6 +93,7 @@ export default function ProjectFrom() {
         <textarea className="p-2" ref={body} cols="50" rows="25" />
         <label className="p-2">Image Upload</label>
         <br />
+        {uploading && <p>{progress}</p>}
         <input
           className="p-2"
           type="file"
