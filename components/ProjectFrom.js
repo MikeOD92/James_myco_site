@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
+import awsUpload from "../pages/api/upload";
 
 export default function ProjectFrom() {
   const title = useRef();
   const body = useRef();
   const files = useRef();
   const [uploading, setUploading] = useState(false);
-  const [file, setfile] = useState([]);
+  const [file, setfile] = useState();
   const [progress, setProgress] = useState();
 
   const handleChange = (e) => {
@@ -18,52 +19,14 @@ export default function ProjectFrom() {
     if (!file) return;
     setUploading(true);
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", file.name);
-    console.log(formData);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-      onUploadProgress: (progress) => {
-        const percent = Math.round(progress.loaded * 100) / progress.total;
-      },
-    };
-    try {
-      await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-        config,
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setUploading(false);
-      setProgress(0);
-    }
-    // setUploadStatus(true);
-    // e.preventDefault();
-
-    // console.log("files Value");
-    // console.log(files.current.value);
-    // console.log("files files");
-    // console.log(files.current.files);
-
-    // const response = await fetch("/api/upload", {
-    //   method: "POST",
-    //   body: {
-    //     images: [...files.current.files],
-    //   },
-    //   headers: {
-    //     "content-Type": "application/json",
-    //   },
-    // });
-    // await console.log(response);
-    // setUploadStatus(false);
+    const data = await awsUpload(file);
+    console.log(data);
+    // will need to set the response/ asset url to a state[] so it can be included in the post
+    return data;
   };
 
   const handleSubmit = (e) => {
+    // check at least one image is uploaded or at least alert if no images are included.
     e.preventDefault();
     // console.log(e.target[0].value);
     // console.log(e.target[1].value);
@@ -74,13 +37,8 @@ export default function ProjectFrom() {
     //   console.log(e.target[i].value);
     // }
 
-    /*// this if we want to use, the values as an array of text, might want to use a package like formik.
-     i think I also need to think about how to layout and show the projects. 
-     this would make it easier for a variable number of paragraphs per project but, 
-     what about just using      <p style={{ whiteSpace: "pre-wrap" }}> and just making it one big text area input 
+    /*// <p style={{ whiteSpace: "pre-wrap" }}> and just making it one big text area input 
      I think this is better its at least more simple. 
-     
-     
      */
   };
   return (
