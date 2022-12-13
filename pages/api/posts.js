@@ -3,6 +3,7 @@ import dbConnect from "../../utils/dbConnect";
 import handler from "../../utils/handler";
 import Page from "../../models/page";
 import { hasTokenMiddleware } from "../../utils/checkUser";
+import S3 from "aws-sdk/clients/s3";
 
 handler.get(getPosts);
 handler.use(hasTokenMiddleware).post(createPosts);
@@ -32,6 +33,7 @@ async function createPosts(req, res) {
     } = req.body;
 
     dbConnect();
+
     const post = await Post.create({
       pageid,
       created,
@@ -42,7 +44,7 @@ async function createPosts(req, res) {
       desc: desc || null,
       date: date || null,
       location: location || null,
-      img: img || null,
+      // img: img || null,
     });
 
     await post.save();

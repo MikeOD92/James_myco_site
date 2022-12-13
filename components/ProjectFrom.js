@@ -1,15 +1,71 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function ProjectFrom() {
   const title = useRef();
   const body = useRef();
+  const files = useRef();
+  const [uploadStatus, setUploadStatus] = useState(false);
+  const [uploadFileList, setUploadFileList] = useState([]);
+  const [progress, setProgress] = useState();
+
+  const handleChange = (e) => {
+    setUploadFileList(e.target.files[0]);
+    console.log(uploadFileList);
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if (!uploadFileList) return;
+
+    const formData = new FormData();
+    formData.append("file", uploadFileList);
+    formData.append("fileName", uploadFileList.name);
+    console.log(formData);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+      onUploadProgress: (progress) => {
+        const percent = Math.round(progress.loaded * 100) / progress.total;
+      },
+    };
+    try {
+      await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+        config,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    // setUploadStatus(true);
+    // e.preventDefault();
+
+    // console.log("files Value");
+    // console.log(files.current.value);
+    // console.log("files files");
+    // console.log(files.current.files);
+
+    // const response = await fetch("/api/upload", {
+    //   method: "POST",
+    //   body: {
+    //     images: [...files.current.files],
+    //   },
+    //   headers: {
+    //     "content-Type": "application/json",
+    //   },
+    // });
+    // await console.log(response);
+    // setUploadStatus(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e.target[0].value);
     // console.log(e.target[1].value);
-    console.log(body.current.value);
-    console.log(title.current.value);
+    // console.log(body.current.value);
+    // console.log(title.current.value);
+    // console.log(files.current.files);
     // for (let i in e.target) {
     //   console.log(e.target[i].value);
     // }
@@ -33,7 +89,15 @@ export default function ProjectFrom() {
         <textarea className="p-2" ref={body} cols="50" rows="25" />
         <label className="p-2">Image Upload</label>
         <br />
-        <input className="p-2" type="file" />
+        <input
+          className="p-2"
+          type="file"
+          ref={files}
+          onChange={(e) => handleChange(e)}
+        />
+        <button className="p-2 bg-green-600" onClick={(e) => handleUpload(e)}>
+          Upload
+        </button>
         <br />
         <input className="p-2 bg-green-600" type="submit" value="POST" />
       </form>
