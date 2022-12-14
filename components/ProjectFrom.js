@@ -1,27 +1,29 @@
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 import awsUpload from "../pages/api/upload";
 
 export default function ProjectFrom() {
   const title = useRef();
   const body = useRef();
-  const files = useRef();
+  const [uploaded, setUploaded] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [file, setfile] = useState();
-  const [progress, setProgress] = useState();
 
   const handleChange = (e) => {
-    setfile(e.target.files[0]);
-    console.log(file);
+    setfile(e.target.files);
+    // console.log();
   };
 
   const handleUpload = async (e) => {
+    // console.log("/////////////////////", file);
     e.preventDefault();
     if (!file) return;
     setUploading(true);
 
     const data = await awsUpload(file);
-    console.log(data);
-    // will need to set the response/ asset url to a state[] so it can be included in the post
+
+    setUploaded([data, ...uploaded]);
+    setUploading(false);
     return data;
   };
 
@@ -51,16 +53,28 @@ export default function ProjectFrom() {
         <textarea className="p-2" ref={body} cols="50" rows="25" />
         <label className="p-2">Image Upload</label>
         <br />
-        {uploading && <p>{progress}</p>}
         <input
           className="p-2"
           type="file"
-          ref={files}
+          multiple
           onChange={(e) => handleChange(e)}
         />
         <button className="p-2 bg-green-600" onClick={(e) => handleUpload(e)}>
           Upload
         </button>
+        {uploading ? (
+          <svg
+            className=" bg-blue-800 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
+            viewBox="0 0 24 24"
+          />
+        ) : (
+          ""
+        )}
+        {uploaded.map((img) => {
+          // console.log("looping over this is the img val:", img);
+          return <img key={img} src={img} alt="uploaded image thumbnail" />;
+          // this needs to be the next/Image tag, and needs to be sized correctly also a remove option would be good.
+        })}
         <br />
         <input className="p-2 bg-green-600" type="submit" value="POST" />
       </form>
