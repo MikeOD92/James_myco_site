@@ -9,24 +9,23 @@ export default function ProjectFrom() {
   const [uploading, setUploading] = useState(false);
   const [file, setfile] = useState();
 
+  // image uploading handlers
   const handleChange = (e) => {
     setfile(e.target.files);
-    // console.log();
   };
 
   const handleUpload = async (e) => {
-    // console.log("/////////////////////", file);
     e.preventDefault();
     if (!file) return;
     setUploading(true);
 
     const data = await awsUpload(file);
 
-    setUploaded([data, ...uploaded]);
+    setUploaded([...data, ...uploaded]);
     setUploading(false);
     return data;
   };
-
+  //////////////
   const handleSubmit = (e) => {
     // check at least one image is uploaded or at least alert if no images are included.
     e.preventDefault();
@@ -64,17 +63,32 @@ export default function ProjectFrom() {
         </button>
         {uploading ? (
           <svg
-            className=" bg-blue-800 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
+            className="animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
             viewBox="0 0 24 24"
           />
         ) : (
           ""
         )}
-        {uploaded.map((img) => {
-          // console.log("looping over this is the img val:", img);
-          return <img key={img} src={img} alt="uploaded image thumbnail" />;
-          // this needs to be the next/Image tag, and needs to be sized correctly also a remove option would be good.
-        })}
+        <div className="flex row flex-wrap">
+          {uploaded.map((img, i) => {
+            // console.log("looping over this is the img val:", img);
+            return (
+              <div key={`${img}-${i}container`} className="m-1">
+                <button className="bg-red-500 p-1 w-5 relative top-8">x</button>
+                <Image
+                  key={img}
+                  src={img}
+                  alt="uploaded image thumbnail"
+                  fill
+                  // width={400}
+                  // height={400}
+                />
+              </div>
+            );
+            // this needs to be the next/Image tag, and needs to be sized correctly also a remove option would be good.
+          })}
+        </div>
+
         <br />
         <input className="p-2 bg-green-600" type="submit" value="POST" />
       </form>

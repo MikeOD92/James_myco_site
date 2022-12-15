@@ -15,4 +15,7 @@ const withTM = require("next-transpile-modules")([
 // module.exports = nextConfig;
 module.exports = withTM({
   reactStrictMode: true,
+  images: {
+    domains: ["jamesmycologysite.s3.us-west-1.amazonaws.com"],
+  },
 });
