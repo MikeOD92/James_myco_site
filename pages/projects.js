@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Header from "../components/Header";
+import Project from "../components/Project";
 // import { MongoClient } from "mongodb";
 // import mongoose from "mongoose";
 
@@ -7,20 +8,26 @@ const Projects = (props) => {
   return (
     <div>
       <Header />
-      <div className="p-20">
+      <div className="p-20 bg-[url('/img/petri_dish.jpg')] bg-fixed bg-top bg-cover max-w-screen flex h-screen justify-evenly items-center">
         <h1> Projects </h1>
-        {/* <h1>{props.projects.p1}</h1> */}
-
-        {props.projects?.posts
-          ? props.projects.posts.map((post) => {
-              return (
-                <h1 key={post._id}>
-                  {post.value[0]} {post.value[1]}
-                </h1>
-              );
-            })
-          : ""}
       </div>
+      {/* <h1>{props.projects.p1}</h1> */}
+      <div className="flex flex-col">
+        {props.projects?.posts.map((post) => {
+          return <Project key={post._id} project={post} />;
+        })}
+      </div>
+      {/* 
+      {props.projects?.posts.map((proj) => {
+        return(
+          <div>
+            <h1 key={post._id}>
+              {post.title}
+            </h1>
+            <p>{post.body}</p>
+          <div>
+        );
+      })} */}
     </div>
   );
 };

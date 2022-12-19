@@ -22,7 +22,7 @@ async function createPosts(req, res) {
     const {
       postType,
       created,
-      value,
+      body,
       images,
       title,
       desc,
@@ -38,7 +38,7 @@ async function createPosts(req, res) {
       pageid,
       created,
       postType,
-      value: value || null,
+      body: body || null,
       images: images || [],
       title: title || null,
       desc: desc || null,

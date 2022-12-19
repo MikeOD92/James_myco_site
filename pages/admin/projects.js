@@ -72,7 +72,7 @@ const Projects = (props) => {
             </button>
           )}
           <div className="p-20 bg-lightmushroom">
-            <ProjectFrom />
+            <ProjectFrom pageid={props.projects._id} />
             {/* <form>
             <input type="String" label="type" ref={postType} /> */}
             {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}

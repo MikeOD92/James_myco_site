@@ -1,10 +1,13 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import awsUpload from "../pages/api/upload";
+import { useRouter } from "next/router";
 
-export default function ProjectFrom() {
+export default function ProjectFrom(props) {
   const title = useRef();
   const body = useRef();
+  const router = useRouter();
+
   const [uploaded, setUploaded] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [file, setfile] = useState();
@@ -26,9 +29,40 @@ export default function ProjectFrom() {
     return data;
   };
   //////////////
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // check at least one image is uploaded or at least alert if no images are included.
     e.preventDefault();
+
+    const projectData = {
+      pageid: props.pageid,
+      postType: "project",
+      created: new Date(),
+      title: title.current.value,
+      // value: body.current.value,
+      body: body.current.value,
+      images: uploaded,
+    };
+
+    // console.log(projectData);
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify(projectData),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+
+      // console.log(response);
+      if (response.status === 201) {
+        router.push("/projects");
+      } else {
+        console.log(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
     // console.log(e.target[0].value);
     // console.log(e.target[1].value);
     // console.log(body.current.value);
@@ -63,7 +97,7 @@ export default function ProjectFrom() {
         </button>
         {uploading ? (
           <svg
-            className="animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
+            className="bg-darkmushroom opacity-1/2 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
             viewBox="0 0 24 24"
           />
         ) : (
@@ -79,9 +113,9 @@ export default function ProjectFrom() {
                   key={img}
                   src={img}
                   alt="uploaded image thumbnail"
-                  fill
-                  // width={400}
-                  // height={400}
+                  // fill
+                  width={400}
+                  height={400}
                 />
               </div>
             );

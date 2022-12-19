@@ -18,14 +18,14 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   ///// Project post fields
-  value: {
+  body: {
+    type: String,
+    required: false,
+  },
+  images: {
     type: [String],
     required: false,
   },
-  // images: {
-  //   type: [File],
-  //   required: false,
-  // },
 
   ///// Event post fields
 
