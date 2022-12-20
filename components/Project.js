@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Projects from "../pages/projects";
+import Image from "next/Image";
 
 export default function Project({ project }) {
   const [view, setView] = useState(0);
@@ -10,7 +11,7 @@ export default function Project({ project }) {
     } else if (operator === "+" && view < project.images.length - 1) {
       setView(view + 1);
     }
-    console.log(view);
+    // console.log(view);
   };
 
   return (
@@ -22,10 +23,12 @@ export default function Project({ project }) {
           onClick={() => handleButtons("-")}
         ></button>
         <div className="inline">
-          <img
+          <Image
             src={project.images[view]}
             alt={`${project.title} splash image`}
-            width="600"
+            width={600}
+            height={100}
+            // className="max-h-1/3"
           />
           <div className="flex flex-row">
             {project.images.map((itm, idx) => {
@@ -47,7 +50,12 @@ export default function Project({ project }) {
         ></button>
       </div>
 
-      <p style={{ whiteSpace: "pre-wrap" }}>{project.body}</p>
+      <p
+        // className="p-5 bg-lightmushroom w-5/6"
+        style={{ whiteSpace: "pre-wrap" }}
+      >
+        {project.body}
+      </p>
     </div>
   );
 }

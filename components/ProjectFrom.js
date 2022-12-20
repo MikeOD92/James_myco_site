@@ -80,9 +80,11 @@ export default function ProjectFrom(props) {
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label className="p-2">Title</label>
+        <br />
         <input className="p-2" type="text" ref={title} />
         <br />
         <label className="p-2">Body</label>
+        <br />
         <textarea className="p-2" ref={body} cols="50" rows="25" />
         <label className="p-2">Image Upload</label>
         <br />
@@ -97,7 +99,7 @@ export default function ProjectFrom(props) {
         </button>
         {uploading ? (
           <svg
-            className="bg-darkmushroom opacity-1/2 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
+            className="bg-bruise opacity-1/2 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
             viewBox="0 0 24 24"
           />
         ) : (

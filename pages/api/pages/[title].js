@@ -15,6 +15,7 @@ async function getPage(req, res) {
   const doc = await Page.findOne({
     title: title,
   }).populate("posts");
+  // .sort({ created: "desc" });
 
   await res.status(200).json(doc);
 }

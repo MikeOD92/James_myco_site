@@ -12,7 +12,7 @@ const Projects = (props) => {
         <h1> Projects </h1>
       </div>
       {/* <h1>{props.projects.p1}</h1> */}
-      <div className="flex flex-col">
+      <div className="flex flex-col p-10 round-md text-lightmushroom">
         {props.projects?.posts.map((post) => {
           return <Project key={post._id} project={post} />;
         })}

@@ -17,16 +17,15 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  images: {
+    type: [String],
+    required: false,
+  },
   ///// Project post fields
   body: {
     type: String,
     required: false,
   },
-  images: {
-    type: [String],
-    required: false,
-  },
-
   ///// Event post fields
 
   desc: {
@@ -41,10 +40,6 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  // img: {
-  //   type: File,
-  //   required: false,
-  // },
 });
 
 export default mongoose.models.Post || mongoose.model("Post", postSchema);

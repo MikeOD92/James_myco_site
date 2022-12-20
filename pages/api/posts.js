@@ -52,7 +52,7 @@ async function createPosts(req, res) {
     const foundPage = await Page.findById(pageid);
     const pagePosts = foundPage.posts;
     const updatePage = await Page.findByIdAndUpdate(pageid, {
-      posts: [...pagePosts, post._id],
+      posts: [post._id, ...pagePosts],
     });
 
     updatePage.save();
