@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 export default function ProjectFrom(props) {
   const title = useRef();
   const body = useRef();
+  const desc = useRef();
   const router = useRouter();
 
   const [uploaded, setUploaded] = useState([]);
@@ -41,6 +42,7 @@ export default function ProjectFrom(props) {
       // value: body.current.value,
       body: body.current.value,
       images: uploaded,
+      desc: desc.current.value,
     };
 
     // console.log(projectData);
@@ -82,6 +84,10 @@ export default function ProjectFrom(props) {
         <label className="p-2">Title</label>
         <br />
         <input className="p-2" type="text" ref={title} />
+        <br />
+        <label className="p-2">Description</label>
+        <br />
+        <input className="p-2" type="text" ref={desc} />
         <br />
         <label className="p-2">Body</label>
         <br />

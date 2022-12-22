@@ -21,6 +21,10 @@ const postSchema = new mongoose.Schema({
     type: [String],
     required: false,
   },
+  desc: {
+    type: String,
+    required: false,
+  },
   ///// Project post fields
   body: {
     type: String,
@@ -28,10 +32,6 @@ const postSchema = new mongoose.Schema({
   },
   ///// Event post fields
 
-  desc: {
-    type: String,
-    required: false,
-  },
   date: {
     type: String,
     required: false,

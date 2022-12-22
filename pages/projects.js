@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Header from "../components/Header";
-import Project from "../components/Project";
+import ProjectTile from "../components/ProjectTile";
 // import { MongoClient } from "mongodb";
 // import mongoose from "mongoose";
 
@@ -14,7 +14,11 @@ const Projects = (props) => {
       {/* <h1>{props.projects.p1}</h1> */}
       <div className="flex flex-col p-10 round-md text-lightmushroom">
         {props.projects?.posts.map((post) => {
-          return <Project key={post._id} project={post} />;
+          return (
+            <Link key={post._id} href={`/project/${post._id}`}>
+              <ProjectTile project={post} />;
+            </Link>
+          );
         })}
       </div>
       {/* 

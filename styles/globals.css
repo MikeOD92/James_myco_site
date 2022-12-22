@@ -61,8 +61,18 @@ h1 {
   font-family: "Noto Sans", sans-serif;
   font-size: 1.8rem;
 }
-h2 {
-  font-family: "Montserrat Alternates", sans-serif;
+.projectTile h2 {
+  /* font-family: "Montserrat Alternates", sans-serif; */
+  font-family: "Baskervville", serif;
+  font-size: 4rem;
+  /* text-align: left;
+  /* padding-top: 10%; */
+  /* white-space: noWrap;
+  box-sizing: content-box; */
+}
+
+.projectTile p {
+  font-family: "Noto Sans", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   html {
