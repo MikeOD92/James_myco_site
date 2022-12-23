@@ -96,7 +96,7 @@ function Header() {
         </div>
       ) : show ? (
         //desktop
-        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-black">
+        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-mushroom">
           {/* //mobile */}
           {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
           <Link className="p-2" href="/about">
