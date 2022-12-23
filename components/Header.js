@@ -12,7 +12,11 @@ import { useSession, signOut, signIn, signUp } from "next-auth/react";
 function Header() {
   const [show, setShow] = useState(false);
   const { data: session } = useSession();
-
+  const [view, setView] = useState(1);
+  const handleMouseEvent = (e, view) => {
+    e.preventDefault();
+    setView(view);
+  };
   return (
     <div className="w-screen h-20 bg-mushroom shadow-md fixed top-0 z-50">
       <Link href="/" className="text-yellow-400 text-4xl absolute top-2 left-7">
@@ -31,20 +35,64 @@ function Header() {
         {show ? <AiOutlineClose /> : <GiHamburgerMenu />}
       </button>
       {show && session?.user ? (
-        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-black">
-          <Link className="p-2" href="/admin/about">
-            <p>About</p>
-          </Link>
-          <Link className="p-2" href="/admin/projects">
-            <p>Projects</p>
-          </Link>
-          <Link className="p-2" href="/admin/cv">
-            <p>CV</p>
-          </Link>
-          <Link className="p-2" href="/admin/events">
-            <p>Events</p>
-          </Link>
-          <button onClick={signOut}>Log out</button>
+        <div
+          className={`absolute right-0 top-20 h-76 p-5 w-1/4 z-50 text-4xl ${
+            view === 1
+              ? "bg-bruise text-lightmushroom"
+              : "bg-lightmushroom text-mushroom"
+          }`}
+          onMouseLeave={() => setShow(!show)}
+        >
+          <div>
+            <div className="flex">
+              <div
+                className="p-4 bg-bruise text-lightmushroom"
+                onClick={(e) => handleMouseEvent(e, 1)}
+              >
+                <p>Admin</p>
+              </div>
+              <div
+                className="p-4 bg-lightmushroom text-mushroom"
+                onClick={(e) => handleMouseEvent(e, 0)}
+              >
+                <p>User</p>
+              </div>
+            </div>
+          </div>
+          {view === 1 ? (
+            <div>
+              <Link className="bg-darkmushroom p-2" href="/admin/about">
+                <p>About</p>
+              </Link>
+              <Link className="p-2" href="/admin/projects">
+                <p>Projects</p>
+              </Link>
+              <Link className="p-2" href="/admin/cv">
+                <p>CV</p>
+              </Link>
+              <Link className="p-2" href="/admin/events">
+                <p>Events</p>
+              </Link>
+              <button className="p-2 float-right" onClick={signOut}>
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <div>
+              <Link className="p-2" href="/about">
+                <p>About</p>
+              </Link>
+              <Link className="p-2" href="/projects">
+                <p>Projects</p>
+              </Link>
+              <Link className="p-2" href="/cv">
+                <p>CV</p>
+              </Link>
+              <Link className="p-2" href="/events">
+                <p>Events</p>
+              </Link>
+            </div>
+          )}
         </div>
       ) : show ? (
         //desktop

@@ -1,6 +1,6 @@
 // import { MongoClient } from "mongodb";
 
-import Page from "../../../models/page";
+import page from "../../../models/page";
 import dbConnect from "../../../utils/dbConnect";
 import handler from "../../../utils/handler";
 import { hasTokenMiddleware } from "../../../utils/checkUser";
@@ -12,9 +12,11 @@ handler.use(hasTokenMiddleware).put(editPage);
 async function getPage(req, res) {
   const { title } = req.query;
   dbConnect();
-  const doc = await Page.findOne({
-    title: title,
-  }).populate("posts");
+  const doc = await page
+    .findOne({
+      title: title,
+    })
+    .populate("posts");
   // .sort({ created: "desc" });
 
   await res.status(200).json(doc);
@@ -45,7 +47,7 @@ async function editPage(req, res) {
       }
     );
 
-    const updatedDoc = await Page.find({ title: title });
+    const updatedDoc = await page.find({ title: title });
     // console.log("weee hooo ////////////", updatedDoc);
     await res.status(200).json(updatedDoc);
   } catch (err) {

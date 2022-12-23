@@ -16,7 +16,7 @@ const Projects = (props) => {
         {props.projects?.posts.map((post) => {
           return (
             <Link key={post._id} href={`/project/${post._id}`}>
-              <ProjectTile project={post} />;
+              <ProjectTile post={post} />;
             </Link>
           );
         })}
@@ -42,6 +42,7 @@ export async function getServerSideProps() {
   const data = await fetch("http://localhost:3000/api/pages/projects").then(
     (res) => res.json()
   );
+  console.log(data);
   if (!data) {
     return {
       props: {},
