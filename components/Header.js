@@ -47,13 +47,13 @@ function Header() {
             <div className="flex">
               <div
                 className="p-4 bg-darkbruise text-lightmushroom"
-                onClick={(e) => handleMouseEvent(e, 1)}
+                onMouseEnter={(e) => handleMouseEvent(e, 1)}
               >
                 <p>Admin</p>
               </div>
               <div
                 className="p-4 bg-lightmushroom text-mushroom"
-                onClick={(e) => handleMouseEvent(e, 0)}
+                onMouseEnter={(e) => handleMouseEvent(e, 0)}
               >
                 <p>User</p>
               </div>
@@ -61,34 +61,40 @@ function Header() {
           </div>
           {view === 1 ? (
             <div>
-              <Link className="bg-darkmushroom p-2" href="/admin/about">
+              <Link
+                className="bg-darkmushroom p-2 hover:text-zinc-800"
+                href="/admin/about"
+              >
                 <p>About</p>
               </Link>
-              <Link className="p-2" href="/admin/projects">
+              <Link className="p-2 hover:text-zinc-800" href="/admin/projects">
                 <p>Projects</p>
               </Link>
-              <Link className="p-2" href="/admin/cv">
+              <Link className="p-2 hover:text-zinc-800" href="/admin/cv">
                 <p>CV</p>
               </Link>
-              <Link className="p-2" href="/admin/events">
+              <Link className="p-2 hover:text-zinc-800" href="/admin/events">
                 <p>Events</p>
               </Link>
-              <button className="p-2 float-right" onClick={signOut}>
+              <button
+                className="p-2 float-right hover:text-zinc-800"
+                onClick={signOut}
+              >
                 Log Out
               </button>
             </div>
           ) : (
             <div>
-              <Link className="p-2" href="/about">
+              <Link className="p-2 hover:text-darkbruise" href="/about">
                 <p>About</p>
               </Link>
-              <Link className="p-2" href="/projects">
+              <Link className="p-2 hover:text-darkbruise" href="/projects">
                 <p>Projects</p>
               </Link>
-              <Link className="p-2" href="/cv">
+              <Link className="p-2 hover:text-darkbruise" href="/cv">
                 <p>CV</p>
               </Link>
-              <Link className="p-2" href="/events">
+              <Link className="p-2 hover:text-darkbruise" href="/events">
                 <p>Events</p>
               </Link>
             </div>
@@ -96,19 +102,22 @@ function Header() {
         </div>
       ) : show ? (
         //desktop
-        <div className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-mushroom">
+        <div
+          className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-mushroom"
+          onMouseLeave={() => setShow(!show)}
+        >
           {/* //mobile */}
           {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
-          <Link className="p-2" href="/about">
+          <Link className="p-2 hover:text-darkbruise" href="/about">
             <p>About</p>
           </Link>
-          <Link className="p-2" href="/projects">
+          <Link className="p-2 hover:text-darkbruise" href="/projects">
             <p>Projects</p>
           </Link>
-          <Link className="p-2" href="/cv">
+          <Link className="p-2 hover:text-darkbruise" href="/cv">
             <p>CV</p>
           </Link>
-          <Link className="p-2" href="/events">
+          <Link className="p-2 hover:text-darkbruise" href="/events">
             <p>Events</p>
           </Link>
         </div>
