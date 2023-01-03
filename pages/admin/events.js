@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import awsUpload from "../api/upload";
 import Image from "next/image";
-// import "../../styles/Eventsform.module.css";
+import post from "../../models/post";
+import dbConnect from "../../utils/dbConnect";
+
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
 
@@ -190,10 +192,19 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const data = await fetch("http://localhost:3000/api/pages/events").then(
-    (res) => res.json()
-  );
-  console.log(data);
+  dbConnect();
+
+  const data = await post
+    .find({ postType: "event" })
+    .sort({ created: "desc" })
+    .lean();
+
+  for (let item of data) {
+    if (item._id !== null) {
+      item._id = item._id.toString();
+    }
+  }
+
   if (!data) {
     return {
       props: {},
@@ -201,15 +212,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      eventList: {
-        _id: data._id || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-        p2: data.p2 || "",
-        p3: data.p3 || "",
-        p4: data.p4 || "",
-        posts: data.posts || [],
-      },
+      eventList: data,
     },
   };
 }

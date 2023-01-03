@@ -1,8 +1,9 @@
-import Link from "next/link";
 import Header from "../../components/Header";
 import react, { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
+import page from "../../models/page";
+import dbConnect from "../../utils/dbConnect";
 
 const CV = (props) => {
   const cvTxt = useRef();
@@ -87,9 +88,13 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const data = await fetch("http://localhost:3000/api/pages/cv").then((res) =>
-    res.json()
-  );
+  dbConnect();
+
+  const data = await page.findOne({ title: "cv" }).lean();
+
+  if (data._id !== null) {
+    data._id = data._id.toString();
+  }
 
   if (!data) {
     console.log("page not found");
@@ -99,11 +104,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      cv: {
-        _id: data._id || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-      },
+      cv: data,
     },
   };
 }

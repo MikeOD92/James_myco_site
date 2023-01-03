@@ -2,6 +2,8 @@ import Header from "../../components/Header";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
+import page from "../../models/page";
+import dbConnect from "../../utils/dbConnect";
 
 const About = (props) => {
   const p1 = useRef();
@@ -133,10 +135,14 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const data = await fetch("http://localhost:3000/api/pages/about").then(
-    (res) => res.json()
-  );
-  // console.log(data);
+  dbConnect();
+
+  const data = await page.findOne({ title: "about" }).lean();
+
+  if (data._id !== null) {
+    data._id = data._id.toString();
+  }
+
   if (!data) {
     return {
       props: {},
@@ -144,14 +150,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      about: {
-        id: data._id.toString() || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-        p2: data.p2 || "",
-        p3: data.p3 || "",
-        p4: data.p4 || "",
-      },
+      about: data,
     },
   };
 }

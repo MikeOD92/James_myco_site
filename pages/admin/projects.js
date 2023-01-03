@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import ProjectFrom from "../../components/ProjectFrom";
+import post from "../../models/post";
+import dbConnect from "../../utils/dbConnect";
 
 const Projects = (props) => {
   const router = useRouter();
@@ -98,27 +100,27 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  dbConnect();
 
-  const data = await fetch("http://localhost:3000/api/pages/projects").then(
-    (res) => res.json()
-  );
+  const data = await post
+    .find({ postType: "project" })
+    .sort({ created: "desc" })
+    .lean();
+
+  for (let item of data) {
+    if (item._id !== null) {
+      item._id = item._id.toString();
+    }
+  }
+
   if (!data) {
-    console.log("did not find page");
     return {
       props: {},
     };
   }
   return {
     props: {
-      projects: {
-        _id: data._id || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-        p2: data.p2 || "",
-        p3: data.p3 || "",
-        p4: data.p4 || "",
-        posts: data.posts || [],
-      },
+      projects: data,
     },
   };
 }
