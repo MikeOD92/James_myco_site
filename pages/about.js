@@ -1,5 +1,8 @@
 import Header from "../components/Header";
 import Image from "next/image";
+import page from "../models/page";
+import dbConnect from "../utils/dbConnect";
+
 const About = (props) => {
   // console.log(props);
   return (
@@ -60,10 +63,14 @@ const About = (props) => {
 export default About;
 
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/pages/about").then(
-    (res) => res.json()
-  );
-  console.log(data);
+  dbConnect();
+
+  const data = await page.findOne({ title: "about" }).lean();
+
+  if (data._id !== null) {
+    data._id = data._id.toString();
+  }
+
   if (!data) {
     return {
       props: {},
@@ -71,14 +78,7 @@ export async function getServerSideProps() {
   }
   return {
     props: {
-      about: {
-        id: data._id.toString() || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-        p2: data.p2 || "",
-        p3: data.p3 || "",
-        p4: data.p4 || "",
-      },
+      about: data,
     },
   };
 }

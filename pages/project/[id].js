@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Header from "../../components/Header";
 import post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
@@ -7,9 +6,6 @@ import dbConnect from "../../utils/dbConnect";
 import Image from "next/image";
 
 export default function ReadProject({ post }) {
-  // const router = useRouter();
-  // const { id } = router.query;
-
   const [view, setView] = useState(0);
 
   const handleButtons = (operator) => {

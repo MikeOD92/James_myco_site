@@ -1,6 +1,8 @@
 import Header from "../components/Header";
 import { Calendar } from "../components/Calendar";
 import { useState, useEffect } from "react";
+import post from "../models/post";
+import dbConnect from "../utils/dbConnect";
 
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
@@ -19,7 +21,7 @@ const Events = (props) => {
           <Calendar events={props.eventList.posts} />
         </div>
         <div className="bg-zinc-800bg-[url('/img/sporeprint.jpg')]  bg-cover bg-blend-overlay w-1/2 p-10">
-          {props.eventList?.posts.map((item) => {
+          {props.eventList?.map((item) => {
             return (
               // this will be a component
               <div
@@ -39,10 +41,19 @@ const Events = (props) => {
 };
 
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/pages/events").then(
-    (res) => res.json()
-  );
-  console.log(data);
+  dbConnect();
+
+  const data = await post
+    .find({ postType: "event" })
+    .sort({ created: "desc" })
+    .lean();
+
+  for (let item of data) {
+    if (item._id !== null) {
+      item._id = item._id.toString();
+    }
+  }
+
   if (!data) {
     return {
       props: {},
@@ -50,11 +61,7 @@ export async function getServerSideProps() {
   }
   return {
     props: {
-      eventList: {
-        _id: data._id || "",
-        title: data.title || "",
-        posts: data.posts || [],
-      },
+      eventList: data,
     },
   };
 }

@@ -1,4 +1,6 @@
 import Header from "../components/Header";
+import page from "../models/page";
+import dbConnect from "../utils/dbConnect";
 
 const CV = (props) => {
   return (
@@ -17,9 +19,13 @@ const CV = (props) => {
 };
 
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/pages/cv").then((res) =>
-    res.json()
-  );
+  dbConnect();
+
+  const data = await page.findOne({ title: "cv" }).lean();
+
+  if (data._id !== null) {
+    data._id = data._id.toString();
+  }
 
   if (!data) {
     console.log("page not found");
@@ -29,11 +35,7 @@ export async function getServerSideProps() {
   }
   return {
     props: {
-      cv: {
-        _id: data._id || "",
-        title: data.title || "",
-        p1: data.p1 || "",
-      },
+      cv: data,
     },
   };
 }

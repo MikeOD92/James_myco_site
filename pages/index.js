@@ -1,4 +1,6 @@
 import Header from "../components/Header";
+import post from "../models/post";
+import dbConnect from "../utils/dbConnect";
 
 function Home(props) {
   return (
@@ -43,9 +45,16 @@ function Home(props) {
   );
 }
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/posts").then((res) =>
-    res.json()
-  );
+  dbConnect();
+
+  const data = await post.find().sort({ created: "desc" }).lean();
+
+  for (let item of data) {
+    if (item._id !== null) {
+      item._id = item._id.toString();
+    }
+  }
+
   if (!data) {
     console.log("no posts found");
 
@@ -55,7 +64,7 @@ export async function getServerSideProps() {
   }
   return {
     props: {
-      posts: [...data],
+      posts: data,
     },
   };
 }

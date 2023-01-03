@@ -5,22 +5,22 @@ import dbConnect from "../../../utils/dbConnect";
 import handler from "../../../utils/handler";
 import { hasTokenMiddleware } from "../../../utils/checkUser";
 
-handler.get(getPage);
+// handler.get(getPage);
 handler.use(hasTokenMiddleware).put(editPage);
 
 /// Read
-async function getPage(req, res) {
-  const { title } = req.query;
-  dbConnect();
-  const doc = await page
-    .findOne({
-      title: title,
-    })
-    .populate("posts");
-  // .sort({ created: "desc" });
+// async function getPage(req, res) {
+//   const { title } = req.query;
+//   dbConnect();
+//   const doc = await page
+//     .findOne({
+//       title: title,
+//     })
+//     .populate("posts");
+//   // .sort({ created: "desc" });
 
-  await res.status(200).json(doc);
-}
+//   await res.status(200).json(doc);
+// }
 
 // Edit
 async function editPage(req, res) {

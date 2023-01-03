@@ -5,17 +5,17 @@ import Page from "../../models/page";
 import { hasTokenMiddleware } from "../../utils/checkUser";
 import S3 from "aws-sdk/clients/s3";
 
-handler.get(getPosts);
+// handler.get(getPosts);
 handler.use(hasTokenMiddleware).post(createPosts);
 handler.use(hasTokenMiddleware).put(editPosts);
 handler.use(hasTokenMiddleware).delete(deleteAllPosts);
 
-async function getPosts(req, res) {
-  // edit this to also be able to find a post by id for single event pages and project pages
-  dbConnect();
-  const doc = await Post.find().sort({ created: "desc" });
-  await res.status(200).json(doc);
-}
+// async function getPosts(req, res) {
+//   // edit this to also be able to find a post by id for single event pages and project pages
+//   dbConnect();
+//   const doc = await Post.find().sort({ created: "desc" });
+//   await res.status(200).json(doc);
+// }
 /////////////
 async function createPosts(req, res) {
   try {
