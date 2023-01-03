@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import ProjectFrom from "../../components/ProjectFrom";
 import post from "../../models/post";
+import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 
 const Projects = (props) => {
@@ -32,33 +33,7 @@ const Projects = (props) => {
     }
   };
 
-  const addProject = async (e) => {
-    e.preventDefault();
-
-    const post = {
-      pageid: props.projects._id,
-      created: new Date(),
-      postType: "project",
-      value: ["hello", "World"],
-    };
-
-    // console.log("logging in admin/projects before POST", post);
-
-    const response = await fetch("/api/posts", {
-      method: "POST",
-      body: JSON.stringify(post),
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
-    // console.log("request body", JSON.stringify(post));
-
-    const data = await response.json();
-    // console.log("logging response data in admin/projects", data);
-  };
-
   return (
-    // <div className="bg-lightmushroom">
     <div>
       <Header />
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10 min-h-full">
@@ -74,12 +49,7 @@ const Projects = (props) => {
             </button>
           )}
           <div className="p-20 bg-lightmushroom">
-            <ProjectFrom pageid={props.projects._id} />
-            {/* <form>
-            <input type="String" label="type" ref={postType} /> */}
-            {/* this should probably be a seprate component maybe even a just a post compoent that takes a project or event prop */}
-            {/* <button onClick={(e) => addProject(e)}> Add Project </button> */}
-            {/* </form> */}
+            <ProjectFrom pageid={props.pageId} />
           </div>
         </div>
       </div>
@@ -113,6 +83,8 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const doc = await page.findOne({ title: "projects" }).lean();
+
   if (!data) {
     return {
       props: {},
@@ -120,6 +92,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
+      pageId: doc._id.toString() || "",
       projects: data,
     },
   };
