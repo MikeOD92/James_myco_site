@@ -38,7 +38,7 @@ function Header() {
         <div
           className={`absolute right-0 top-20 h-76 p-5 w-1/4 z-50 text-4xl ${
             view === 1
-              ? "bg-bruise text-lightmushroom"
+              ? "bg-darkbruise text-lightmushroom"
               : "bg-lightmushroom text-mushroom"
           }`}
           onMouseLeave={() => setShow(!show)}
@@ -46,7 +46,7 @@ function Header() {
           <div>
             <div className="flex">
               <div
-                className="p-4 bg-bruise text-lightmushroom"
+                className="p-4 bg-darkbruise text-lightmushroom"
                 onClick={(e) => handleMouseEvent(e, 1)}
               >
                 <p>Admin</p>

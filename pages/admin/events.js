@@ -5,6 +5,7 @@ import hasToken from "../../utils/checkUser";
 import awsUpload from "../api/upload";
 import Image from "next/image";
 import post from "../../models/post";
+import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 
 const Events = (props) => {
@@ -46,7 +47,7 @@ const Events = (props) => {
     e.preventDefault();
 
     const eventPost = {
-      pageid: props.eventList._id,
+      pageid: props.pageId,
       created: new Date(),
       postType: "event",
       title: title.current.value,
@@ -205,6 +206,8 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const doc = await page.findOne({ title: "events" }).lean();
+
   if (!data) {
     return {
       props: {},
@@ -212,6 +215,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
+      pageId: doc._id.toString() || "",
       eventList: data,
     },
   };

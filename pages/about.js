@@ -11,10 +11,10 @@ const About = (props) => {
       <Header />
       <div className="absolute top-14 bg-[url('/img/about_bg.PNG')] bg-cover w-full p-10">
         <div className="text-left">
-          <h1 className="text-bruise"> About </h1>
+          <h1 className="text-bruise relative top-48 text-left"> About </h1>
 
           <div className="flex flex-wrap row-reverse">
-            <div className="p-5 w-full flex flex-row justify-end rounded-md">
+            <div className="w-full flex flex-row justify-end rounded-md">
               <Image
                 src="/img/portrait.JPG"
                 width="300"

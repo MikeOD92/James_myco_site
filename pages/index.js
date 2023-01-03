@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
+import HomeTile from "../components/HomeTile";
 
 function Home(props) {
   return (
@@ -16,30 +17,16 @@ function Home(props) {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div id="extra" className="h-screen w-100 bg-zinc-800 text-white">
-        <p>
-          {" "}
-          In this section we could have an event/news feed like blog posts
-          almost{" "}
-        </p>
-        <div className="flex flex-col">
-          <h2 className="text-5xl">
-            microscopic photograph of mycorrhizae in plant roots{" "}
-          </h2>
-          <div className="flex flex-row">
-            <p className="p-5 text-sm">
-              {" "}
-              This image is Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.
-            </p>
-          </div>
-        </div>
+      <div className="min-h-screen w-100 pt-20 bg-zinc-800 text-white">
+        {props.posts.map((item, idx) => {
+          if (idx < 3) {
+            return (
+              <>
+                <HomeTile post={item} />
+              </>
+            );
+          }
+        })}
       </div>
     </div>
   );
