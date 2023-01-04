@@ -35,7 +35,7 @@ async function editPage(req, res) {
   // console.log("this is the data", data);
 
   try {
-    await Page.updateOne(
+    await page.updateOne(
       { title: title },
       {
         title: data.title,

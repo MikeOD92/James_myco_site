@@ -31,7 +31,7 @@ const Events = (props) => {
         <div className="bg-lightmushroom text-zinc-800 p-20 w-1/2">
           <Calendar events={props.eventList} />
         </div>
-        <div className="bg-zinc-900 bg-cover bg-blend-overlay w-1/2 p-10">
+        <div className="bg-zinc-900 bg-cover bg-blend-overlay w-1/2 pt-2 p-10">
           {events.slice(view, view + 2).map((item) => {
             return (
               <div key={item._id}>
@@ -39,7 +39,10 @@ const Events = (props) => {
               </div>
             );
           })}
-          <button onClick={() => setView(view + 2)}> {">"} </button>
+          <div className="p-2 bg-mushroom rounded-md w-1/6 flex justify-around mt-3">
+            <button onClick={() => setView(view - 2)}>{"<"}</button>
+            <button onClick={() => setView(view + 2)}>{">"}</button>
+          </div>
         </div>
       </div>
     </div>
