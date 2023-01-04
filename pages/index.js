@@ -17,7 +17,7 @@ function Home(props) {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div className="min-h-screen w-100 pt-20 bg-zinc-800 text-white">
+      <div className="min-h-screen w-100 flex flex-col items-center pt-10  m-5 text-white">
         {props.posts.map((item, idx) => {
           if (idx < 3) {
             return (

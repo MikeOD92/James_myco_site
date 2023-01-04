@@ -15,7 +15,7 @@ const Projects = (props) => {
         {props.projects?.map((post) => {
           return (
             <Link key={post._id} href={`/project/${post._id}`}>
-              <ProjectTile post={post} />;
+              <ProjectTile post={post} />
             </Link>
           );
         })}

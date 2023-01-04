@@ -25,7 +25,7 @@ const About = (props) => {
             </div>
             <div className="p-5">
               <Image
-                src="/../public/img/mycelium2.jpg"
+                src="/img/mycelium2.jpg"
                 width="300"
                 height="300"
                 alt="mycelium"
