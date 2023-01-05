@@ -70,11 +70,11 @@ function Header() {
               <Link className="p-2 hover:text-zinc-800" href="/admin/projects">
                 <p>Projects</p>
               </Link>
-              <Link className="p-2 hover:text-zinc-800" href="/admin/cv">
-                <p>CV</p>
-              </Link>
               <Link className="p-2 hover:text-zinc-800" href="/admin/events">
                 <p>Events</p>
+              </Link>
+              <Link className="p-2 hover:text-zinc-800" href="/admin/cv">
+                <p>CV</p>
               </Link>
               <button
                 className="p-2 float-right hover:text-zinc-800"
@@ -91,11 +91,11 @@ function Header() {
               <Link className="p-2 hover:text-darkbruise" href="/projects">
                 <p>Projects</p>
               </Link>
-              <Link className="p-2 hover:text-darkbruise" href="/cv">
-                <p>CV</p>
-              </Link>
               <Link className="p-2 hover:text-darkbruise" href="/events">
                 <p>Events</p>
+              </Link>
+              <Link className="p-2 hover:text-darkbruise" href="/cv">
+                <p>CV</p>
               </Link>
             </div>
           )}
@@ -114,11 +114,11 @@ function Header() {
           <Link className="p-2 hover:text-darkbruise" href="/projects">
             <p>Projects</p>
           </Link>
-          <Link className="p-2 hover:text-darkbruise" href="/cv">
-            <p>CV</p>
-          </Link>
           <Link className="p-2 hover:text-darkbruise" href="/events">
             <p>Events</p>
+          </Link>
+          <Link className="p-2 hover:text-darkbruise" href="/cv">
+            <p>CV</p>
           </Link>
         </div>
       ) : (

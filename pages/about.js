@@ -33,10 +33,18 @@ const About = (props) => {
               />
             </div>
             <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3 flex flex-row justify-end">
-              {props.about ? <p>{props.about.p1}</p> : ""}
+              {props.about ? (
+                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p1}</p>
+              ) : (
+                ""
+              )}
             </div>
             <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3">
-              {props.about ? <p>{props.about.p2}</p> : ""}
+              {props.about ? (
+                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p2}</p>
+              ) : (
+                ""
+              )}
             </div>
             <div className="p-5">
               <Image
@@ -49,9 +57,17 @@ const About = (props) => {
             </div>
 
             <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md">
-              {props.about ? <p>{props.about.p3}</p> : ""}
+              {props.about ? (
+                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p3}</p>
+              ) : (
+                ""
+              )}
               <br />
-              {props.about ? <p>{props.about.p4}</p> : ""}
+              {props.about ? (
+                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p4}</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

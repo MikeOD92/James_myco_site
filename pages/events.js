@@ -19,6 +19,22 @@ const Events = (props) => {
     );
   }, [props.eventList]);
 
+  const handleClick = (e, sym) => {
+    e.preventDefault();
+    switch (sym) {
+      case "-":
+        if (view > 1) {
+          setView(view - 2);
+        }
+        break;
+      case "+":
+        if (view + 2 < events.length - 1) {
+          setView(view + 2);
+          console.log(view, events.length);
+        }
+        break;
+    }
+  };
   return (
     <div className="max-w-screen">
       <Header />
@@ -40,8 +56,8 @@ const Events = (props) => {
             );
           })}
           <div className="p-2 bg-mushroom rounded-md w-1/6 flex justify-around mt-3">
-            <button onClick={() => setView(view - 2)}>{"<"}</button>
-            <button onClick={() => setView(view + 2)}>{">"}</button>
+            <button onClick={(e) => handleClick(e, "-")}>{"<"}</button>
+            <button onClick={(e) => handleClick(e, "+")}>{">"}</button>
           </div>
         </div>
       </div>
