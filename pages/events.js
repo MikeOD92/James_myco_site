@@ -1,10 +1,12 @@
 import Header from "../components/Header";
-import { Calendar } from "../components/Calendar";
 import { useState, useEffect } from "react";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
 import EventTile from "../components/EventTile";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin
+import NoSSR from "../components/NoSSR";
 
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
@@ -47,12 +49,17 @@ const Events = (props) => {
       </div>
       <div className="flex flex-row">
         <div className="bg-lightmushroom text-zinc-800 p-20 w-1/2">
-          <Calendar events={props.eventList} />
+          <NoSSR>
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              eventBackgroundColor="#8C7090"
+              className="text-black"
+              events={props.eventList}
+              height={"85vh"}
+            />
+          </NoSSR>
         </div>
-        <div
-          id="eventTop"
-          className="bg-zinc-900 bg-cover bg-blend-overlay w-1/2 pt-2 p-10"
-        >
+        <div id="eventTop" className="bg-zinc-900 w-1/2 mt-5 p-10">
           {events.slice(view, view + 2).map((item) => {
             return (
               <div key={item._id}>
@@ -62,13 +69,13 @@ const Events = (props) => {
           })}
           <div className="bg-mushroom rounded-md w-1/6 flex justify-around mt-3">
             <button
-              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
               onClick={(e) => handleClick(e, "-")}
             >
               <FaChevronLeft />
             </button>
             <button
-              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
               onClick={(e) => handleClick(e, "+")}
             >
               <FaChevronRight />

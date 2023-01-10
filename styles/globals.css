@@ -10,6 +10,14 @@
 
     font-family: 'Noto Sans', sans-serif;
 */
+:root {
+  --fc-button-bg-color: #8c7090;
+  --fc-button-border-color: #8c7090;
+  --fc-button-hover-bg-color: #af9ab1;
+  --fc-button-hover-border-color: #af9ab1;
+  --fc-button-active-bg-color: #af9ab1;
+  --fc-button-active-border-color: #8c7090;
+}
 html,
 body {
   padding: 0;
@@ -76,9 +84,7 @@ h1 {
 .projectTile p {
   font-family: "Noto Sans", sans-serif;
 }
-/* .fc-button {
-  background-color: #8c7090; */
-/* } */
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

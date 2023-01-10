@@ -47,13 +47,13 @@ const Projects = (props) => {
 
         <div className="flex justify-around bg-mushroom rounded-md w-1/6 ml-5 m-3">
           <button
-            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
             onClick={(e) => handleClick(e, "-")}
           >
             <FaChevronLeft />
           </button>
           <button
-            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
             onClick={(e) => handleClick(e, "+")}
           >
             <FaChevronRight />
