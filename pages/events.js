@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
 import EventTile from "../components/EventTile";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
@@ -25,12 +26,13 @@ const Events = (props) => {
       case "-":
         if (view > 1) {
           setView(view - 2);
+          location.assign("#eventTop");
         }
         break;
       case "+":
-        if (view + 2 < events.length - 1) {
+        if (view < events.length - 1) {
           setView(view + 2);
-          console.log(view, events.length);
+          location.assign("#eventTop");
         }
         break;
     }
@@ -47,7 +49,10 @@ const Events = (props) => {
         <div className="bg-lightmushroom text-zinc-800 p-20 w-1/2">
           <Calendar events={props.eventList} />
         </div>
-        <div className="bg-zinc-900 bg-cover bg-blend-overlay w-1/2 pt-2 p-10">
+        <div
+          id="eventTop"
+          className="bg-zinc-900 bg-cover bg-blend-overlay w-1/2 pt-2 p-10"
+        >
           {events.slice(view, view + 2).map((item) => {
             return (
               <div key={item._id}>
@@ -55,9 +60,19 @@ const Events = (props) => {
               </div>
             );
           })}
-          <div className="p-2 bg-mushroom rounded-md w-1/6 flex justify-around mt-3">
-            <button onClick={(e) => handleClick(e, "-")}>{"<"}</button>
-            <button onClick={(e) => handleClick(e, "+")}>{">"}</button>
+          <div className="bg-mushroom rounded-md w-1/6 flex justify-around mt-3">
+            <button
+              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+              onClick={(e) => handleClick(e, "-")}
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise"
+              onClick={(e) => handleClick(e, "+")}
+            >
+              <FaChevronRight />
+            </button>
           </div>
         </div>
       </div>

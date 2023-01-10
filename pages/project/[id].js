@@ -4,6 +4,7 @@ import post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ReadProject({ post }) {
   const [view, setView] = useState(0);
@@ -23,47 +24,51 @@ export default function ReadProject({ post }) {
         <div className="p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
             <div>
-              <h1>{post.title || ""}</h1>
+              <h1 className="p-5">{post.title || ""}</h1>
             </div>
 
-            <div className="grid grid-cols-2 ">
-              <div>
-                <div className="flex flex-row justify-center">
+            <div>
+              <div className="flex flex-row justify-center">
+                {post.images.length > 1 ? (
                   <button
-                    className="bg-bruise p-3 self-center"
+                    className="bg-bruise p-3 mr-5 self-center hover:bg-darkbruise rounded-full"
                     onClick={() => handleButtons("-")}
                   ></button>
-                  <div className="inline">
-                    <div className="grid grid-cols-3 grid-rows-2 grid-flow-dense">
-                      {/*<div className="bg-yellow-500 w-600 h-600" />
-                <div className="bg-blue-500 w-600 h-600" /> */}
-                      <div className="col-span-2 row-span-2">
-                        <Image
-                          src={post.images[view]}
-                          alt={`${post.title} splash image`}
-                          width={400}
-                          height={400}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
+                ) : (
+                  ""
+                )}
+                <div>
+                  <Image
+                    src={post.images[view]}
+                    alt={`${post.title} splash image`}
+                    width={600}
+                    height={600}
+                  />
                 </div>
-                <button
-                  className="bg-bruise p-3 self-center"
-                  onClick={() => handleButtons("+")}
-                ></button>
+                {post.images.length > 1 ? (
+                  <button
+                    className="bg-bruise p-3 ml-5 self-center hover:bg-darkbruise rounded-full"
+                    onClick={() => handleButtons("+")}
+                  ></button>
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="flex flex-row content-center"></div>
             </div>
-            <div className="p-10 scroll h-5/6 overflow-scroll">
-              <p
-                className="text-lightmushroom"
-                style={{ whiteSpace: "pre-wrap" }}
-              >
-                {post ? post.body : ""}
-              </p>
-            </div>
+            <div className="flex flex-row content-center"></div>
+          </div>
+
+          <p className="text-lightmushroom" style={{ whiteSpace: "pre-wrap" }}>
+            {post ? post.body : ""}
+          </p>
+          <div className="mt-5">
+            <Link
+              className="p-10 text-bruise hover:text-lightmushroom"
+              href="/projects"
+            >
+              {" "}
+              Back{" "}
+            </Link>
           </div>
         </div>
       ) : (

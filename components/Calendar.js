@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
-import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin
 import NoSSR from "./NoSSR";
+
 export const Calendar = (props) => {
   const calRef = useRef(null);
 
@@ -13,6 +14,7 @@ export const Calendar = (props) => {
         editable
         selectable
         events={props.events}
+        eventBackgroundColor={"#8C7090"}
         className="text-black"
       />
     </NoSSR>
