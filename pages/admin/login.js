@@ -23,10 +23,10 @@ const Login = () => {
         email: emailRef.current.value,
         password: passRef.current.value,
       });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
+
     /// this is the code the register a user save this for the time being
     //////////////////////////////////////////////////////////////
     // e.preventDefault();

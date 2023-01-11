@@ -66,8 +66,7 @@ export default function ReadProject({ post }) {
               className="p-10 text-bruise hover:text-lightmushroom"
               href="/projects"
             >
-              {" "}
-              Back{" "}
+              Back to Projects
             </Link>
           </div>
         </div>

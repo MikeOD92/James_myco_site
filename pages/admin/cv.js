@@ -45,7 +45,6 @@ const CV = (props) => {
           },
         });
         const data = await response.json();
-        console.log(data);
         router.replace("/cv");
       } catch (err) {
         console.error(err);
