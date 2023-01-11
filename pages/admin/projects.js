@@ -1,15 +1,18 @@
 import Header from "../../components/Header";
-import { useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import ProjectFrom from "../../components/ProjectFrom";
 import post from "../../models/post";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
+import Image from "next/image";
 
 const Projects = (props) => {
   const router = useRouter();
+  const [currentProj, setCurrentProj] = useState(null);
 
+  // this function creates the projects page, if it does not already exist.
   const handleCreation = async (e) => {
     e.preventDefault();
 
@@ -48,9 +51,48 @@ const Projects = (props) => {
               Create Projects Page
             </button>
           )}
-          <div className="p-20 bg-lightmushroom">
-            <ProjectFrom pageid={props.pageId} />
-          </div>
+          {currentProj === null ? (
+            <div className="flex flex-col">
+              {props.projects.map((itm) => {
+                return (
+                  <div
+                    className="p-5 bg-mushroom m-3 flex rounded-md"
+                    key={itm._id}
+                    onClick={() => setCurrentProj(itm)}
+                  >
+                    <div>
+                      <h2 className="text-xl pb-2">{itm.title}</h2>
+                      <Image
+                        src={itm.images[0]}
+                        height={200}
+                        width={200}
+                        alt="project splash img"
+                      />
+                    </div>
+                    <div className="w-1/2 p-5">
+                      <p>{itm.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              <div
+                className="p-5 bg-green-600 m-3 flex rounded-md"
+                onClick={() => setCurrentProj({})}
+              >
+                <h2> Create New Project + </h2>
+              </div>
+            </div>
+          ) : (
+            <div className="p-20 bg-lightmushroom">
+              <button
+                className="p-3 bg-darkbruise"
+                onClick={() => setCurrentProj(null)}
+              >
+                Back
+              </button>
+              <ProjectFrom pageid={props.pageId} project={currentProj} />
+            </div>
+          )}
         </div>
       </div>
     </div>

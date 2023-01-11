@@ -67,19 +67,22 @@ async function createPosts(req, res) {
 //////////
 async function editPosts(req, res) {
   const data = req.body;
-  console.log("this is the data", data);
   dbConnect();
 
   try {
     const doc = await Post.updateOne(
       { _id: data._id },
       {
-        type: data.type,
+        title: data.title || null,
+        body: data.body || null,
+        images: data.images || [],
+        desc: data.desc || null,
+        date: data.date || null,
+        location: data.location || null,
       }
     );
 
     const updatedDoc = await Post.find({ _id: data._id });
-    console.log("weee hooo ////////////", doc, updatedDoc);
     await res.status(200).json(updatedDoc);
   } catch (err) {
     console.error(err);

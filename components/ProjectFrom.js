@@ -9,7 +9,9 @@ export default function ProjectFrom(props) {
   const desc = useRef();
   const router = useRouter();
 
-  const [uploaded, setUploaded] = useState([]);
+  const [uploaded, setUploaded] = useState(
+    props.project.images ? [...props.project.images] : []
+  );
   const [uploading, setUploading] = useState(false);
   const [file, setfile] = useState();
 
@@ -37,33 +39,54 @@ export default function ProjectFrom(props) {
     const projectData = {
       pageid: props.pageid,
       postType: "project",
-      created: new Date(),
+      // created: new Date(),
       title: title.current.value,
-      // value: body.current.value,
       body: body.current.value,
       images: uploaded,
       desc: desc.current.value,
     };
 
-    // console.log(projectData);
-    try {
-      const response = await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify(projectData),
-        headers: {
-          "content-Type": "application/json",
-        },
-      });
+    if (!props.project._id) {
+      projectData.created = new Date();
+      try {
+        const response = await fetch("/api/posts", {
+          method: "POST",
+          body: JSON.stringify(projectData),
+          headers: {
+            "content-Type": "application/json",
+          },
+        });
 
-      // console.log(response);
-      if (response.status === 201) {
-        router.push("/projects");
-      } else {
-        console.log(response);
+        // console.log(response);
+        if (response.status === 201) {
+          router.push("/projects");
+        } else {
+          console.log(response);
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
+    } else {
+      try {
+        projectData._id = props.project._id;
+        projectData.created = props.project.created;
+        const response = await fetch("/api/posts", {
+          method: "PUT",
+          body: JSON.stringify(projectData),
+          headers: {
+            "content-Type": "application/json",
+          },
+        });
+
+        console.log(response);
+        if (response.status === 200) {
+          router.push(`/project/${props.project._id}`);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
+    // console.log(projectData);
 
     // console.log(e.target[0].value);
     // console.log(e.target[1].value);
@@ -83,15 +106,31 @@ export default function ProjectFrom(props) {
       <form onSubmit={(e) => handleSubmit(e)}>
         <label className="p-2">Title</label>
         <br />
-        <input className="p-2" type="text" ref={title} />
+        <input
+          className="p-2"
+          type="text"
+          ref={title}
+          defaultValue={props.project.title || ""}
+        />
         <br />
         <label className="p-2">Description</label>
         <br />
-        <input className="p-2" type="text" ref={desc} />
+        <input
+          className="p-2"
+          type="text"
+          ref={desc}
+          defaultValue={props.project.desc || ""}
+        />
         <br />
         <label className="p-2">Body</label>
         <br />
-        <textarea className="p-2" ref={body} cols="50" rows="25" />
+        <textarea
+          className="p-2"
+          ref={body}
+          cols="50"
+          rows="15"
+          defaultValue={props.project.body || ""}
+        />
         <label className="p-2">Image Upload</label>
         <br />
         <input
@@ -132,7 +171,11 @@ export default function ProjectFrom(props) {
         </div>
 
         <br />
-        <input className="p-2 bg-green-600" type="submit" value="POST" />
+        <input
+          className="p-2 bg-green-600"
+          type="submit"
+          value={!props.project._id ? "POST" : "EDIT"}
+        />
       </form>
     </div>
   );
