@@ -29,7 +29,6 @@ const Projects = (props) => {
       });
 
       const data = await response.json();
-      console.log(data);
       router.replace("/admin/projects");
     } catch (err) {
       console.error(err);
@@ -53,6 +52,12 @@ const Projects = (props) => {
           )}
           {currentProj === null ? (
             <div className="flex flex-col">
+              <div
+                className="p-5 bg-green-600 m-3 flex rounded-md"
+                onClick={() => setCurrentProj({})}
+              >
+                <h2> Create New Project + </h2>
+              </div>
               {props.projects.map((itm) => {
                 return (
                   <div
@@ -75,12 +80,6 @@ const Projects = (props) => {
                   </div>
                 );
               })}
-              <div
-                className="p-5 bg-green-600 m-3 flex rounded-md"
-                onClick={() => setCurrentProj({})}
-              >
-                <h2> Create New Project + </h2>
-              </div>
             </div>
           ) : (
             <div className="p-20 bg-lightmushroom">

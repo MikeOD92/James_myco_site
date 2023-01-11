@@ -27,19 +27,29 @@ export default function ProjectFrom(props) {
 
     const data = await awsUpload(file);
 
-    setUploaded([...data, ...uploaded]);
+    setUploaded([...uploaded, ...data]);
     setUploading(false);
     return data;
+  };
+
+  const handleImgRemoval = (e, i) => {
+    e.preventDefault();
+    let arr = uploaded;
+    arr.splice(i, 1);
+    setUploaded([...arr]);
   };
   //////////////
   const handleSubmit = async (e) => {
     // check at least one image is uploaded or at least alert if no images are included.
     e.preventDefault();
 
+    if (uploaded.length < 1) {
+      alert("no images uploaded");
+      return;
+    }
     const projectData = {
       pageid: props.pageid,
       postType: "project",
-      // created: new Date(),
       title: title.current.value,
       body: body.current.value,
       images: uploaded,
@@ -78,7 +88,7 @@ export default function ProjectFrom(props) {
           },
         });
 
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           router.push(`/project/${props.project._id}`);
         }
@@ -86,21 +96,28 @@ export default function ProjectFrom(props) {
         console.error(err);
       }
     }
-    // console.log(projectData);
-
-    // console.log(e.target[0].value);
-    // console.log(e.target[1].value);
-    // console.log(body.current.value);
-    // console.log(title.current.value);
-    // console.log(files.current.files);
-    // for (let i in e.target) {
-    //   console.log(e.target[i].value);
-    // }
-
-    /*// <p style={{ whiteSpace: "pre-wrap" }}> and just making it one big text area input 
-     I think this is better its at least more simple. 
-     */
   };
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    if (confirm("Are you sure you want to delete this project")) {
+      try {
+        const response = await fetch("/api/posts", {
+          method: "DELETE",
+          body: JSON.stringify({ _id: props.project._id }),
+          headers: {
+            "content-Type": "application/json",
+          },
+        });
+        router.reload();
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -152,30 +169,46 @@ export default function ProjectFrom(props) {
         )}
         <div className="flex row flex-wrap">
           {uploaded.map((img, i) => {
-            // console.log("looping over this is the img val:", img);
             return (
               <div key={`${img}-${i}container`} className="m-1">
-                <button className="bg-red-500 p-1 w-5 relative top-8">x</button>
+                <button
+                  onClick={(e) => handleImgRemoval(e, i)}
+                  className="bg-red-600 p-1 w-10 h-10 relative top-10"
+                >
+                  x
+                </button>
                 <Image
                   key={img}
                   src={img}
                   alt="uploaded image thumbnail"
-                  // fill
                   width={400}
                   height={400}
                 />
               </div>
             );
-            // this needs to be the next/Image tag, and needs to be sized correctly also a remove option would be good.
           })}
         </div>
 
         <br />
-        <input
-          className="p-2 bg-green-600"
-          type="submit"
-          value={!props.project._id ? "POST" : "EDIT"}
-        />
+        <div className="flex flex-row justify-between">
+          <input
+            className={`p-2 ${
+              uploaded.length < 1
+                ? "bg-zinc-400 text-neutral-300"
+                : "bg-green-600"
+            }`}
+            type="submit"
+            value={!props.project._id ? "POST" : "EDIT"}
+            disabled={uploaded.length < 1 ? true : false}
+          />
+          {props.project._id ? (
+            <button onClick={(e) => handleDelete(e)} className="p-2 bg-red-600">
+              DELETE
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
       </form>
     </div>
   );

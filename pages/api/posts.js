@@ -8,7 +8,7 @@ import S3 from "aws-sdk/clients/s3";
 // handler.get(getPosts);
 handler.use(hasTokenMiddleware).post(createPosts);
 handler.use(hasTokenMiddleware).put(editPosts);
-handler.use(hasTokenMiddleware).delete(deleteAllPosts);
+handler.use(hasTokenMiddleware).delete(deletePost);
 
 // async function getPosts(req, res) {
 //   // edit this to also be able to find a post by id for single event pages and project pages
@@ -88,12 +88,16 @@ async function editPosts(req, res) {
     console.error(err);
   }
 }
-// need to add delete post function
 
-async function deleteAllPosts(req, res) {
+async function deletePost(req, res) {
   dbConnect();
-  const posts = await Post.find();
-  await posts.deleteMany();
-  await res.status(204).json({ message: "posts DB has been cleared" });
+  // const post = await Post.find({ _id: req.body._id });
+  try {
+    await Post.deleteOne({ _id: req.body._id });
+  } catch (err) {
+    console.error(err);
+    await res.status(400).json({});
+  }
+  await res.status(204).json({ message: "post deleted" });
 }
 export default handler;
