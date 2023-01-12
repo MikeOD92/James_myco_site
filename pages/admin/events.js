@@ -96,10 +96,6 @@ const Events = (props) => {
           </div>
         </div>
       </div>
-      {/* <button className="p-3 bg-red-500" onClick={(e) => clearPostDB(e)}>
-        {" "}
-        DELETE ALL{" "}
-      </button> */}
     </div>
   );
 };

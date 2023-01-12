@@ -21,10 +21,10 @@ export default function ReadEvent({ post }) {
               height={400}
             />
             <div className="p-10">
-              <p style={{ whiteSpace: "pre-wrap" }}>
-                {new Date(post.date).toLocaleString()}
+              <p>{new Date(post.date).toLocaleString()}</p>
+              <p style={{ whiteSpace: "pre-wrap" }} className="mt-5">
+                {post.desc}
               </p>
-              <p className="mt-5">{post.desc}</p>
             </div>
           </div>
           <div className="p-5">
@@ -32,14 +32,15 @@ export default function ReadEvent({ post }) {
             <p>{post.location}</p>
           </div>
         </div>
-      </div>
-      <div className="mt-5">
-        <Link
-          className="p-10 text-bruise hover:text-lightmushroom"
-          href="/events"
-        >
-          Back to Events
-        </Link>
+
+        <div className="mt-5">
+          <Link
+            className="p-3 bg-darkbruise text-bruise hover:text-lightmushroom rounded-md"
+            href="/events"
+          >
+            Back to Events
+          </Link>
+        </div>
       </div>
     </div>
   );

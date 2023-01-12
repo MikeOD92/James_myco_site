@@ -63,7 +63,7 @@ export default function ReadProject({ post }) {
           </p>
           <div className="mt-5">
             <Link
-              className="p-10 text-bruise hover:text-lightmushroom"
+              className="p-3 bg-darkbruise text-bruise hover:text-lightmushroom rounded-md"
               href="/projects"
             >
               Back to Projects
