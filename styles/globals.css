@@ -85,6 +85,9 @@ h1 {
   font-family: "Noto Sans", sans-serif;
 }
 
+label {
+  color: black;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -50,7 +50,8 @@ const Projects = (props) => {
               Create Projects Page
             </button>
           )}
-          {currentProj === null ? (
+          {/* ///// */}
+          {currentProj === null && props.projects ? (
             <div className="flex flex-col">
               <div
                 className="p-5 bg-green-600 m-3 flex rounded-md"
@@ -81,7 +82,7 @@ const Projects = (props) => {
                 );
               })}
             </div>
-          ) : (
+          ) : currentProj !== null ? (
             <div className="p-20 bg-lightmushroom">
               <button
                 className="p-3 bg-darkbruise"
@@ -91,6 +92,8 @@ const Projects = (props) => {
               </button>
               <ProjectFrom pageid={props.pageId} project={currentProj} />
             </div>
+          ) : (
+            ""
           )}
         </div>
       </div>

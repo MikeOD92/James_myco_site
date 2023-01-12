@@ -32,7 +32,7 @@ const Events = (props) => {
         }
         break;
       case "+":
-        if (view < events.length - 1) {
+        if (view + 1 < events.length - 1) {
           setView(view + 2);
           location.assign("#eventTop");
         }
