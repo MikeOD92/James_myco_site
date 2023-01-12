@@ -94,7 +94,7 @@ export default function EventForm(props) {
 
         // console.log(response);
         if (response.status === 200) {
-          router.push(`/events/${props.event._id}`);
+          router.push(`/event/${props.event._id}`);
         }
       } catch (err) {
         console.error(err);
