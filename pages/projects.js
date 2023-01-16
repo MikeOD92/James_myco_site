@@ -19,7 +19,7 @@ const Projects = (props) => {
         }
         break;
       case "+":
-        if (view + 1 <= props.projects.length - 1) {
+        if (view + 5 <= props.projects.length - 1) {
           location.assign("#projectTop");
           setView(view + 5);
         }

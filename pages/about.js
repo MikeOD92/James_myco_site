@@ -20,54 +20,59 @@ const About = (props) => {
                 width="300"
                 height="300"
                 alt="portait"
-                className="p-5 bg-zinc-200 rounded-md"
+                className="p-5 bg-zinc-300 rounded-md"
               />
             </div>
-            <div className="p-5">
-              <Image
-                src="/img/mycelium2.jpg"
-                width="300"
-                height="300"
-                alt="mycelium"
-                className="p-5 bg-zinc-200 rounded-md"
-              />
+            <div className="w-full flex flex-row mt-5">
+              <div>
+                <Image
+                  src="/img/mycelium2.jpg"
+                  width="300"
+                  height="300"
+                  alt="mycelium"
+                  className="p-5 bg-zinc-300 rounded-md"
+                />
+              </div>
+              <div className="text-right p-10 ml-5 w-5/6 bg-zinc-300 text-black opacity-90 rounded-md">
+                {props.about ? (
+                  <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p1}</p>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
-            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3 flex flex-row justify-end">
-              {props.about ? (
-                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p1}</p>
-              ) : (
-                ""
-              )}
+            <div className="w-full flex flex-row mt-5">
+              <div className="text-left p-10 bg-zinc-300 text-black opacity-90 rounded-md w-5/6">
+                {props.about ? (
+                  <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p2}</p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="ml-5">
+                <Image
+                  src="/img/mycelium.jpg"
+                  width="300"
+                  height="300"
+                  alt="mycelium"
+                  className="p-5 bg-zinc-300 rounded-md"
+                />
+              </div>
             </div>
-            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md w-2/3">
-              {props.about ? (
-                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p2}</p>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="p-5">
-              <Image
-                src="/img/mycelium.jpg"
-                width="300"
-                height="300"
-                alt="mycelium"
-                className="p-5 bg-zinc-200 rounded-md"
-              />
-            </div>
-
-            <div className="text-left p-10 m-5 bg-zinc-300 text-black opacity-90 rounded-md">
-              {props.about ? (
-                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p3}</p>
-              ) : (
-                ""
-              )}
-              <br />
-              {props.about ? (
-                <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p4}</p>
-              ) : (
-                ""
-              )}
+            <div className="w-full flex flex-row mt-5">
+              <div className="text-left p-10 w-full bg-zinc-300 text-black opacity-90 rounded-md">
+                {props.about ? (
+                  <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p3}</p>
+                ) : (
+                  ""
+                )}
+                <br />
+                {props.about ? (
+                  <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p4}</p>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
         </div>

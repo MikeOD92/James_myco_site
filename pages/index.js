@@ -5,9 +5,9 @@ import HomeTile from "../components/HomeTile";
 
 function Home(props) {
   return (
-    <div>
+    <div className="bg-zinc-800">
       <Header />
-      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-fixed bg-black home bg-cover max-w-screen h-screen">
+      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-fixed home bg-cover max-w-screen h-screen">
         <h1 className="text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
           James Oliver
         </h1>
@@ -17,7 +17,7 @@ function Home(props) {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div className="min-h-screen w-100 flex flex-col items-center pt-10  m-5 text-white">
+      <div className="min-h-screen w-100 flex flex-col items-center pt-5  m-5 text-white">
         {props.posts.map((item, idx) => {
           if (idx < 3) {
             return (

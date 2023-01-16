@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function EventTile({ post }) {
   return (
-    <div className="text-black p-3 mt-3 rounded-md bg-lightmushroom flex flex-col">
+    <div className="text-black p-3 mt-3 rounded-md bg-lightmushroom hover:outline hover:outline-4 hover:outline-mushroom flex flex-col">
       <Link href={`/event/${post._id}`}>
         <div className="flex flex-row justify-between">
-          <h2 className="home text-2xl ">{post.title}</h2>
-          <h3 className="text-xl">{new Date(post.date).toLocaleString()}</h3>
+          <h2 className="text-3xl serif">{post.title}</h2>
+          <h3 className="text-lg">{new Date(post.date).toLocaleString()}</h3>
         </div>
 
         <div className="pt-5 flex flex-row">

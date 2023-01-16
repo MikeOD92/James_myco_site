@@ -26,14 +26,14 @@ const Events = (props) => {
     e.preventDefault();
     switch (sym) {
       case "-":
-        if (view > 1) {
-          setView(view - 2);
+        if (view - 3 > 1) {
+          setView(view - 3);
           location.assign("#eventTop");
         }
         break;
       case "+":
-        if (view + 1 < events.length - 1) {
-          setView(view + 2);
+        if (view + 3 <= events.length - 1) {
+          setView(view + 3);
           location.assign("#eventTop");
         }
         break;
@@ -59,8 +59,8 @@ const Events = (props) => {
             />
           </NoSSR>
         </div>
-        <div id="eventTop" className="bg-zinc-900 w-1/2 mt-5 p-10">
-          {events.slice(view, view + 2).map((item) => {
+        <div id="eventTop" className="bg-zinc-900 w-1/2 p-10">
+          {events.slice(view, view + 3).map((item) => {
             return (
               <div key={item._id}>
                 <EventTile post={item} />

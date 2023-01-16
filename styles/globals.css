@@ -88,6 +88,9 @@ h1 {
 label {
   color: black;
 }
+.serif {
+  font-family: "Baskervville", serif;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

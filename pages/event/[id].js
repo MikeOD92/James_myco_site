@@ -12,23 +12,24 @@ export default function ReadEvent({ post }) {
       <Header />
       <div className="p-20">
         <div>
-          <h1 className="p-5">{post.title}</h1>
+          <h1 className="p-5 serif text-lightmushroom">{post.title}</h1>
           <div className="flex flex-row">
             <Image
+              className="rounded-md"
               src={post.images[0] ? post.images[0] : "/img/sporeprint.jpg"}
               alt={`${post.title} splash image`}
               width={400}
               height={400}
             />
-            <div className="p-10">
-              <p>{new Date(post.date).toLocaleString()}</p>
+            <div className="ml-3 p-10 bg-lightmushroom w-full rounded-md text-zinc-800">
+              <p className="text-2xl">{new Date(post.date).toLocaleString()}</p>
               <p style={{ whiteSpace: "pre-wrap" }} className="mt-5">
                 {post.desc}
               </p>
             </div>
           </div>
-          <div className="p-5">
-            <h3 className="text-3xl">Location</h3>
+          <div className="p-5 text-lightmushroom">
+            <h3 className="text-3xl ">Location</h3>
             <p>{post.location}</p>
           </div>
         </div>

@@ -103,21 +103,21 @@ function Header() {
       ) : show ? (
         //desktop
         <div
-          className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-lightmushroom z-50 text-4xl text-mushroom"
+          className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-darkbruise z-50 text-4xl text-lightmushroom"
           onMouseLeave={() => setShow(!show)}
         >
           {/* //mobile */}
           {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
-          <Link className="p-2 hover:text-darkbruise" href="/about">
+          <Link className="p-2 hover:text-yellow-400" href="/about">
             <p>About</p>
           </Link>
-          <Link className="p-2 hover:text-darkbruise" href="/projects">
+          <Link className="p-2 hover:text-yellow-400" href="/projects">
             <p>Projects</p>
           </Link>
-          <Link className="p-2 hover:text-darkbruise" href="/events">
+          <Link className="p-2 hover:text-yellow-400" href="/events">
             <p>Events</p>
           </Link>
-          <Link className="p-2 hover:text-darkbruise" href="/cv">
+          <Link className="p-2 hover:text-yellow-400" href="/cv">
             <p>CV</p>
           </Link>
         </div>

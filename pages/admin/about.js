@@ -74,7 +74,7 @@ const About = (props) => {
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
         <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl bg-zinc-800">
           <form className="flex flex-col align-top">
-            <label> Paragraph 1</label>
+            <label className="text-white"> Paragraph 1</label>
             <textarea
               defaultValue={props.about.p1}
               ref={p1}
@@ -82,7 +82,7 @@ const About = (props) => {
               cols="50"
               className="m-3"
             />
-            <label> Paragraph 2</label>
+            <label className="text-white"> Paragraph 2</label>
             <textarea
               ref={p2}
               defaultValue={props.about.p2}
@@ -90,7 +90,7 @@ const About = (props) => {
               cols="50"
               className="m-3"
             />
-            <label> Paragraph 3</label>
+            <label className="text-white"> Paragraph 3</label>
             <textarea
               ref={p3}
               defaultValue={props.about.p3}
@@ -98,7 +98,7 @@ const About = (props) => {
               cols="50"
               className="m-3"
             />
-            <label> Paragraph 4</label>
+            <label className="text-white"> Paragraph 4</label>
             <textarea
               ref={p4}
               defaultValue={props.about.p4}

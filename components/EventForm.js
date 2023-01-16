@@ -127,7 +127,7 @@ export default function EventForm(props) {
   // console.log(new Date(props.event.date));
   return (
     <form onSubmit={handleSubmit}>
-      <label>Event Title</label>
+      <label className="text-white">Event Title</label>
       <br />
       <input
         className="p-3"
@@ -137,7 +137,7 @@ export default function EventForm(props) {
         defaultValue={props.event.title || ""}
       />
       <br />
-      <label>Description</label>
+      <label className="text-white">Description</label>
       <br />
       <textarea
         className="p-3"
@@ -147,7 +147,7 @@ export default function EventForm(props) {
         defaultValue={props.event.desc || ""}
       />
       <br />
-      <label>Date & Time</label>
+      <label className="text-white">Date & Time</label>
       <br />
       <input
         className="p-3"
@@ -156,7 +156,7 @@ export default function EventForm(props) {
         defaultValue={props.event.date ? props.event.date.slice(0, 16) : ""}
       />
       <br />
-      <label>Location</label>
+      <label className="text-white">Location</label>
       <br />
       <input
         className="p-3"
@@ -165,7 +165,7 @@ export default function EventForm(props) {
         defaultValue={props.event.location || ""}
       />
       <br />
-      <label>Image</label>
+      <label className="text-white">Image</label>
       <br />
       <input className="p-3" type="file" onChange={(e) => handleChange(e)} />
       <button className="p-3 bg-green-600" onClick={handleUpload}>

@@ -24,7 +24,9 @@ export default function ReadProject({ post }) {
         <div className="p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
             <div>
-              <h1 className="p-5">{post.title || ""}</h1>
+              <h1 className="p-5 serif text-lightmushroom">
+                {post.title || ""}
+              </h1>
             </div>
 
             <div>
@@ -39,6 +41,7 @@ export default function ReadProject({ post }) {
                 )}
                 <div>
                   <Image
+                    className="rounded-md"
                     src={post.images[view]}
                     alt={`${post.title} splash image`}
                     width={600}
@@ -57,10 +60,9 @@ export default function ReadProject({ post }) {
             </div>
             <div className="flex flex-row content-center"></div>
           </div>
-
-          <p className="text-lightmushroom" style={{ whiteSpace: "pre-wrap" }}>
-            {post ? post.body : ""}
-          </p>
+          <div className="bg-lightmushroom p-10 rounded-md text-zinc-800 text-lg">
+            <p style={{ whiteSpace: "pre-wrap" }}>{post ? post.body : ""}</p>
+          </div>
           <div className="mt-5">
             <Link
               className="p-3 bg-darkbruise text-bruise hover:text-lightmushroom rounded-md"

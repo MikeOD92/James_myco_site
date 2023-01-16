@@ -121,7 +121,7 @@ export default function ProjectFrom(props) {
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label className="p-2">Title</label>
+        <label className="p-2 text-white">Title</label>
         <br />
         <input
           className="p-2"
@@ -130,7 +130,7 @@ export default function ProjectFrom(props) {
           defaultValue={props.project.title || ""}
         />
         <br />
-        <label className="p-2">Description</label>
+        <label className="p-2 text-white">Description</label>
         <br />
         <input
           className="p-2"
@@ -139,7 +139,7 @@ export default function ProjectFrom(props) {
           defaultValue={props.project.desc || ""}
         />
         <br />
-        <label className="p-2">Body</label>
+        <label className="p-2 text-white">Body</label>
         <br />
         <textarea
           className="p-2"
@@ -148,10 +148,10 @@ export default function ProjectFrom(props) {
           rows="15"
           defaultValue={props.project.body || ""}
         />
-        <label className="p-2">Image Upload</label>
+        <label className="p-2 text-white">Image Upload</label>
         <br />
         <input
-          className="p-2"
+          className="p-2 "
           type="file"
           multiple
           onChange={(e) => handleChange(e)}
