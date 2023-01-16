@@ -4,11 +4,12 @@ import Link from "next/link";
 
 export default function HomeTile({ post }) {
   return (
-    <div className="m-3 p-10 flex flex-col items-center bg-lightmushroom w-2/3 rounded-lg">
+    <div className="m-3 p-10 flex flex-col items-center bg-lightmushroom w-full lg:w-5/6 rounded-lg">
       <h1 className="text-6xl pt-5 pb-10 text-zinc-700 serif">{post.title}</h1>
 
-      <div className="flex flex-row w-full">
+      <div className="flex flex-col lg:flex-row w-full">
         <Image
+          className="self-center"
           src={post.images[0] ? post.images[0] : "/img/sporeprint.jpg"}
           alt={
             post.images[0]
