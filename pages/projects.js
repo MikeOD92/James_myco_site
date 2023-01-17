@@ -35,7 +35,7 @@ const Projects = (props) => {
       </div>
       <div
         id="projectTop"
-        className="flex flex-col p-10 mt-10 round-md text-lightmushroom"
+        className="flex flex-col md:p-10 mt-10 round-md text-lightmushroom"
       >
         {props.projects?.slice(view, view + 5).map((post) => {
           return (

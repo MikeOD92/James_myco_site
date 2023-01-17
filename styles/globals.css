@@ -79,6 +79,7 @@ h1 {
   /* font-family: "Montserrat Alternates", sans-serif; */
   font-family: "Baskervville", serif;
   font-size: 4rem;
+  text-shadow: 5px 5px 8px rgb(0, 0, 0);
   /* text-align: left;
   /* padding-top: 10%; */
   /* white-space: noWrap;
