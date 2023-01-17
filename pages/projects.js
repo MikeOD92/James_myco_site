@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import ProjectTile from "../components/ProjectTile";
@@ -8,6 +8,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Projects = (props) => {
   const [view, setView] = useState(0);
+
+  const [window, setWindow] = useState();
+
+  useEffect(() => {
+    setWindow(Window.innerWidth);
+  }, [window]);
 
   const handleClick = (e, sym) => {
     e.preventDefault();
@@ -39,21 +45,25 @@ const Projects = (props) => {
       >
         {props.projects?.slice(view, view + 5).map((post) => {
           return (
-            <Link key={post._id} href={`/project/${post._id}`}>
+            <Link
+              className="mb-10"
+              key={post._id}
+              href={`/project/${post._id}`}
+            >
               <ProjectTile post={post} />
             </Link>
           );
         })}
 
-        <div className="flex justify-around bg-mushroom rounded-md w-1/6 ml-5 m-3">
+        <div className="flex bg-mushroom rounded-md w-100 md:w-1/6 m-5">
           <button
-            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
+            className=" p-10 md:p-5 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
             onClick={(e) => handleClick(e, "-")}
           >
             <FaChevronLeft />
           </button>
           <button
-            className="p-2 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
+            className="p-10 md:p-5 bg-mushroom rounded-md w-1/2 hover:bg-lightmushroom hover:text-darkbruise flex justify-center"
             onClick={(e) => handleClick(e, "+")}
           >
             <FaChevronRight />
