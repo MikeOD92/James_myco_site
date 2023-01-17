@@ -102,7 +102,7 @@ function Header() {
       ) : show ? (
         //desktop
         <div
-          className="absolute right-0 top-20 h-76 p-5 w-1/4 bg-darkbruise z-50 text-4xl text-lightmushroom"
+          className="absolute right-0 top-20 h-screen lg:h-fit p-5 w-screen lg:w-1/4 z-50 text-5xl lg:text-4xl bg-darkbruise text-lightmushroom"
           onMouseLeave={() => setShow(!show)}
         >
           {/* //mobile */}
