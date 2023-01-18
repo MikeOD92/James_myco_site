@@ -47,12 +47,14 @@ function Header() {
               <div
                 className="p-4 bg-darkbruise text-lightmushroom"
                 onMouseEnter={(e) => handleMouseEvent(e, 1)}
+                onClick={(e) => handleMouseEvent(e, 1)}
               >
                 <p>Admin</p>
               </div>
               <div
                 className="p-4 bg-lightmushroom text-mushroom"
                 onMouseEnter={(e) => handleMouseEvent(e, 0)}
+                onClick={(e) => handleMouseEvent(e, 0)}
               >
                 <p>User</p>
               </div>

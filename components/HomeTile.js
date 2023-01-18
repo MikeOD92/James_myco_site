@@ -20,9 +20,8 @@ export default function HomeTile({ post }) {
           height={400}
           // className="border-2 border-darkbruise"
         />
-        <div className="flex flex-col w-full text-black text-lg">
+        <div className="flex flex-col w-full text-black text-lg justify-between">
           <p className="p-10">{post.desc}</p>
-          <br />
           <Link
             className="self-end hover:text-darkbruise"
             href={

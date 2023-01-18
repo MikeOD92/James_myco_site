@@ -60,7 +60,7 @@ export default function ReadProject({ post }) {
             </div>
             <div className="flex flex-row content-center"></div>
           </div>
-          <div className="bg-lightmushroom p-10 rounded-md text-zinc-800 text-lg">
+          <div className="bg-lightmushroom p-10 rounded-md text-zinc-800 text-lg overflow-scroll">
             <p style={{ whiteSpace: "pre-wrap" }}>{post ? post.body : ""}</p>
           </div>
           <div className="mt-5">

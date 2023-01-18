@@ -6,7 +6,7 @@ const CV = (props) => {
   return (
     <div>
       <Header />
-      <div className="p-20">
+      <div className="pt-20 p-5 md:p-20">
         <h1> CV </h1>
         <div>
           <p style={{ whiteSpace: "pre-wrap" }}>
