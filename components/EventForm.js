@@ -141,7 +141,7 @@ export default function EventForm(props) {
       <br />
       <textarea
         className="p-3"
-        cols={50}
+        cols={window.innerWidth > 768 ? 50 : 25}
         rows={8}
         ref={desc}
         defaultValue={props.event.desc || ""}
@@ -168,7 +168,7 @@ export default function EventForm(props) {
       <label className="text-white">Image</label>
       <br />
       <input className="p-3" type="file" onChange={(e) => handleChange(e)} />
-      <button className="p-3 bg-green-600" onClick={handleUpload}>
+      <button className="p-3 bg-green-600 rounded-md" onClick={handleUpload}>
         Upload
       </button>
       {uploading ? (
@@ -185,7 +185,7 @@ export default function EventForm(props) {
           <div key={`${img}-${i}container`} className="m-1">
             <button
               onClick={(e) => handleImgRemoval(e, i)}
-              className="bg-red-600 p-1 w-10 h-10 relative top-10"
+              className="bg-red-600 p-1 w-10 h-10 relative top-10 rounded-md"
             >
               x
             </button>
@@ -212,7 +212,10 @@ export default function EventForm(props) {
           disabled={uploaded.length < 1 ? true : false}
         />
         {props.event._id ? (
-          <button onClick={(e) => handleDelete(e)} className="p-2 bg-red-600">
+          <button
+            onClick={(e) => handleDelete(e)}
+            className="p-2 bg-red-600 rounded-md"
+          >
             DELETE
           </button>
         ) : (

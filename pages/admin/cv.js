@@ -54,20 +54,22 @@ const CV = (props) => {
   return (
     <div>
       <Header />
-      <div className="p-20">
+      <div className=" pt-20 md:p-20 ">
         <h1> CV </h1>
-        <form>
+        <form className="flex flex-col">
           <textarea
             defaultValue={props.cv.p1}
             ref={cvTxt}
             rows="50"
             cols="100"
-            className="m-3"
+            className="m-5"
           />
         </form>
         <button
           onClick={(e) => handleSubmit(e)}
-          className={props.cv ? "p-3 bg-green-500" : "p-3 bg-blue-500"}
+          className={`m-5 rounded-md ${
+            props.cv ? "p-3 bg-green-500" : "p-3 bg-blue-500"
+          }`}
         >
           {props.cv ? "Edit" : "Create"}
         </button>

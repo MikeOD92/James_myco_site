@@ -36,9 +36,9 @@ const Events = (props) => {
   return (
     <div>
       <Header />
-      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10 min-h-full">
-        <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl bg-zinc-800">
-          <div className="bg-lightmushroom p-5">
+      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-3 md:p-10 min-h-full">
+        <div className="flex-col md:p-12 md:max-w-3xl md:m-auto shadow-xl rounded-2xl bg-zinc-800">
+          <div className="bg-lightmushroom md:p-5">
             {props.eventList ? (
               ""
             ) : (
@@ -56,25 +56,29 @@ const Events = (props) => {
                 {props.eventList.map((itm) => {
                   return (
                     <div
-                      className="p-5 bg-mushroom m-3 flex rounded-md"
+                      className="p-5 bg-mushroom m-3 rounded-md"
                       key={itm._id}
                       onClick={() => setCurrentEvent(itm)}
                     >
-                      <div>
-                        <h2 className="text-xl pb-2">{itm.title}</h2>
-                        <Image
-                          src={
-                            itm.images[0]
-                              ? itm.images[0]
-                              : "/img/sporeprint.jpg"
-                          }
-                          height={200}
-                          width={200}
-                          alt="event splash img"
-                        />
-                      </div>
-                      <div className="w-1/2 p-5">
-                        <p>{itm.desc}</p>
+                      <div className="flex flex-col items-center md:items-start">
+                        <h2 className="text-3xl text-center md:text-xl pb-2 w-full">
+                          {itm.title}
+                        </h2>
+                        <div className="flex flex-row p-5">
+                          <Image
+                            src={
+                              itm.images[0]
+                                ? itm.images[0]
+                                : "/img/sporeprint.jpg"
+                            }
+                            height={300}
+                            width={300}
+                            alt="event splash img"
+                            // className=""
+                          />
+
+                          <p className="hidden p-5 md:block">{itm.desc}</p>
+                        </div>
                       </div>
                     </div>
                   );
@@ -83,7 +87,7 @@ const Events = (props) => {
             ) : currentEvent !== null ? (
               <div className="p-20 bg-lightmushroom">
                 <button
-                  className="p-3 bg-darkbruise"
+                  className="p-3 bg-darkbruise rounded-md"
                   onClick={() => setCurrentEvent(null)}
                 >
                   Back

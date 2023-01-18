@@ -71,8 +71,8 @@ const About = (props) => {
   return (
     <div>
       <Header />
-      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-10">
-        <div className="flex-col px-12 py-12 max-w-3xl mx-auto shadow-xl rounded-2xl bg-zinc-800">
+      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed min-h-full w-full p-5 pt-10 md:p-10">
+        <div className="flex-col p-5 md:p-12 md:max-w-3xl m-auto shadow-xl rounded-2xl bg-zinc-800">
           <form className="flex flex-col align-top">
             <label className="text-white"> Paragraph 1</label>
             <textarea
@@ -108,13 +108,19 @@ const About = (props) => {
             />
             {props.about ? (
               <button
-                className="bg-green-600 p-2"
+                className="rounded-md bg-green-600 p-2"
                 onClick={(e) => handlePut(e)}
               >
-                PUT
+                EDIT
               </button>
             ) : (
-              <button onClick={(e) => handlePageCreation(e)}> POST </button>
+              <button
+                className="rounded-md bg-green-600 p-2"
+                onClick={(e) => handlePageCreation(e)}
+              >
+                {" "}
+                POST{" "}
+              </button>
             )}
           </form>
         </div>

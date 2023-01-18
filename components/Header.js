@@ -63,22 +63,25 @@ function Header() {
           {view === 1 ? (
             <div className="text-center lg:text-left">
               <Link
-                className="bg-darkmushroom p-2 hover:text-zinc-800"
+                className="bg-darkmushroom p-2 hover:text-yellow-400"
                 href="/admin/about"
               >
                 <p>About</p>
               </Link>
-              <Link className="p-2 hover:text-zinc-800" href="/admin/projects">
+              <Link
+                className="p-2 hover:text-yellow-400"
+                href="/admin/projects"
+              >
                 <p>Projects</p>
               </Link>
-              <Link className="p-2 hover:text-zinc-800" href="/admin/events">
+              <Link className="p-2 hover:text-yellow-400" href="/admin/events">
                 <p>Events</p>
               </Link>
-              <Link className="p-2 hover:text-zinc-800" href="/admin/cv">
+              <Link className="p-2 hover:text-yellow-400" href="/admin/cv">
                 <p>CV</p>
               </Link>
               <button
-                className="p-2 float-right hover:text-zinc-800"
+                className="p-2 float-right hover:text-yellow-400"
                 onClick={signOut}
               >
                 Log Out

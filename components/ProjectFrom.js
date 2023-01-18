@@ -144,7 +144,7 @@ export default function ProjectFrom(props) {
         <textarea
           className="p-2"
           ref={body}
-          cols="50"
+          cols={window.innerWidth > 768 ? 50 : 25}
           rows="15"
           defaultValue={props.project.body || ""}
         />
@@ -156,7 +156,10 @@ export default function ProjectFrom(props) {
           multiple
           onChange={(e) => handleChange(e)}
         />
-        <button className="p-2 bg-green-600" onClick={(e) => handleUpload(e)}>
+        <button
+          className="p-2 bg-green-600 rounded-md"
+          onClick={(e) => handleUpload(e)}
+        >
           Upload
         </button>
         {uploading ? (
@@ -192,7 +195,7 @@ export default function ProjectFrom(props) {
         <br />
         <div className="flex flex-row justify-between">
           <input
-            className={`p-2 ${
+            className={`p-2 rounded-md ${
               uploaded.length < 1
                 ? "bg-zinc-400 text-neutral-300"
                 : "bg-green-600"
@@ -202,7 +205,10 @@ export default function ProjectFrom(props) {
             disabled={uploaded.length < 1 ? true : false}
           />
           {props.project._id ? (
-            <button onClick={(e) => handleDelete(e)} className="p-2 bg-red-600">
+            <button
+              onClick={(e) => handleDelete(e)}
+              className="p-2 bg-red-600 rounded-md"
+            >
               DELETE
             </button>
           ) : (
