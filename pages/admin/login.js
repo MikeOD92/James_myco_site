@@ -1,7 +1,6 @@
 import react, { useEffect, useRef } from "react";
 import { signIn, useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Header from "../../components/Header";
 
 const Login = () => {
   const emailRef = useRef();
@@ -48,7 +47,6 @@ const Login = () => {
   };
   return (
     <div>
-      <Header />
       <div className="p-20">
         <h1> Admin Login </h1>
         <form onSubmit={handleSubmission}>

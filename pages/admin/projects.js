@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
@@ -7,6 +6,7 @@ import post from "../../models/post";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 import Image from "next/image";
+import AnimationWrapper from "../../components/AnimationWrapper";
 
 const Projects = (props) => {
   const router = useRouter();
@@ -36,8 +36,7 @@ const Projects = (props) => {
   };
 
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-3 md:p-10 min-h-full">
         <div className="flex-col md:p-12 md:max-w-3xl md:m-auto shadow-xl rounded-2xl bg-zinc-800">
           {props.projects ? (
@@ -98,7 +97,7 @@ const Projects = (props) => {
           )}
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

@@ -5,6 +5,7 @@ import ProjectTile from "../components/ProjectTile";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import AnimationWrapper from "../components/AnimationWrapper";
 
 const Projects = (props) => {
   const [view, setView] = useState(0);
@@ -34,14 +35,13 @@ const Projects = (props) => {
   };
 
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="p-20 bg-[url('/img/petri_dish.jpg')] bg-fixed bg-top bg-cover max-w-screen flex h-screen justify-evenly items-center">
         <h1> Projects </h1>
       </div>
       <div
         id="projectTop"
-        className="flex flex-col md:p-10 mt-10 round-md text-lightmushroom"
+        className="bg-zinc-800 flex flex-col md:p-10 mt-10 round-md text-lightmushroom"
       >
         {props.projects?.slice(view, view + 5).map((post) => {
           return (
@@ -70,7 +70,7 @@ const Projects = (props) => {
           </button>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

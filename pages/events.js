@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
@@ -7,7 +6,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin
 import NoSSR from "../components/NoSSR";
-
+import AnimationWrapper from "../components/AnimationWrapper";
 const Events = (props) => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -40,8 +39,7 @@ const Events = (props) => {
     }
   };
   return (
-    <div className="max-w-screen">
-      <Header />
+    <AnimationWrapper>
       <div className="bg-[url('/img/lichen.jpg')] bg-fixed bg-top bg-cover max-w-screen min-h-screen flex justify-evenly items-center">
         <div>
           <h1 className="text-8xl text-yellow-400">Events</h1>
@@ -83,7 +81,7 @@ const Events = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

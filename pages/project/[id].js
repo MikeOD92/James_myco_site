@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Header from "../../components/Header";
 import post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
-
+import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,8 +17,7 @@ export default function ReadProject({ post }) {
   };
 
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       {post ? (
         <div className="p-5 lg:p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
@@ -75,7 +73,7 @@ export default function ReadProject({ post }) {
       ) : (
         <p className="p-20"> Project not found </p>
       )}
-    </div>
+    </AnimationWrapper>
   );
 }
 

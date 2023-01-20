@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
@@ -7,6 +6,7 @@ import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 import EventForm from "../../components/EventForm";
 import Image from "next/Image";
+import AnimationWrapper from "../../components/AnimationWrapper";
 
 const Events = (props) => {
   const router = useRouter();
@@ -34,8 +34,7 @@ const Events = (props) => {
   };
 
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-3 md:p-10 min-h-full">
         <div className="flex-col md:p-12 md:max-w-3xl md:m-auto shadow-xl rounded-2xl bg-zinc-800">
           <div className="bg-lightmushroom md:p-5">
@@ -100,7 +99,7 @@ const Events = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

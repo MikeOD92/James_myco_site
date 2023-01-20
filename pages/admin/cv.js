@@ -1,9 +1,9 @@
-import Header from "../../components/Header";
 import react, { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
+import AnimationWrapper from "../../components/AnimationWrapper";
 
 const CV = (props) => {
   const cvTxt = useRef();
@@ -52,9 +52,8 @@ const CV = (props) => {
     }
   };
   return (
-    <div>
-      <Header />
-      <div className=" pt-20 md:p-20 ">
+    <AnimationWrapper>
+      <div className="bg-zinc-800 pt-20 md:p-20 ">
         <h1> CV </h1>
         <form className="flex flex-col">
           <textarea
@@ -74,7 +73,7 @@ const CV = (props) => {
           {props.cv ? "Edit" : "Create"}
         </button>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

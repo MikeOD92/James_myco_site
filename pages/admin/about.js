@@ -1,10 +1,9 @@
-import Header from "../../components/Header";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
-
+import AnimationWrapper from "../../components/AnimationWrapper";
 const About = (props) => {
   const p1 = useRef();
   const p2 = useRef();
@@ -69,8 +68,7 @@ const About = (props) => {
     }
   };
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed min-h-full w-full p-5 pt-10 md:p-10">
         <div className="flex-col p-5 md:p-12 md:max-w-3xl m-auto shadow-xl rounded-2xl bg-zinc-800">
           <form className="flex flex-col align-top">
@@ -125,7 +123,7 @@ const About = (props) => {
           </form>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

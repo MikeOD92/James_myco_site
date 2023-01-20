@@ -2,11 +2,10 @@ import Header from "../components/Header";
 import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
 import HomeTile from "../components/HomeTile";
-
+import AnimationWrapper from "../components/AnimationWrapper";
 function Home(props) {
   return (
-    <div className="bg-zinc-800">
-      <Header />
+    <AnimationWrapper>
       <div className="bg-[url('/img/asphalt_myco.jpg')] bg-fixed home bg-cover max-w-screen h-screen">
         <h1 className="text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
           James Oliver
@@ -28,7 +27,8 @@ function Home(props) {
           }
         })}
       </div>
-    </div>
+      {/* </motion.main> 0*/}
+    </AnimationWrapper>
   );
 }
 export async function getServerSideProps() {

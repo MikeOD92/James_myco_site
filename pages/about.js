@@ -1,12 +1,11 @@
-import Header from "../components/Header";
 import Image from "next/image";
 import page from "../models/page";
 import dbConnect from "../utils/dbConnect";
+import AnimationWrapper from "../components/AnimationWrapper";
 
 const About = (props) => {
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/about_bg.PNG')] bg-cover w-full p-10">
         <div className="w-full flex flex-col md:flex-row md:justify-between rounded-md">
           <h1 className="text-bruise h-full w-screen md:relative md:top-24 md:right-10 lg:top-48 lg:right-0 md:text-left">
@@ -72,7 +71,7 @@ const About = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

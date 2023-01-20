@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import Header from "../../components/Header";
 import post from "../../models/post";
 import dbConnect from "../../utils/dbConnect";
-
+import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ReadEvent({ post }) {
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className=" mt-20 md:mt-0 md:p-20">
         <div>
           <h1 className="p-5 serif text-lightmushroom">{post.title}</h1>
@@ -43,7 +41,7 @@ export default function ReadEvent({ post }) {
           </Link>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 }
 export async function getServerSideProps(context) {

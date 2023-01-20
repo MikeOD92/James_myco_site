@@ -1,11 +1,10 @@
-import Header from "../components/Header";
 import page from "../models/page";
 import dbConnect from "../utils/dbConnect";
+import AnimationWrapper from "../components/AnimationWrapper";
 
 const CV = (props) => {
   return (
-    <div>
-      <Header />
+    <AnimationWrapper>
       <div className="pt-20 p-5 md:p-20">
         <h1> CV </h1>
         <div>
@@ -14,7 +13,7 @@ const CV = (props) => {
           </p>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 
