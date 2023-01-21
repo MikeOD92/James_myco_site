@@ -13,7 +13,7 @@ export default function AnimationWrapper({ children }) {
       animate="enter"
       exit="exit"
       transition={{ type: "easeOut", duration: 1 }}
-      className="bg-zinc-800 "
+      className="bg-zinc-800"
     >
       {children}
     </motion.main>

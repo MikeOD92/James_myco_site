@@ -4,13 +4,16 @@ import dbConnect from "../../utils/dbConnect";
 import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ReadProject({ post }) {
   const [view, setView] = useState(0);
+  const [body, setBody] = useState(post.body.split(/\r?\n/).filter(Boolean));
 
   const handleButtons = (operator) => {
     if (operator === "-" && view > 0) {
       setView(view - 1);
+      console.log(body);
     } else if (operator === "+" && view < post.images.length - 1) {
       setView(view + 1);
     }
@@ -22,7 +25,7 @@ export default function ReadProject({ post }) {
         <div className="p-5 lg:p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
             <div>
-              <h1 className="p-5 serif text-lightmushroom">
+              <h1 className="p-5 serif text-lightmushroom text-7xl mb-5">
                 {post.title || ""}
               </h1>
             </div>
@@ -39,7 +42,7 @@ export default function ReadProject({ post }) {
                 )}
                 <div>
                   <Image
-                    className="rounded-md"
+                    className="rounded-lg p-5 bg-mushroom"
                     src={post.images[view]}
                     alt={`${post.title} splash image`}
                     width={600}
@@ -56,12 +59,61 @@ export default function ReadProject({ post }) {
                 )}
               </div>
             </div>
-            <div className="flex flex-row content-center"></div>
           </div>
-          <div className="bg-lightmushroom p-10 rounded-md text-zinc-800 text-lg overflow-scroll">
-            <p style={{ whiteSpace: "pre-wrap" }}>{post ? post.body : ""}</p>
+          <div className="flex flex-col text-zinc-800 bg-lightmushroom rounded-lg">
+            {body.map((item, i) => {
+              if (i % 2 === 0) {
+                return (
+                  <div
+                    className="flex flex-col md:flex-row p-10 justify-between"
+                    key={`paragraph${i}`}
+                  >
+                    {post.images[i] ? (
+                      <Image
+                        src={post.images[i]}
+                        width="400"
+                        height="400"
+                        alt="uploaded image related to article"
+                        className={`border-4 border-mushroom`}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    <div>
+                      <p className="p-5" style={{ whiteSpace: "pre-wrap" }}>
+                        {item}
+                      </p>
+                    </div>
+                  </div>
+                );
+              } else {
+                return (
+                  <div
+                    className="flex flex-col md:flex-row p-10 justify-between"
+                    key={`paragraph${i}`}
+                  >
+                    <div>
+                      <p className="p-5" style={{ whiteSpace: "pre-wrap" }}>
+                        {item}
+                      </p>
+                    </div>
+                    {post.images[i] ? (
+                      <Image
+                        src={post.images[i]}
+                        width="400"
+                        height="400"
+                        alt="uploaded image related to article"
+                        className="border-4 border-mushroom"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                );
+              }
+            })}
           </div>
-          <div className="mt-5">
+          <div className="mt-20">
             <Link
               className="p-3 bg-darkbruise text-bruise hover:text-lightmushroom rounded-md"
               href="/projects"
