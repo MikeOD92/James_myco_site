@@ -5,6 +5,7 @@ import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ProjectWriteup from "../../components/ProjectWriteup";
 
 export default function ReadProject({ post }) {
   const [view, setView] = useState(0);
@@ -60,59 +61,7 @@ export default function ReadProject({ post }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-col text-zinc-800 bg-lightmushroom rounded-lg">
-            {body.map((item, i) => {
-              if (i % 2 === 0) {
-                return (
-                  <div
-                    className="flex flex-col md:flex-row p-10 justify-between"
-                    key={`paragraph${i}`}
-                  >
-                    {post.images[i] ? (
-                      <Image
-                        src={post.images[i]}
-                        width="400"
-                        height="400"
-                        alt="uploaded image related to article"
-                        className={`border-4 border-mushroom`}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    <div>
-                      <p className="p-5" style={{ whiteSpace: "pre-wrap" }}>
-                        {item}
-                      </p>
-                    </div>
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    className="flex flex-col md:flex-row p-10 justify-between"
-                    key={`paragraph${i}`}
-                  >
-                    <div>
-                      <p className="p-5" style={{ whiteSpace: "pre-wrap" }}>
-                        {item}
-                      </p>
-                    </div>
-                    {post.images[i] ? (
-                      <Image
-                        src={post.images[i]}
-                        width="400"
-                        height="400"
-                        alt="uploaded image related to article"
-                        className="border-4 border-mushroom"
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                );
-              }
-            })}
-          </div>
+          <ProjectWriteup body={body} images={post.images} />
           <div className="mt-20">
             <Link
               className="p-3 bg-darkbruise text-bruise hover:text-lightmushroom rounded-md"

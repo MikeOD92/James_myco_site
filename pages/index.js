@@ -3,6 +3,7 @@ import post from "../models/post";
 import dbConnect from "../utils/dbConnect";
 import HomeTile from "../components/HomeTile";
 import AnimationWrapper from "../components/AnimationWrapper";
+
 function Home(props) {
   return (
     <AnimationWrapper>
@@ -16,7 +17,7 @@ function Home(props) {
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div className="min-h-screen w-100 flex flex-col items-center pt-5  m-5 text-white">
+      <div className="min-h-screen w-100 flex flex-col items-center p-5  m-5 text-white">
         {props.posts.map((item, idx) => {
           if (idx < 3) {
             return (

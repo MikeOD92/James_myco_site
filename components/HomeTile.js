@@ -1,10 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function HomeTile({ post }) {
   return (
-    <div className="m-3 p-10 flex flex-col items-center bg-lightmushroom w-full lg:w-5/6 rounded-lg">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ type: "easeIn", duration: 0.8 }}
+      className="m-3 p-10 flex flex-col items-center bg-lightmushroom w-full lg:w-5/6 rounded-lg"
+    >
       <h1 className="text-6xl pt-5 pb-10 text-zinc-700 serif">{post.title}</h1>
 
       <div className="flex flex-col lg:flex-row w-full">
@@ -35,6 +41,6 @@ export default function HomeTile({ post }) {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
