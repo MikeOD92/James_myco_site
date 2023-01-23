@@ -8,7 +8,7 @@ const About = (props) => {
     <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/about_bg.PNG')] bg-cover w-full p-10">
         <div className="w-full flex flex-col md:flex-row md:justify-between rounded-md">
-          <h1 className="text-bruise h-full w-screen md:relative md:top-24 md:right-10 lg:top-48 lg:right-0 md:text-left">
+          <h1 className="text-bruise w-screen md:relative md:top-24 md:right-10 lg:top-48 lg:right-0 md:text-left">
             About
           </h1>
           <Image
@@ -16,7 +16,7 @@ const About = (props) => {
             width="300"
             height="300"
             alt="portait"
-            className="p-5 bg-zinc-300 rounded-md self-center w-full md:w-2/3 lg:w-1/3"
+            className="p-5 mb-5 bg-zinc-300 rounded-md self-center w-full md:w-2/3 lg:w-1/3"
           />
         </div>
         <motion.div
