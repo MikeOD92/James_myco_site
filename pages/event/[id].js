@@ -4,8 +4,18 @@ import dbConnect from "../../utils/dbConnect";
 import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  GoogleMap,
+  useLoadScript,
+  MarkerF,
+  StyledMapType,
+} from "@react-google-maps/api";
 
 export default function ReadEvent({ post }) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY,
+  });
+
   return (
     <AnimationWrapper>
       <div className=" mt-20 md:mt-0 md:p-20">
@@ -26,9 +36,10 @@ export default function ReadEvent({ post }) {
               </p>
             </div>
           </div>
-          <div className="p-5 text-lightmushroom">
-            <h3 className="text-3xl ">Location</h3>
-            <p>{post.location}</p>
+          <div className="p-5 text-lightmushroom mt-10">
+            <h3 className="text-3xl mb-10">Location</h3>
+            <p className="mb-10">{post.location}</p>
+            {!isLoaded ? <p>.....Loading</p> : <Map />}
           </div>
         </div>
 
@@ -44,6 +55,23 @@ export default function ReadEvent({ post }) {
     </AnimationWrapper>
   );
 }
+
+const Map = () => {
+  // right now im looking at geocoding,
+  // but i wonder if we could choose on a map at event creation,
+  // and just get that data inside of the event object model
+  // only need to do it once.
+  return (
+    <GoogleMap
+      zoom={10}
+      center={{ lat: 44, lng: -80 }}
+      mapContainerClassName="map-container"
+      // style={retro}
+    >
+      <MarkerF position={{ lat: 44, lng: -80 }} />
+    </GoogleMap>
+  );
+};
 export async function getServerSideProps(context) {
   const { id } = context.params;
 

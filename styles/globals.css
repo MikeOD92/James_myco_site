@@ -96,6 +96,11 @@ label {
 .serif {
   font-family: "Baskervville", serif;
 }
+.map-container {
+  width: 90vw;
+  height: 50vh;
+  border-radius: 15px;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -103,5 +108,17 @@ label {
   body {
     color: white;
     /* background: black; */
+  }
+}
+@media screen and (min-width: 768px) {
+  .map-container {
+    width: 75vw;
+    height: 45vh;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .map-container {
+    width: 86vw;
+    height: 65vh;
   }
 }
