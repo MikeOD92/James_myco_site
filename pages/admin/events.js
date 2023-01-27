@@ -5,7 +5,7 @@ import post from "../../models/post";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 import EventForm from "../../components/EventForm";
-import Image from "next/Image";
+import Image from "next/image";
 import AnimationWrapper from "../../components/AnimationWrapper";
 
 const Events = (props) => {

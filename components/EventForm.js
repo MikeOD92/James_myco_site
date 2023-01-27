@@ -2,14 +2,15 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import awsUpload from "../pages/api/upload";
 import { useRouter } from "next/router";
-
+import MapForm from "./MapForm";
 export default function EventForm(props) {
   const [date, setDate] = useState(new Date());
 
   const title = useRef();
   const desc = useRef();
   const formDate = useRef();
-  const location = useRef();
+  // const location = useRef();// so can this be made to refrence a google map?
+  const [location, setLocation] = useState({lat: 34, lng: -118})
   const [uploaded, setUploaded] = useState(
     props.event.images ? [...props.event.images] : []
   );
@@ -57,7 +58,7 @@ export default function EventForm(props) {
       title: title.current.value,
       desc: desc.current.value,
       date: new Date(formDate.current.value),
-      location: location.current.value,
+      location: JSON.stringify(location),
       images: uploaded,
     };
     if (!props.event._id) {
@@ -93,6 +94,7 @@ export default function EventForm(props) {
         });
 
         // console.log(response);
+       
         if (response.status === 200) {
           router.push(`/event/${props.event._id}`);
         }
@@ -158,12 +160,15 @@ export default function EventForm(props) {
       <br />
       <label className="text-white">Location</label>
       <br />
-      <input
+      <MapForm className="w-1/4 h-1/2 bg-blue-500" 
+        state={location} 
+        setLocation={setLocation}/>
+      {/* <input
         className="p-3"
         type="text"
         ref={location}
         defaultValue={props.event.location || ""}
-      />
+      /> */}
       <br />
       <label className="text-white">Image</label>
       <br />
