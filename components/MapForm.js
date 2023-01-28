@@ -21,20 +21,33 @@ export default function MapForm(props){
     )
     };
 
-const Map = ({location}) => {
+const Map = ({ children, style,location, ...options}) => {
     const [marker, setmarker] = useState(location.location)
-
+    const [center, setCenter] = useState({ lat: 34, lng: -118 });
+    const [zoom, setZoom] = useState(10);
     useEffect(()=>{
         location.setLocation(marker)
     }, [marker])
 
+    const onClick = (e) => {
+  // avoid directly mutating state
+  setmarker({lat: e.latLng.lat(), lng: e.latLng.lng()});
+};
+
+    const onIdle = () => {
+    console.log("onIdle");
+    setCenter(marker)
+    setZoom(10);
+    // setCenter(e.getCenter().toJSON());
+    };
+
     return(
         <GoogleMap
-            zoom={10}
-            center={{ lat: 34, lng: -118 }}
+            zoom={zoom}
+            center={center}
             mapContainerClassName="map-form"
-            onClick={(e)=> setmarker({lat: e.latLng.lat(), lng: e.latLng.lng()})} 
-    >
+            onClick={(e)=> onClick(e)} 
+            onIdle={onIdle}>   
             <MarkerF position={marker} />
         </GoogleMap>
     )

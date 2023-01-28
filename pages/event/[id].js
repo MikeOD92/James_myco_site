@@ -39,7 +39,7 @@ export default function ReadEvent({ post }) {
           <div className="p-5 text-lightmushroom mt-10">
             <h3 className="text-3xl mb-10">Location</h3>
             <p className="mb-10">{post.location}</p>
-            {!isLoaded ? <p>.....Loading</p> : <Map />}
+            {!isLoaded ? <p>.....Loading</p> : <Map location={post.location}/>}
           </div>
         </div>
 
@@ -56,19 +56,20 @@ export default function ReadEvent({ post }) {
   );
 }
 
-const Map = () => {
+const Map = ({location}) => {
+  const data = JSON.parse(location);
   // right now im looking at geocoding,
   // but i wonder if we could choose on a map at event creation,
   // and just get that data inside of the event object model
   // only need to do it once.
   return (
     <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
+      zoom={12}
+      center={data}
       mapContainerClassName="map-container"
       // style={retro}
     >
-      <MarkerF position={{ lat: 44, lng: -80 }} />
+      <MarkerF position={data} />
     </GoogleMap>
   );
 };
