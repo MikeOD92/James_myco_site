@@ -5,12 +5,13 @@ import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
-import MapStyles from "../../components/MapStyles";
 
 export default function ReadEvent({ post }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY,
   });
+
+  const formattedDate = new Date(post.date).toLocaleString();
 
   return (
     <AnimationWrapper>
@@ -26,7 +27,7 @@ export default function ReadEvent({ post }) {
               height={400}
             />
             <div className=" m-5 lg:m-0 lg:ml-3 p-10 bg-lightmushroom rounded-lg lg:w-full text-zinc-800">
-              <p className="text-2xl">{new Date(post.date).toLocaleString()}</p>
+              <p className="text-2xl">{formattedDate}</p>
               <p style={{ whiteSpace: "pre-wrap" }} className="mt-5">
                 {post.desc}
               </p>
@@ -34,8 +35,8 @@ export default function ReadEvent({ post }) {
           </div>
           <div className="p-5 text-lightmushroom mt-10">
             <h3 className="text-3xl mb-10">Location</h3>
-            <p className="mb-10">{post.location}</p>
-            {!isLoaded ? <p>.....Loading</p> : <Map />}
+            <p className="mb-10">{post.location.add}</p>
+            {!isLoaded ? <p>.....Loading</p> : <Map location={post.location} />}
           </div>
         </div>
 
@@ -52,18 +53,16 @@ export default function ReadEvent({ post }) {
   );
 }
 
-const Map = () => {
-  // right now im looking at geocoding,
-  // but i wonder if we could choose on a map at event creation,
-  // and just get that data inside of the event object model
-  // only need to do it once.
+const Map = ({ location }) => {
+  // const data = JSON.parse(location);
+  // location should now look like {add: ""}
   return (
     <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
+      zoom={15}
+      center={{ lat: location.lat, lng: location.lng }}
       mapContainerClassName="map-container"
     >
-      <MarkerF position={{ lat: 44, lng: -80 }} />
+      <MarkerF position={{ lat: location.lat, lng: location.lng }} clickable />
     </GoogleMap>
   );
 };

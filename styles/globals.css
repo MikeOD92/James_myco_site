@@ -101,6 +101,11 @@ label {
   height: 50vh;
   border-radius: 15px;
 }
+.map-form {
+  width: 40vw;
+  height: 40vh;
+  border-radius: 15px;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
