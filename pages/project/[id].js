@@ -25,10 +25,13 @@ export default function ReadProject({ post }) {
       {post ? (
         <div className="p-5 lg:p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
-            <div>
-              <h1 className="p-5 serif text-lightmushroom text-7xl mb-5">
+            <div className="p-5">
+              <h1 className="serif text-lightmushroom text-7xl mb-5">
                 {post.title || ""}
               </h1>
+              <h4 className="text-3xl text-lightmushroom serif">
+                {post.desc ? post.desc : ""}
+              </h4>
             </div>
 
             <div>

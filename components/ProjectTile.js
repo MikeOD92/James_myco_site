@@ -19,7 +19,9 @@ export default function ProjectTile({ post }) {
       />
       <div className="relative p-10 md:p-5 md:text-left text-lightmushroom">
         <h2 className="projectTile">{post.title}</h2>
-        <p className=" hidden md:block">{post.desc ? post.desc : ""}</p>
+        <h4 className="hidden md:block text-3xl serif">
+          {post.desc ? post.desc : ""}
+        </h4>
       </div>
     </motion.div>
   );

@@ -121,7 +121,7 @@ export default function ProjectFrom(props) {
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label className="p-2 text-white">Title</label>
+        <label className="p-2 text-zinc-800">Title</label>
         <br />
         <input
           className="p-2"
@@ -130,7 +130,7 @@ export default function ProjectFrom(props) {
           defaultValue={props.project.title || ""}
         />
         <br />
-        <label className="p-2 text-white">Description</label>
+        <label className="p-2 text-zinc-800">Description</label>
         <br />
         <input
           className="p-2"
@@ -139,16 +139,19 @@ export default function ProjectFrom(props) {
           defaultValue={props.project.desc || ""}
         />
         <br />
-        <label className="p-2 text-white">Body</label>
+        <label className="p-2 text-zinc-800">Body</label>
         <br />
         <textarea
           className="p-2"
           ref={body}
-          cols={window.innerWidth > 768 ? 50 : 25}
+          cols={
+            window.innerWidth > 1024 ? 100 : window.innerWidth > 768 ? 50 : 25
+          }
           rows="15"
           defaultValue={props.project.body || ""}
         />
-        <label className="p-2 text-white">Image Upload</label>
+        <br />
+        <label className="p-2 text-zinc-800">Image Upload</label>
         <br />
         <input
           className="p-2 "

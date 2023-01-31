@@ -4,12 +4,8 @@ import dbConnect from "../../utils/dbConnect";
 import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  GoogleMap,
-  useLoadScript,
-  MarkerF,
-  StyledMapType,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import MapStyles from "../../components/MapStyles";
 
 export default function ReadEvent({ post }) {
   const { isLoaded } = useLoadScript({
@@ -66,7 +62,6 @@ const Map = () => {
       zoom={10}
       center={{ lat: 44, lng: -80 }}
       mapContainerClassName="map-container"
-      // style={retro}
     >
       <MarkerF position={{ lat: 44, lng: -80 }} />
     </GoogleMap>

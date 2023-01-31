@@ -38,7 +38,7 @@ const Projects = (props) => {
   return (
     <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-3 md:p-10 min-h-full">
-        <div className="flex-col md:p-12 md:max-w-3xl md:m-auto shadow-xl rounded-2xl bg-zinc-800">
+        <div className="flex-col md:p-12 md:max-w-full md:m-auto shadow-xl rounded-2xl bg-zinc-800">
           {props.projects ? (
             ""
           ) : (
