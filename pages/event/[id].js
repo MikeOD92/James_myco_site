@@ -8,13 +8,14 @@ import {
   GoogleMap,
   useLoadScript,
   MarkerF,
-  StyledMapType,
 } from "@react-google-maps/api";
 
 export default function ReadEvent({ post }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY,
   });
+
+  const formattedDate = new Date(post.date).toLocaleString();
 
   return (
     <AnimationWrapper>
@@ -30,7 +31,7 @@ export default function ReadEvent({ post }) {
               height={400}
             />
             <div className=" m-5 lg:m-0 lg:ml-3 p-10 bg-lightmushroom rounded-lg lg:w-full text-zinc-800">
-              <p className="text-2xl">{new Date(post.date).toLocaleString()}</p>
+              <p className="text-2xl">{formattedDate}</p>
               <p style={{ whiteSpace: "pre-wrap" }} className="mt-5">
                 {post.desc}
               </p>
@@ -58,18 +59,13 @@ export default function ReadEvent({ post }) {
 
 const Map = ({location}) => {
   const data = JSON.parse(location);
-  // right now im looking at geocoding,
-  // but i wonder if we could choose on a map at event creation,
-  // and just get that data inside of the event object model
-  // only need to do it once.
   return (
     <GoogleMap
-      zoom={12}
+      zoom={15}
       center={data}
       mapContainerClassName="map-container"
-      // style={retro}
     >
-      <MarkerF position={data} />
+      <MarkerF position={data} clickable/>
     </GoogleMap>
   );
 };
