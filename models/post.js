@@ -37,6 +37,10 @@ const postSchema = new mongoose.Schema({
     required: false,
   },
   location: {
+    add: {
+      type: String, 
+      required: false
+    },
     lat: {
       type: Number,
       required: false

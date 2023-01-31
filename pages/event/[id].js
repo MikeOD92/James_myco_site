@@ -39,7 +39,7 @@ export default function ReadEvent({ post }) {
           </div>
           <div className="p-5 text-lightmushroom mt-10">
             <h3 className="text-3xl mb-10">Location</h3>
-            <p className="mb-10">{post.location}</p>
+            <p className="mb-10">{post.location.add}</p>
             {!isLoaded ? <p>.....Loading</p> : <Map location={post.location}/>}
           </div>
         </div>
@@ -58,14 +58,15 @@ export default function ReadEvent({ post }) {
 }
 
 const Map = ({location}) => {
-  const data = JSON.parse(location);
+  // const data = JSON.parse(location);
+  // location should now look like {add: ""}
   return (
     <GoogleMap
       zoom={15}
-      center={data}
+      center={{lat:location.lat, lng: location.lng}}
       mapContainerClassName="map-container"
     >
-      <MarkerF position={data} clickable/>
+      <MarkerF position={{lat:location.lat, lng: location.lng}} clickable/>
     </GoogleMap>
   );
 };

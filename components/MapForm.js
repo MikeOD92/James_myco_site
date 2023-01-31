@@ -3,20 +3,13 @@ import {
     GoogleMap,
     useLoadScript,
     MarkerF,
-    Autocomplete,
     StandaloneSearchBox,
-    LoadScript
   } from "@react-google-maps/api";
 
 export default function MapForm(props){
-    // right now im looking at geocoding,
-    // but i wonder if we could choose on a map at event creation,
-    // and just get that data inside of the event object model
-    // only need to do it once.
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY,
         libraries : ["places"],
-        mapIds: ["1c8383b3cc2af0bc"],
       });
     return (   
         <div>
@@ -26,34 +19,25 @@ export default function MapForm(props){
     };
 
 const Map = ({ children, style,location, ...options}) => {
-    const [marker, setmarker] = useState(location.location)
-    const [center, setCenter] = useState({ lat: 34, lng: -118 });
-    const [zoom, setZoom] = useState(10);
+    const [marker, setmarker] = useState({lat:location.location.lat, lng: location.location.lng} || { lat: 34, lng: -118.5 })
+    // const [center, setCenter] = useState({lat:location.location.lat, lng: location.location.lng} || { lat: 34, lng: -118.5 });
+    const [zoom, setZoom] = useState(12);
     const searchBar = useRef();
 
     useEffect(()=>{
-        location.setLocation(marker)
+        location.setLocation({lat:marker.lat, lng:marker.lng})
     }, [marker])
 
-    const onClick = (e) => {
-        setmarker({lat: e.latLng.lat(), lng: e.latLng.lng()});
-        };
+    // const onIdle = () => {
+    //     setCenter(marker)
+    // };
 
-    const onIdle = () => {
-        console.log("onIdle");
-        setCenter(marker)
-        // setZoom(10);
-    };
-
-    // const onLoad = ref => this.searchBox = ref;
-    // THIS IS coming along, what we want to do is use the searchbar.current.value, the text address
-    // to find and set the coords for the marker,
-    // from here we can save all of this info in the actual post
     const onPlacesChanged = async() => {
         try{
             const data = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchBar.current.value}&key=${ process.env.NEXT_PUBLIC_MAP_API_KEY}`)
             const response = await data.json();
             setmarker(response.results[0].geometry.location)
+            location.setLocationStr(searchBar.current.value)
             setZoom(15)
         }catch(err){
             console.error(err)
@@ -63,17 +47,16 @@ const Map = ({ children, style,location, ...options}) => {
     return(
         <GoogleMap
             zoom={zoom}
-            center={center}
+            center={marker}
             mapContainerClassName="map-form"
-            onClick={(e)=> onClick(e)} 
-            onIdle={onIdle}
             > 
             <StandaloneSearchBox
             onPlacesChanged={onPlacesChanged}>
                 <input
                     ref={searchBar}
                     type="text"
-                    placeholder="Customized your placeholder"
+                    placeholder="search"
+                    defaultValue={location.locationStr? location.locationStr : ""}
                     style={{
                     boxSizing: `border-box`,
                     border: `1px solid transparent`,
@@ -93,8 +76,6 @@ const Map = ({ children, style,location, ...options}) => {
     </StandaloneSearchBox>
             <MarkerF position={marker} />
         </GoogleMap>
-        // </LoadScript>
-      
     )
    
 }
