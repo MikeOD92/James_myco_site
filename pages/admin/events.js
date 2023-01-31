@@ -36,7 +36,7 @@ const Events = (props) => {
   return (
     <AnimationWrapper>
       <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed w-full p-3 md:p-10 min-h-full">
-        <div className="flex-col md:p-12 md:max-w-3xl md:m-auto shadow-xl rounded-2xl bg-zinc-800">
+        <div className="flex-col md:p-12 lg:max-w-full md:m-auto shadow-xl rounded-2xl bg-zinc-800">
           <div className="bg-lightmushroom md:p-5">
             {props.eventList ? (
               ""
@@ -63,7 +63,7 @@ const Events = (props) => {
                         <h2 className="text-3xl text-center md:text-xl pb-2 w-full">
                           {itm.title}
                         </h2>
-                        <div className="flex flex-row p-5">
+                        <div className="flex lg:flex-row p-5">
                           <Image
                             src={
                               itm.images[0]
@@ -76,7 +76,7 @@ const Events = (props) => {
                             // className=""
                           />
 
-                          <p className="hidden p-5 md:block">{itm.desc}</p>
+                          <p className="hidden p-5 lg:block">{itm.desc}</p>
                         </div>
                       </div>
                     </div>
