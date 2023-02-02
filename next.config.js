@@ -10,6 +10,7 @@ const withTM = require("next-transpile-modules")([
   "@fullcalendar/interaction",
   "@fullcalendar/react",
   "@fullcalendar/timegrid",
+  // "@google-cloud/storage",
 ]);
 
 // module.exports = nextConfig;

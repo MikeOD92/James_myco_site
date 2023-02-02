@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import awsUpload from "../pages/api/upload";
+// import awsUpload from "../pages/api/upload";
 import { useRouter } from "next/router";
+
+import Upload from "./Upload";
 
 export default function ProjectFrom(props) {
   const title = useRef();
@@ -12,25 +14,24 @@ export default function ProjectFrom(props) {
   const [uploaded, setUploaded] = useState(
     props.project.images ? [...props.project.images] : []
   );
-  const [uploading, setUploading] = useState(false);
-  const [file, setfile] = useState();
 
   // image uploading handlers
-  const handleChange = (e) => {
-    setfile(e.target.files);
-  };
+  // const handleChange = (e) => {
+  //   setfile(e.target.files);
+  // };
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!file) return;
-    setUploading(true);
+  // const handleUpload = async (e) => {
+  //   e.preventDefault();
+  //   if (!file) return;
+  //   setUploading(true);
 
-    const data = await awsUpload(file);
+  // const data = await awsUpload(file);
+  //   const data = await gcpUpload(file);
 
-    setUploaded([...uploaded, ...data]);
-    setUploading(false);
-    return data;
-  };
+  //   setUploaded([...uploaded, ...data]);
+  //   setUploading(false);
+  //   return data;
+  // };
 
   const handleImgRemoval = (e, i) => {
     e.preventDefault();
@@ -153,26 +154,20 @@ export default function ProjectFrom(props) {
         <br />
         <label className="p-2 text-zinc-800">Image Upload</label>
         <br />
-        <input
+        <Upload setUploaded uploaded />
+        {/* <input
           className="p-2 "
           type="file"
           multiple
           onChange={(e) => handleChange(e)}
-        />
-        <button
+        /> */}
+        {/* <button
           className="p-2 bg-green-600 rounded-md"
           onClick={(e) => handleUpload(e)}
         >
           Upload
-        </button>
-        {uploading ? (
-          <svg
-            className="bg-bruise opacity-1/2 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
-            viewBox="0 0 24 24"
-          />
-        ) : (
-          ""
-        )}
+        </button> */}
+
         <div className="flex row flex-wrap">
           {uploaded.map((img, i) => {
             return (
