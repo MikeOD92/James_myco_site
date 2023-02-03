@@ -49,8 +49,8 @@ export default function ReadProject({ post }) {
                     className="rounded-lg p-5 bg-mushroom"
                     src={post.images[view]}
                     alt={`${post.title} splash image`}
-                    width={600}
-                    height={600}
+                    width={800}
+                    height={500}
                   />
                 </div>
                 {post.images.length > 1 ? (
