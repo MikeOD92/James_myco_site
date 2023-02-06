@@ -90,7 +90,7 @@ export async function getServerSideProps() {
 
   const data = await post
     .find({ postType: "event" })
-    .sort({ created: "asc" })
+    .sort({ date: "asc" })
     .lean();
 
   for (let item of data) {

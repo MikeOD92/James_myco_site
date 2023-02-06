@@ -1,43 +1,33 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import awsUpload from "../pages/api/upload";
 import { useRouter } from "next/router";
 import MapForm from "./MapForm";
-export default function EventForm(props) {
-  const [date, setDate] = useState(new Date());
+import Upload from "./Upload";
 
+export default function PostForm(props) {
   const title = useRef();
   const desc = useRef();
+  const body = useRef();
   const formDate = useRef();
-  // const location = useRef();// so can this be made to refrence a google map?
-  const [location, setLocation] = useState(() => props.event.location ? {lat: props.event.location.lat, lng: props.event.location.lng}:{lat: 34, lng: -118.5})
-  const [locationStr, setLocationStr] = useState(() => props.event.location? props.event.location.add : "");
-  
-  const [uploaded, setUploaded] = useState(
-    props.event.images ? [...props.event.images] : []
+
+  const [location, setLocation] = useState(() =>
+    props.type === "event" && props.event?.location
+      ? { lat: props.event.location.lat, lng: props.event.location.lng }
+      : { lat: 34, lng: -118.5 }
+  );
+  const [locationStr, setLocationStr] = useState(() =>
+    props.event?.location ? props.event.location.add : ""
   );
 
-  const [uploading, setUploading] = useState(false);
-  const [file, setfile] = useState();
+  const [uploaded, setUploaded] = useState(
+    props.event?.images
+      ? [...props.event?.images]
+      : props.project?.images
+      ? [...props.project?.images]
+      : []
+  );
 
   const router = useRouter();
-  ////// img upload handlers
-
-  const handleChange = (e) => {
-    setfile(e.target.files);
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!file) return;
-    setUploading(true);
-
-    const data = await awsUpload(file);
-
-    setUploaded([...data, ...uploaded]);
-    setUploading(false);
-    return data;
-  };
 
   const handleImgRemoval = (e, i) => {
     e.preventDefault();
@@ -54,28 +44,30 @@ export default function EventForm(props) {
       return;
     }
 
-    const eventData = {
+    const postData = {
       pageid: props.pageid,
-      postType: "event",
+      postType: props.type,
       title: title.current.value,
       desc: desc.current.value,
-      date: new Date(formDate.current.value),
-      location: {add: locationStr, lat: location.lat, lng: location.lng},
+      date: new Date(formDate.current?.value) || null,
+      location:
+        { add: locationStr, lat: location.lat, lng: location.lng } || null,
+      body: body.current?.value || null,
       images: uploaded,
     };
-    if (!props.event._id) {
-      eventData.created = new Date();
+    if (!props.event?._id && !props.project?._id) {
+      postData.created = new Date();
       try {
         const response = await fetch("/api/posts", {
           method: "POST",
-          body: JSON.stringify(eventData),
+          body: JSON.stringify(postData),
           headers: {
             "content-Type": "application/json",
           },
         });
 
         if (response.status === 201) {
-          router.push("/events");
+          router.push(`/${props.type}s`);
         } else {
           console.log(response);
         }
@@ -84,21 +76,21 @@ export default function EventForm(props) {
       }
     } else {
       try {
-        eventData._id = props.event._id;
-        eventData.created = props.event.created;
+        postData._id = props.event ? props.event._id : props.project?._id;
+        postData.created = props.event?.created || props.project?.created;
 
         const response = await fetch("/api/posts", {
           method: "PUT",
-          body: JSON.stringify(eventData),
+          body: JSON.stringify(postData),
           headers: {
             "content-Type": "application/json",
           },
         });
 
-        // console.log(response);
-       
         if (response.status === 200) {
-          router.push(`/event/${props.event._id}`);
+          router.push(
+            `/${props.type}/${props.event?._id || props.project?._id}`
+          );
         }
       } catch (err) {
         console.error(err);
@@ -111,9 +103,11 @@ export default function EventForm(props) {
 
     if (confirm("Are you sure you want to delete this event")) {
       try {
+        const id = props.event ? props.event._id : props.project?._id;
+
         const response = await fetch("/api/posts", {
           method: "DELETE",
-          body: JSON.stringify({ _id: props.event._id }),
+          body: JSON.stringify({ _id: id }),
           headers: {
             "content-Type": "application/json",
           },
@@ -138,7 +132,7 @@ export default function EventForm(props) {
         type="text"
         placeholder="title"
         ref={title}
-        defaultValue={props.event.title || ""}
+        defaultValue={props.event?.title || props.project?.title || ""}
       />
       <br />
       <label className="text-white">Description</label>
@@ -148,42 +142,54 @@ export default function EventForm(props) {
         cols={window.innerWidth > 768 ? 50 : 25}
         rows={8}
         ref={desc}
-        defaultValue={props.event.desc || ""}
+        defaultValue={props.event?.desc || props.project?.desc || ""}
       />
       <br />
-      <label className="text-white">Date & Time</label>
-      <br />
-      <input
-        className="p-3"
-        type="datetime-local"
-        ref={formDate}
-        defaultValue={props.event.date ? props.event.date.slice(0, 16) : ""}
-      />
-      <br />
-      <label className="text-white">Location</label>
-      <br />
-      <MapForm className="w-1/4 h-1/2 bg-blue-500" 
-        location={location} 
-        setLocation={setLocation}
-        locationStr={locationStr}
-        setLocationStr={setLocationStr}/>
-      <br />
-      <label className="text-white">Image</label>
-      <br />
-      <input className="p-3" type="file" onChange={(e) => handleChange(e)} />
-      <button className="p-3 bg-green-600 rounded-md" onClick={handleUpload}>
-        Upload
-      </button>
-      {uploading ? (
-        <svg
-          className="bg-bruise opacity-1/2 animate-spin h-10 w-10 m-3" // this doesn't look right but does work.
-          viewBox="0 0 24 24"
-        />
+      {props.event ? (
+        <>
+          <label className="text-white">Date & Time</label>
+          <br />
+          <input
+            className="p-3"
+            type="datetime-local"
+            ref={formDate}
+            defaultValue={props.event.date ? props.event.date.slice(0, 16) : ""}
+          />
+          <br />
+          <label className="text-white">Location</label>
+          <br />
+          <MapForm
+            className="w-1/4 h-1/2 bg-blue-500"
+            location={location}
+            setLocation={setLocation}
+            locationStr={locationStr}
+            setLocationStr={setLocationStr}
+          />
+          <br />
+        </>
+      ) : props.project ? (
+        <>
+          <label className="p-2 text-zinc-800">Body</label>
+          <br />
+          <textarea
+            className="p-2"
+            ref={body}
+            cols={
+              window.innerWidth > 1024 ? 100 : window.innerWidth > 768 ? 50 : 25
+            }
+            rows="15"
+            defaultValue={props.project.body || ""}
+          />
+        </>
       ) : (
         ""
       )}
+
+      <label className="text-white">Image</label>
+      <br />
+      <Upload setUploaded={setUploaded} uploaded={uploaded} />
+
       {uploaded.map((img, i) => {
-        // console.log("looping over this is the img val:", img);
         return (
           <div key={`${img}-${i}container`} className="m-1">
             <button
@@ -211,10 +217,10 @@ export default function EventForm(props) {
               : "bg-green-600"
           }`}
           type="submit"
-          value={!props.event._id ? "POST" : "EDIT"}
+          value={!props.event?._id && !props.project?._id ? "POST" : "EDIT"}
           disabled={uploaded.length < 1 ? true : false}
         />
-        {props.event._id ? (
+        {props.event?._id || props.project?._id ? (
           <button
             onClick={(e) => handleDelete(e)}
             className="p-2 bg-red-600 rounded-md"

@@ -4,9 +4,9 @@ import hasToken from "../../utils/checkUser";
 import post from "../../models/post";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
-import EventForm from "../../components/EventForm";
 import Image from "next/image";
 import AnimationWrapper from "../../components/AnimationWrapper";
+import PostForm from "../../components/PostForm";
 
 const Events = (props) => {
   const router = useRouter();
@@ -91,7 +91,11 @@ const Events = (props) => {
                 >
                   Back
                 </button>
-                <EventForm pageid={props.pageId} event={currentEvent} />
+                <PostForm
+                  pageid={props.pageId}
+                  event={currentEvent}
+                  type="event"
+                />
               </div>
             ) : (
               ""
@@ -116,10 +120,7 @@ export async function getServerSideProps(context) {
   }
   dbConnect();
 
-  const data = await post
-    .find({ postType: "event" })
-    .sort({ created: "desc" })
-    .lean();
+  const data = await post.find({ postType: "event" }).sort("date").lean();
 
   for (let item of data) {
     if (item._id !== null) {

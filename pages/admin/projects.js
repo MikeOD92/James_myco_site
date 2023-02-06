@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import hasToken from "../../utils/checkUser";
-import ProjectFrom from "../../components/ProjectFrom";
 import post from "../../models/post";
 import page from "../../models/page";
 import dbConnect from "../../utils/dbConnect";
 import Image from "next/image";
 import AnimationWrapper from "../../components/AnimationWrapper";
+import PostForm from "../../components/PostForm";
 
 const Projects = (props) => {
   const router = useRouter();
@@ -90,7 +90,11 @@ const Projects = (props) => {
               >
                 Back
               </button>
-              <ProjectFrom pageid={props.pageId} project={currentProj} />
+              <PostForm
+                pageid={props.pageId}
+                project={currentProj}
+                type="project"
+              />
             </div>
           ) : (
             ""
