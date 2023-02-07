@@ -17,11 +17,11 @@ const withTM = require("next-transpile-modules")([
 module.exports = withTM({
   reactStrictMode: true,
   images: {
-    domains: ["jamesmycologysite.s3.us-west-1.amazonaws.com"],
+    domains: ["jamesmycologysite.s3.us-west-1.amazonaws.com", "localhost:3000"], /// need to look into what this was,
   },
-  browser: {
-    fs: false,
-    path: false,
-    os: false,
-  },
+  // browser: {
+  //   fs: false,
+  //   path: false,
+  //   os: false,
+  // },
 });

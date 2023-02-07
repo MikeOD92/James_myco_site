@@ -1,22 +1,41 @@
 import React, { useState } from "react";
-import awsUpload from "../pages/api/upload";
+// import awsUpload from "../pages/api/upload";
+// import gcpUpload from "../pages/api/upload";
 
 export default function Upload(props) {
   const [uploading, setUploading] = useState(false);
-  const [file, setfile] = useState([]);
+  const [file, setfile] = useState(); // was an array
+  // const [path, setPath] = useState();
 
   const handleChange = (e) => {
-    setfile(e.target.files);
+    // setPath(e.target.value);
+    setfile(e.target.files[0]);
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) return;
+    // console.log(path);
+    // console.log(file);
+    // console.log("//////////////////////");
+    const form = new FormData();
+    form.append("file", file);
+
     setUploading(true);
+    // file[0].path = path;
 
-    const data = await awsUpload(file);
+    console.log(file);
 
-    props.setUploaded([...props.uploaded, ...data]);
+    const data = await fetch("/api/upload", {
+      method: "POST",
+      body: form,
+      // headers: {
+      //   "content-type": "multipart/form-data",
+      // },
+    });
+
+    console.log(data);
+    props.setUploaded([...props.uploaded, data]);
     setUploading(false);
     return data;
   };
@@ -25,7 +44,7 @@ export default function Upload(props) {
       <input
         className="p-2 "
         type="file"
-        multiple
+        // multiple
         onChange={(e) => handleChange(e)}
       />
       <button

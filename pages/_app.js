@@ -4,8 +4,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
-import { motion, AnimatePresence } from "framer-motion";
-import { Storage } from "@google-cloud/storage";
+import { AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
