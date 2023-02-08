@@ -1,51 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // import awsUpload from "../pages/api/upload";
 // import gcpUpload from "../pages/api/upload";
 
 export default function Upload(props) {
   const [uploading, setUploading] = useState(false);
-  const [file, setfile] = useState(); // was an array
+  // const [file, setfile] = useState(); // was an array
+  const fileRef = useRef(null);
   // const [path, setPath] = useState();
 
-  const handleChange = (e) => {
-    // setPath(e.target.value);
-    setfile(e.target.files[0]);
-  };
+  // const handleChange = (e) => {
+  //   // setPath(e.target.value);
+  //   setfile(e.target.files[0]);
+  // };
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!file) return;
-    // console.log(path);
-    // console.log(file);
-    // console.log("//////////////////////");
-    const form = new FormData();
-    form.append("file", file);
+
+    if (!fileRef.current?.files?.[0]) return;
+
+    const file = fileRef.current.files[0];
+    fileRef.current.value = null;
 
     setUploading(true);
-    // file[0].path = path;
 
-    console.log(file);
+    const form = new FormData();
+    form.append("file", file);
 
     const data = await fetch("/api/upload", {
       method: "POST",
       body: form,
-      // headers: {
-      //   "content-type": "multipart/form-data",
-      // },
     });
 
     console.log(data);
     props.setUploaded([...props.uploaded, data]);
     setUploading(false);
-    return data;
+    // return data;
   };
   return (
     <div>
       <input
         className="p-2 "
         type="file"
+        ref={fileRef}
         // multiple
-        onChange={(e) => handleChange(e)}
+        // onChange={(e) => handleChange(e)}
       />
       <button
         className="p-2 bg-green-600 rounded-md"

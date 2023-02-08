@@ -1,8 +1,6 @@
-import S3 from "aws-sdk/clients/s3";
-import { Storage } from "@google-cloud/storage";
 import handler from "../../utils/handler";
 import { hasTokenMiddleware } from "../../utils/checkUser";
-import formidable from "formidable";
+import { uploadUtil } from "../../lib/upload";
 
 export const config = {
   api: {
@@ -12,28 +10,36 @@ export const config = {
 
 const upload = async (req, res) => {
   console.log("backend upload service running");
-  const promise = new Promise((resolve, reject) => {
-    const form = new formidable.IncomingForm({ keepExtensions: true });
-    form.uploadDir = "./public/img/";
-    // so it is uploading to the public dir but it gives me an invalid name and does not have an extension/
-
-    form.parse(req, (err, fields, files) => {
-      // files[0].newFilename = files[0].orginalFilename;
-      // console.log(files);
-      // console.log("///////////////////////");
-      // if (err) {
-      //   return res.status(500).json(err);
-      // }
-      if (err) reject(err);
-      resolve({ fields, files });
-      // console.log(err, fields, files);
-    });
-  });
-  return promise.then(({ fields, files }) => {
-    res.status(200).json({ fields, files });
-  });
+  uploadUtil(req, res);
 };
+
 handler.use(hasTokenMiddleware).post(upload);
+
+export default handler;
+//   const promise = new Promise((resolve, reject) => {
+//     const form = new formidable.IncomingForm({
+//       keepExtensions: true,
+//       fileWriteStreamHandler: uploadStream,
+//     });
+//     form.uploadDir = "./public/img/";
+//     // so it is uploading to the public dir but it gives me an invalid name and does not have an extension/
+
+//     form.parse(req, (err, fields, files) => {
+//       // files[0].newFilename = files[0].orginalFilename;
+//       // console.log(files);
+//       // console.log("///////////////////////");
+//       // if (err) {
+//       //   return res.status(500).json(err);
+//       // }
+//       if (err) reject(err);
+//       resolve({ fields, files });
+//       // console.log(err, fields, files);
+//     });
+//   });
+//   return promise.then(({ fields, files }) => {
+//     res.status(200).json({ fields, files });
+//   });
+// };
 
 // async function upload(req, res) {
 //   const form = new formidable.IncomingForm();
@@ -120,5 +126,3 @@ handler.use(hasTokenMiddleware).post(upload);
 
 // export default awsUpload;
 // export default gcpUpload;
-
-export default handler;

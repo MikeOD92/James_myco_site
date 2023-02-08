@@ -24,6 +24,7 @@
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.4",
     "formidable": "^2.1.1",
+    "formidable-serverless": "^1.1.1",
     "framer-motion": "^8.5.0",
     "googleapis": "^110.0.0",
     "mongodb": "^4.12.0",
