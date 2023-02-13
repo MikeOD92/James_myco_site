@@ -10,7 +10,9 @@ const handler = nc({
   onNoMatch: (req, res) => {
     res.status(400).send("Page does not exist");
   },
-  bodyParser: false,
+  // api: {
+  //   bodyParser: false,
+  // },
 });
 
 export default handler;

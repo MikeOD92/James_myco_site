@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import MapForm from "./MapForm";
 import Upload from "./Upload";
+import { awsDelete } from "../pages/api/upload";
 
 export default function PostForm(props) {
   const title = useRef();
@@ -29,8 +30,11 @@ export default function PostForm(props) {
 
   const router = useRouter();
 
-  const handleImgRemoval = (e, i) => {
+  const handleImgRemoval = async (e, i, data) => {
+    // this needs to delete items from the S3 bucket as well as from the uploaded array
     e.preventDefault();
+    console.log(data.split("/").pop());
+    awsDelete(data);
     let arr = uploaded;
     arr.splice(i, 1);
     setUploaded([...arr]);
@@ -99,12 +103,14 @@ export default function PostForm(props) {
   };
 
   const handleDelete = async (e) => {
+    // this should also delete all the images associated with the post in the s3 bucket
     e.preventDefault();
 
     if (confirm("Are you sure you want to delete this event")) {
       try {
         const id = props.event ? props.event._id : props.project?._id;
 
+        ///// remove images here
         const response = await fetch("/api/posts", {
           method: "DELETE",
           body: JSON.stringify({ _id: id }),
@@ -121,8 +127,6 @@ export default function PostForm(props) {
     }
   };
 
-  // console.log(props.event.date);
-  // console.log(new Date(props.event.date));
   return (
     <form onSubmit={handleSubmit}>
       <label className="text-white">Event Title</label>
@@ -193,7 +197,7 @@ export default function PostForm(props) {
         return (
           <div key={`${img}-${i}container`} className="m-1">
             <button
-              onClick={(e) => handleImgRemoval(e, i)}
+              onClick={(e) => handleImgRemoval(e, i, uploaded[i])}
               className="bg-red-600 p-1 w-10 h-10 relative top-10 rounded-md"
             >
               x

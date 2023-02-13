@@ -10,22 +10,19 @@ const withTM = require("next-transpile-modules")([
   "@fullcalendar/interaction",
   "@fullcalendar/react",
   "@fullcalendar/timegrid",
-  "@google-cloud/storage",
 ]);
 
 // module.exports = nextConfig;
 module.exports = withTM({
   reactStrictMode: true,
   images: {
-    domains: [
-      "jamesmycologysite.s3.us-west-1.amazonaws.com",
-      "localhost:3000",
-      "gs://james-site",
-    ], /// need to look into what this was,
+    domains: ["jamesmycologysite.s3.us-west-1.amazonaws.com", "localhost:3000"], /// need to look into what this was,
+    // loader: "custom",
+    // loaderFile: "./lib/upload.js",
   },
-  // browser: {
-  //   fs: false,
-  //   path: false,
-  //   os: false,
-  // },
+  browser: {
+    fs: false,
+    path: false,
+    os: false,
+  },
 });
