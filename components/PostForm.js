@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import MapForm from "./MapForm";
 import Upload from "./Upload";
 import { awsDelete } from "../pages/api/upload";
-import AwsMapForm from "./awsMapForm";
+import MapBoxForm from "./MapBoxForm";
 export default function PostForm(props) {
   const title = useRef();
   const desc = useRef();
@@ -162,14 +162,14 @@ export default function PostForm(props) {
           <br />
           <label className="text-white">Location</label>
           <br />
-          <MapForm
+          {/* <MapForm
             className="w-1/4 h-1/2 bg-blue-500"
             location={location}
             setLocation={setLocation}
             locationStr={locationStr}
             setLocationStr={setLocationStr}
-          />
-          <AwsMapForm />
+          /> */}
+          <MapBoxForm />
           <br />
         </>
       ) : props.project ? (

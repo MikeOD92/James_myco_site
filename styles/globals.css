@@ -96,16 +96,18 @@ label {
 .serif {
   font-family: "Baskervville", serif;
 }
-.map-container {
-  width: 90vw;
+.mapContainer {
+  width: 70vw;
   height: 50vh;
   border-radius: 15px;
+  margin-bottom: 5vh;
 }
 .map-form {
   width: 40vw;
   height: 40vh;
   border-radius: 15px;
 }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
