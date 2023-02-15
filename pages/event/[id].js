@@ -5,6 +5,7 @@ import AnimationWrapper from "../../components/AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import * as mapStyle from "../../public/mapStyle.json";
 
 export default function ReadEvent({ post }) {
   const { isLoaded } = useLoadScript({
@@ -20,7 +21,7 @@ export default function ReadEvent({ post }) {
           <h1 className="p-5 serif text-lightmushroom">{post.title}</h1>
           <div className="flex flex-col lg:flex-row">
             <Image
-              className="rounded-lg self-center p-5 w-full lg:w-fit md:bg-mushroom"
+              className="rounded-lg self-center p-5 w-full lg:w-full md:bg-mushroom"
               src={post.images[0] ? post.images[0] : "/img/sporeprint.jpg"}
               alt={`${post.title} splash image`}
               width={400}
@@ -35,7 +36,17 @@ export default function ReadEvent({ post }) {
           </div>
           <div className="p-5 text-lightmushroom mt-10">
             <h3 className="text-3xl mb-10">Location</h3>
-            <p className="mb-10">{post.location.add}</p>
+            <a
+              href={`http://maps.google.com/maps?q=${post.location.lat},${post.location.lng}+(My+Point)&z=14&ll=${post.location.lat},${post.location.lng}`}
+              // href={`http://www.google.com/maps/place/${post.location.add
+              //   .split(" ")
+              //   .join("+")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-bruise"
+            >
+              <p className="mb-10">{post.location.add}</p>
+            </a>
             {!isLoaded ? <p>.....Loading</p> : <Map location={post.location} />}
           </div>
         </div>
@@ -61,8 +72,16 @@ const Map = ({ location }) => {
       zoom={15}
       center={{ lat: location.lat, lng: location.lng }}
       mapContainerClassName="map-container"
+      options={{
+        styles: mapStyle,
+      }}
+      clickableIcons
     >
-      <MarkerF position={{ lat: location.lat, lng: location.lng }} clickable />
+      <MarkerF
+        position={{ lat: location.lat, lng: location.lng }}
+        clickable
+        onClick={(e) => console.log(e)}
+      />
     </GoogleMap>
   );
 };

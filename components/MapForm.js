@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import * as mapStyle from "../public/mapStyle.json";
 import {
   GoogleMap,
   useLoadScript,
@@ -52,7 +53,14 @@ const Map = ({ children, style, location, ...options }) => {
   };
 
   return (
-    <GoogleMap zoom={zoom} center={marker} mapContainerClassName="map-form">
+    <GoogleMap
+      zoom={zoom}
+      center={marker}
+      mapContainerClassName="map-form"
+      options={{
+        styles: mapStyle,
+      }}
+    >
       <StandaloneSearchBox onPlacesChanged={onPlacesChanged}>
         <input
           ref={searchBar}
