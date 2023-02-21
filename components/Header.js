@@ -65,19 +65,29 @@ function Header() {
               <Link
                 className="bg-darkmushroom p-2 hover:text-yellow-400"
                 href="/admin/about"
+                onClick={() => setShow(false)}
               >
                 <p>About</p>
               </Link>
               <Link
                 className="p-2 hover:text-yellow-400"
                 href="/admin/projects"
+                onClick={() => setShow(false)}
               >
                 <p>Projects</p>
               </Link>
-              <Link className="p-2 hover:text-yellow-400" href="/admin/events">
+              <Link
+                className="p-2 hover:text-yellow-400"
+                href="/admin/events"
+                onClick={() => setShow(false)}
+              >
                 <p>Events</p>
               </Link>
-              <Link className="p-2 hover:text-yellow-400" href="/admin/cv">
+              <Link
+                className="p-2 hover:text-yellow-400"
+                href="/admin/cv"
+                onClick={() => setShow(false)}
+              >
                 <p>CV</p>
               </Link>
               <button
@@ -89,16 +99,32 @@ function Header() {
             </div>
           ) : (
             <div className="text-center lg:text-left">
-              <Link className="p-2 hover:text-darkbruise" href="/about">
+              <Link
+                className="p-2 hover:text-darkbruise"
+                href="/about"
+                onClick={() => setShow(false)}
+              >
                 <p>About</p>
               </Link>
-              <Link className="p-2 hover:text-darkbruise" href="/projects">
+              <Link
+                className="p-2 hover:text-darkbruise"
+                href="/projects"
+                onClick={() => setShow(false)}
+              >
                 <p>Projects</p>
               </Link>
-              <Link className="p-2 hover:text-darkbruise" href="/events">
+              <Link
+                className="p-2 hover:text-darkbruise"
+                href="/events"
+                onClick={() => setShow(false)}
+              >
                 <p>Events</p>
               </Link>
-              <Link className="p-2 hover:text-darkbruise" href="/cv">
+              <Link
+                className="p-2 hover:text-darkbruise"
+                href="/cv"
+                onClick={() => setShow(false)}
+              >
                 <p>CV</p>
               </Link>
             </div>
@@ -112,16 +138,32 @@ function Header() {
         >
           {/* //mobile */}
           {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
-          <Link className="p-2 hover:text-yellow-400" href="/about">
+          <Link
+            className="p-2 hover:text-yellow-400"
+            href="/about"
+            onClick={() => setShow(false)}
+          >
             <p>About</p>
           </Link>
-          <Link className="p-2 hover:text-yellow-400" href="/projects">
+          <Link
+            className="p-2 hover:text-yellow-400"
+            href="/projects"
+            onClick={() => setShow(false)}
+          >
             <p>Projects</p>
           </Link>
-          <Link className="p-2 hover:text-yellow-400" href="/events">
+          <Link
+            className="p-2 hover:text-yellow-400"
+            href="/events"
+            onClick={() => setShow(false)}
+          >
             <p>Events</p>
           </Link>
-          <Link className="p-2 hover:text-yellow-400" href="/cv">
+          <Link
+            className="p-2 hover:text-yellow-400"
+            href="/cv"
+            onClick={() => setShow(false)}
+          >
             <p>CV</p>
           </Link>
         </div>
