@@ -46,6 +46,7 @@ export default function PostForm(props) {
       alert("no images uploaded");
       return;
     }
+    console.log(locationStr);
 
     const postData = {
       pageid: props.pageid,
