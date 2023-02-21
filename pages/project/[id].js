@@ -23,10 +23,10 @@ export default function ReadProject({ post }) {
   return (
     <AnimationWrapper>
       {post ? (
-        <div className="p-5 lg:p-20">
+        <div className="md:p-5 lg:p-20">
           <div className="flex flex-col items-left w-full mb-20 mt-10">
-            <div className="p-5">
-              <h1 className="serif text-lightmushroom text-7xl mb-5">
+            <div className="mt-10 p-5">
+              <h1 className="serif text-lightmushroom text-5xl md:text-7xl mb-5">
                 {post.title || ""}
               </h1>
               <h4 className="text-3xl text-lightmushroom serif">

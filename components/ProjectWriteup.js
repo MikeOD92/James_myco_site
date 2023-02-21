@@ -10,7 +10,7 @@ export default function projectWriteup({ body, images }) {
           img++;
           return (
             <div
-              className="flex flex-col md:flex-row p-10 justify-between"
+              className="flex flex-col md:flex-row md:p-10 justify-between"
               key={`paragraph${img - 1}`}
             >
               {images[img - 1] ? (
@@ -19,7 +19,7 @@ export default function projectWriteup({ body, images }) {
                   width="400"
                   height="400"
                   alt="uploaded image related to article"
-                  className={`border-4 border-mushroom`}
+                  className={`border-4 border-mushroom w-full`}
                 />
               ) : (
                 ""
@@ -35,7 +35,7 @@ export default function projectWriteup({ body, images }) {
           img++;
           return (
             <div
-              className="flex flex-col md:flex-row p-10 justify-between"
+              className="flex flex-col md:flex-row justify-between"
               key={`paragraph${i}`}
             >
               <div>
@@ -59,7 +59,7 @@ export default function projectWriteup({ body, images }) {
         } else {
           return (
             <div
-              className="flex flex-col md:flex-row p-10 justify-between"
+              className="flex flex-col md:flex-row md:p-10 justify-between"
               key={`paragraph${i}`}
             >
               <div>
@@ -72,7 +72,7 @@ export default function projectWriteup({ body, images }) {
         }
       })}
       <div
-        className="flex flex-col md:flex-row p-10 justify-evenly"
+        className="flex flex-col md:flex-row md:p-10 justify-evenly"
         key="extraimages"
       >
         {images.slice(img).map((image, i) => {

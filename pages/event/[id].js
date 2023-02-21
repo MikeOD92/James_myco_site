@@ -16,9 +16,11 @@ export default function ReadEvent({ post }) {
 
   return (
     <AnimationWrapper>
-      <div className=" mt-20 md:mt-0 md:p-20">
+      <div className="mt-20 md:mt-0 md:p-20">
         <div>
-          <h1 className="p-5 serif text-lightmushroom">{post.title}</h1>
+          <h1 className="p-5 serif text-lightmushroom text-4xl md:text-6xl">
+            {post.title}
+          </h1>
           <div className="flex flex-col lg:flex-row">
             <Image
               className="rounded-lg self-center p-5 w-full lg:w-full md:bg-mushroom"
