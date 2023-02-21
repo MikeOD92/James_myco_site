@@ -11,13 +11,13 @@ function Home(props) {
         <h1 className="text-6xl md:text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
           James Oliver
         </h1>
-        <h2 className="home text-6xl text-zinc-800 bg-lightmushroom opacity-70 absolute bottom-0 right-0 left-0 w-full p-3">
+        <h2 className="home text-5xl md:text-6xl text-zinc-800 bg-lightmushroom opacity-70 absolute bottom-0 right-0 left-0 w-full p-3">
           Mycology
           <span className=""> & </span>
           <span className="">Soil Science</span>
         </h2>
       </div>
-      <div className="min-h-screen w-100 flex flex-col items-center p-5  m-5 text-white">
+      <div className="min-h-screen w-100 flex flex-col items-center p-2 m-5 text-white">
         {props.posts.map((item, idx) => {
           if (idx < 3) {
             return (

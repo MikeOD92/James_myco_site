@@ -69,7 +69,7 @@ const About = (props) => {
   };
   return (
     <AnimationWrapper>
-      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed min-h-full w-full p-5 pt-10 md:p-10">
+      <div className="absolute top-14 bg-[url('/img/mycorrhizae_background.PNG')] bg-cover bg-fixed min-h-full min-w-full p-5 pt-10 md:p-10">
         <div className="flex-col p-5 md:p-12 md:max-w-3xl m-auto shadow-xl rounded-2xl bg-zinc-800">
           <form className="flex flex-col align-top">
             <label className="text-white"> Paragraph 1</label>

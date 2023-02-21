@@ -57,7 +57,7 @@ const Events = (props) => {
             />
           </NoSSR>
         </div>
-        <div id="eventTop" className="bg-zinc-900 w-full lg:w-1/2 p-10">
+        <div id="eventTop" className="bg-zinc-900 w-full lg:w-1/2 md:p-10">
           {events.slice(view, view + 1).map((item) => {
             return (
               <div key={item._id}>

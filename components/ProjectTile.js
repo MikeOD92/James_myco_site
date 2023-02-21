@@ -18,8 +18,8 @@ export default function ProjectTile({ post }) {
         // className="w-full "
       />
       <div className="relative p-10 md:p-5 md:text-left text-lightmushroom">
-        <h2 className="projectTile">{post.title}</h2>
-        <h4 className="hidden md:block text-3xl serif">
+        <h2 className="projectTile text-4xl md:text-6xl">{post.title}</h2>
+        <h4 className="hidden md:block md:text-2xl md:mt-2 serif">
           {post.desc ? post.desc : ""}
         </h4>
       </div>
