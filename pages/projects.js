@@ -36,7 +36,7 @@ const Projects = (props) => {
 
   return (
     <AnimationWrapper>
-      <div className="p-20 bg-[url('/img/petri_dish.jpg')] bg-fixed bg-contain md:bg-cover bg-top max-w-screen h-screen flex justify-evenly items-center">
+      <div className="bg-[url('/img/petri_dish.jpg')] bg-fixed bg-cover bg-top max-w-screen h-screen flex justify-evenly items-center">
         <h1> Projects </h1>
       </div>
       <div
