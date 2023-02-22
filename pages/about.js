@@ -50,7 +50,7 @@ const About = (props) => {
           className="w-full flex flex-col md:flex-row md:justify-between rounded-md mt-5"
           // className="w-full flex flex-col items-center md:items-stretch md:flex-row mt-5"
         >
-          <div className="text-left p-10 mb-5 md:mb-0 md:mr-5 w-full bg-zinc-300 text-black opacity-90 rounded-md">
+          <div className="text-left p-5 md:p-10 mb-5 md:mb-0 md:mr-5 w-full bg-zinc-300 text-black opacity-90 rounded-md">
             {props.about ? (
               <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p2}</p>
             ) : (
@@ -73,7 +73,7 @@ const About = (props) => {
           transition={{ type: "easeIn", duration: 0.6 }}
           className="w-full flex flex-col items-center md:items-stretch md:flex-row mt-5"
         >
-          <div className="text-right p-10 mb-5 md:mb-0 w-full bg-zinc-300 text-black opacity-90 rounded-md">
+          <div className="text-right p-5 md:p-10 mb-5 md:mb-0 w-full bg-zinc-300 text-black opacity-90 rounded-md">
             {props.about ? (
               <p style={{ whiteSpace: "pre-wrap" }}>{props.about.p3}</p>
             ) : (

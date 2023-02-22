@@ -35,7 +35,11 @@ export default function ReadProject({ post }) {
             </div>
 
             <div>
-              <div className="flex flex-row lg:justify-center">
+              <div
+                className={`flex-row lg:justify-center ${
+                  post.images.length > 1 ? "hidden md:flex" : "hidden"
+                }`}
+              >
                 {post.images.length > 1 ? (
                   <button
                     className="bg-bruise p-5 lg:p-3 mr-2 lg:mr-5 self-center hover:bg-darkbruise rounded-full"
