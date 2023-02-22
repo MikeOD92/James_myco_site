@@ -7,7 +7,7 @@ import AnimationWrapper from "../components/AnimationWrapper";
 function Home(props) {
   return (
     <AnimationWrapper>
-      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-cover bg-fixed home max-w-screen h-screen">
+      <div className="bg-[url('/img/asphalt_myco.jpg')] bg-cover home max-w-screen h-screen">
         <h1 className="text-6xl md:text-8xl home text-yellow-400 absolute bottom-1/2 left-10">
           James Oliver
         </h1>

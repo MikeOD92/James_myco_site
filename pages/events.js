@@ -40,7 +40,7 @@ const Events = (props) => {
   };
   return (
     <AnimationWrapper>
-      <div className="bg-[url('/img/lichen.jpg')] bg-top home bg-cover bg-fixed max-w-screen h-screen flex justify-evenly items-center">
+      <div className="bg-[url('/img/lichen.jpg')] bg-top home bg-cover max-w-screen h-screen flex justify-evenly items-center">
         <div>
           <h1 className="text-8xl text-yellow-400">Events</h1>
         </div>
