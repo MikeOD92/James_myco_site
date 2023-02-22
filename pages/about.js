@@ -13,8 +13,8 @@ const About = (props) => {
           </h1>
           <Image
             src="/img/portrait.JPG"
-            width="300"
-            height="300"
+            width="250"
+            height="250"
             alt="portait"
             className="p-5 bg-zinc-300 rounded-md self-center w-full md:w-1/3"
           />
