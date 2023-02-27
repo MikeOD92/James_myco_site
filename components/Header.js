@@ -90,6 +90,13 @@ function Header() {
               >
                 <p>CV</p>
               </Link>
+              <Link
+                className="bg-darkmushroom p-2 hover:text-yellow-400"
+                href="/admin/users"
+                onClick={() => setShow(false)}
+              >
+                <p>Users</p>
+              </Link>
               <button
                 className="p-2 float-right hover:text-yellow-400"
                 onClick={signOut}

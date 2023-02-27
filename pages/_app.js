@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
       <Header />
       <AnimatePresence
         mode="wait"
@@ -22,17 +22,3 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 }
 
 export default MyApp;
-
-// export async function getServerSideProps() {
-//   const bucket = new Storage.bucket("my-bucket", {
-//     cors: [
-//       {
-//         methods: ["POST"],
-//         origins: ["*"],
-//         responseHeaders: ["*"],
-//       },
-//     ],
-//     forceDestroy: true,
-//   });
-//   exports.bucketName = bucket.url;
-// }
