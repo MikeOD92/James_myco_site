@@ -5,8 +5,7 @@
 @import "tailwindcss/components";
 /* @import "./base.css"; */
 @import "tailwindcss/utilities";
-@import url("https://fonts.googleapis.com/css2?family=Baskervville&family=Montserrat+Alternates:ital,wght@0,300;1,200&family=Noto+Sans&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Baskervville&family=Montserrat+Alternates:wght@300;400&family=Noto+Sans&display=swap");
 /* 
     font-family: 'Baskervville', serif;
 
@@ -39,7 +38,7 @@ a {
   box-sizing: border-box;
 }
 h1 {
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Montserrat Alternates", "Noto Sans", sans-serif;
   font-weight: 400;
   font-size: 72px;
 }
