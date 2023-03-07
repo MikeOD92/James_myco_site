@@ -13,10 +13,10 @@ const About = (props) => {
           </h1>
           <Image
             src="/img/portrait.JPG"
-            width="200"
-            height="200"
+            width="400"
+            height="400"
             alt="portait"
-            className="p-5 bg-zinc-300 rounded-md self-center w-full md:w-1/3"
+            className="p-5 bg-zinc-300 rounded-md self-center md:w-1/3"
           />
         </div>
         <motion.div
@@ -24,7 +24,6 @@ const About = (props) => {
           whileInView={{ opacity: 1 }}
           transition={{ type: "easeIn", duration: 0.6 }}
           className="w-full flex flex-col md:flex-row md:justify-between rounded-md mt-5"
-          //className="w-full flex flex-col items-center md:items-stretch md:flex-row mt-5"
         >
           <div>
             <Image
