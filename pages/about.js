@@ -16,7 +16,7 @@ const About = (props) => {
             width="400"
             height="400"
             alt="portait"
-            className="p-5 bg-zinc-300 rounded-md self-center md:w-1/3"
+            className="p-2 md:p-5 bg-zinc-300 rounded-md self-center md:w-1/3"
           />
         </div>
         <motion.div
@@ -31,7 +31,7 @@ const About = (props) => {
               width="300"
               height="300"
               alt="mycelium"
-              className="p-5 bg-zinc-300 rounded-md self-center w-full"
+              className="p-2 md:p-5 bg-zinc-300 rounded-md self-center w-full"
             />
           </div>
           <div className="text-right p-5 md:p-10 mt-5 md:mt-0 md:ml-5 w-full bg-zinc-300 text-black opacity-90 rounded-md">
@@ -62,7 +62,7 @@ const About = (props) => {
               width="300"
               height="300"
               alt="mycelium"
-              className="p-5 bg-zinc-300 rounded-md self-center w-full"
+              className="p-2 md:p-5 bg-zinc-300 rounded-md self-center w-full"
             />
           </div>
         </motion.div>
