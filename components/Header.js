@@ -35,7 +35,7 @@ function Header() {
       </button>
       {show && session?.user ? (
         <div
-          className={`absolute right-0 top-20 h-screen lg:h-fit p-5 w-screen lg:w-1/4 z-50 text-5xl lg:text-4xl ${
+          className={`absolute right-0 top-20 h-fit lg:h-fit p-5 w-screen lg:w-1/4 z-50 text-5xl lg:text-4xl ${
             view === 1
               ? "bg-darkbruise text-lightmushroom"
               : "bg-lightmushroom text-mushroom"
