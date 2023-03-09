@@ -61,7 +61,7 @@ function Header() {
             </div>
           </div>
           {view === 1 ? (
-            <div className="text-center lg:text-left">
+            <div className="text-center h-screen lg:text-left">
               <Link
                 className="bg-darkmushroom p-2 hover:text-yellow-400"
                 href="/admin/about"
@@ -138,13 +138,10 @@ function Header() {
           )}
         </div>
       ) : show ? (
-        //desktop
         <div
           className="absolute right-0 top-20 h-screen lg:h-fit p-5 w-screen lg:w-1/4 z-50 text-5xl lg:text-4xl bg-darkbruise text-lightmushroom"
           onMouseLeave={() => setShow(!show)}
         >
-          {/* //mobile */}
-          {/* // <div className="absolute right-0 top-20 h-screen w-screen bg-white z-50 text-7xl link text-mushroom text-center"> */}
           <Link
             className="p-2 hover:text-yellow-400"
             href="/about"
